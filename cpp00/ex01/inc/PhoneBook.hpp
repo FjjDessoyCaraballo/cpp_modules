@@ -24,11 +24,9 @@ class Phonebook
 	public:
 		Phonebook(void);
 		~Phonebook(void);
-		// getters
 		void	add(void);
 		void	search(void);
 		void	print(Contact contacts);
-		// setters
 		Contact	get_contact(int index);
 };
 
