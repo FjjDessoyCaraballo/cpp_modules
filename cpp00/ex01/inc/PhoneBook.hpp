@@ -30,4 +30,8 @@ class Phonebook
 		Contact	get_contact(int index);
 };
 
+std::string		add_spaces(int n);
+std::string		max_width(std::string, long unsigned max);
+int				user_interface(Contact contacts[8]);
+
 #endif
