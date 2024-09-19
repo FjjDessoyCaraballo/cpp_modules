@@ -8,12 +8,12 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#include "../inc/PhoneBook.hpp"
+#include "PhoneBook.hpp"
 
 Phonebook::Phonebook(void)
 {
 	this->_index = 0;
-	std::cout << "Why do you need to a phonebook in 2024?" << std::endl;
+	std::cout << "Why do you need a phonebook in 2024?" << std::endl;
 	std::cout << "Whatever. Just add up to 8 contacts or type exit" << std::endl;
 }
 
@@ -68,8 +68,8 @@ void	Phonebook::add(void)
 		if (std::getline(std::cin, str) && str != "")
 		{
 			this->_contacts[this->_index % 8].set_secret(str);
-			std::cout << this->_contacts[this->_index % 8].get_firstname() << \ 
-				" added. I hope you're happy with this mediocre result" << \ 
+			std::cout << this->_contacts[this->_index % 8].get_firstname() << \
+				" added. I hope you're happy with this mediocre result" << \
 				std::endl;
 		}
 	}
@@ -78,11 +78,27 @@ void	Phonebook::add(void)
 
 void	Phonebook::search(void)
 {
-	std::string str;
+	std::string	str;
 
-	str = "";
-	if ()
-
+	if (!user_interface(this->_contacts))
+	{
+		std::cout << std::endl << "Phonebook is empty!" << std::endl;
+		return ;
+	}
+	while (!std::cin.eof())
+	{
+		std::cout << "Select an index: ";
+		if (std::getline(std::cin, str) && str != "")
+		{
+			if (str.size() == 1 && str[0] >= '1' && str[0] <= '8' && \
+					this->_contacts[str[0] - 1 - '0'].get_firstname().size())
+				break ;
+		}
+		if (str != "")
+			std::cout << "Invalid index!" << std::endl;
+	}
+	if (!std::cin.eof())
+		this->print(this->_contacts[str[0] - 1 - '0']);
 }
 
 void	Phonebook::print(Contact contact)
@@ -100,3 +116,53 @@ void	Phonebook::print(Contact contact)
 	std::cout << "Super secret: " << contact.get_secret() << std::endl;
 }
 
+
+std::string	space_out(int n)
+{
+	std::string	str;
+
+	while (n--)
+		str.append(" ");
+	return (str);
+}
+
+std::string	max_width(std::string str, long unsigned max)
+{
+	if (str.size() > max)
+	{
+		str.resize(max);
+		str[str.size() - 1] = '.';
+	}
+	return (str);
+}
+
+int	user_interface(Contact contacts[8])
+{
+	char		c;
+	int			i;
+	std::string	str;
+
+	std::cout << " 	ʕっ•ᴥ•ʔっ 	ʕっ•ᴥ•ʔっ" << std::endl;
+	std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
+	std::cout << "|----------|----------|----------|----------|" << std::endl;
+	c = '0';
+	i = 0;
+	while (++c <= '8')
+	{
+		if (contacts[c - 1 - '0'].get_firstname().size() && ++i)
+		{
+			str = c;
+			str = max_width(str, 10);
+			std::cout << "|" << space_out(10 - str.size()) << str;
+			str = max_width(contacts[c - 1  - '0'].get_firstname(), 10);
+			std::cout << "|" << space_out(10 - str.size()) << str;
+			str = max_width(contacts[c - 1 - '0'].get_lastname(), 10);
+			std::cout << "|" << space_out(10 - str.size()) << str;
+			str = max_width(contacts[c - 1 - '0'].get_nickname(), 10);
+			std::cout << "|" << space_out(10 - str.size()) << str;
+			std::cout << "|" << std::endl;
+		}
+	}
+	std::cout << " 	ʕっ•ᴥ•ʔっ 	ʕっ•ᴥ•ʔっ" << std::endl;
+	return (i);
+}

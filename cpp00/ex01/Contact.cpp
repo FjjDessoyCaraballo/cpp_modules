@@ -8,7 +8,7 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#include "../inc/Contact.hpp"
+#include "Contact.hpp"
 
 Contact::Contact(void)
 {	

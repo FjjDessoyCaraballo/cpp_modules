@@ -1,26 +1,22 @@
-NAME		= 	phonebook
-SRCDIR		= 	src
-OBJDIR		= 	obj
-INCLUDES	= 	inc
+SRC = PhoneBook.cpp Contact.cpp main.cpp
+OBJ = $(SRC:.cpp=.o)
+CC = g++
+RM = rm -f
+CPPFLAGS = -Wall -Wextra -Werror -std=c++11 -pedantic
 
-SRC			=	PhoneBook.cpp\
-				Contact.cpp
-
-#COMPILER
-CC			= clang++
-CFLAGS		= -Wall -Wextra -Werror -std=c++11
+NAME = stupid_phonebook
 
 all: $(NAME)
 
-$(NAME): $(SRCDIR)/$(SRC)
-	@echo "getting your stuff nice and tidy $@"
-	@$(CC) $(CFLAGS) -o $@ $^
+$(NAME): $(OBJ)
+	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
 clean:
+	$(RM) $(OBJ)
 
 fclean: clean
-	rm -rf $(NAME)
+	$(RM) $(NAME)
 
-re: fclean all
+re: fclean $(NAME)
 
 .PHONY: all clean fclean re

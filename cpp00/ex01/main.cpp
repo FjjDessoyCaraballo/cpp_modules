@@ -8,30 +8,26 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#include "PhoneBook.hpp"
 
-# include "Contact.hpp"
-
-# include <iostream>
-# include <string>
-
-class Phonebook
+int	main(void)
 {
-	private:
-		Contact _contacts[8];
-		int		_index;
-	public:
-		Phonebook(void);
-		~Phonebook(void);
-		void	add(void);
-		void	search(void);
-		void	print(Contact contacts);
-		Contact	get_contact(int index);
-};
+	Phonebook 	ph1;
+	std::string	str;
 
-std::string		add_spaces(int n);
-std::string		max_width(std::string, long unsigned max);
-int				user_interface(Contact contacts[8]);
-
-#endif
+	while (str != "EXIT")
+	{
+		std::cout << "Guess the commands: ";
+		std::getline(std::cin, str);
+		if (str == "ADD")
+			ph1.add();
+		else if (str == "SEARCH")
+			ph1.search();
+		if (std::cin.eof())
+		{
+			std::cout << std::endl;
+			return (0);
+		}
+	}
+	return (0);
+}
