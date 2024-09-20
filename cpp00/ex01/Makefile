@@ -1,8 +1,7 @@
 NAME		= 	pb
 
-COMP 		= 	c++
-
-COMPFLAGS	= 	-Wall -Wextra #-Werror
+COMPILER 	= 	c++
+COMPFLAGS	= 	-Wall -Wextra -Werror
 
 SRCDIR 		= 	src
 OBJDIR 		= 	obj
@@ -15,10 +14,10 @@ OBJS 		=	$(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 all: $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	@$(COMP) $(COMPFLAGS) -c $< -o $@
+	@$(COMPILER) $(COMPFLAGS) -c $< -o $@
 
 $(NAME): $(OBJDIR) $(OBJS)
-	@$(COMP) $(COMPFLAGS) $(OBJS) -o $(NAME)
+	@$(COMPILER) $(COMPFLAGS) $(OBJS) -o $(NAME)
 	@echo "getting your stuff nice and tidy"
 
 $(OBJDIR):
@@ -34,3 +33,5 @@ fclean: clean
 	@echo "Removing $(NAME)"
 
 re: fclean all
+
+.PHONY: all clean fclean re
