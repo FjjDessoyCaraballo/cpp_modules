@@ -4,11 +4,11 @@
 /* L     __/   [] \    														* */
 /* LOL===__        \   			MY ROFLCOPTER GOES BRRRRRR					* */
 /* L      \________]  					by fdessoy-							* */
-/*         I   I     														* */
+/*         I   I     			(fdessoy-@student.hive.fi)					* */
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#include "Contact.hpp"
+#include "../inc/Contact.hpp"
 
 Contact::Contact(void)
 {	

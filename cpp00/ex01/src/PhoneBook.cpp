@@ -4,11 +4,11 @@
 /* L     __/   [] \    														* */
 /* LOL===__        \   			MY ROFLCOPTER GOES BRRRRRR					* */
 /* L      \________]  					by fdessoy-							* */
-/*         I   I     														* */
+/*         I   I     			(fdessoy-@student.hive.fi)					* */
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#include "../inc/PhoneBook.hpp"
 
 Phonebook::Phonebook(void)
 {

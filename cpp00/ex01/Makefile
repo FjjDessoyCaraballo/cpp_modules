@@ -1,22 +1,36 @@
-SRC = PhoneBook.cpp Contact.cpp main.cpp
-OBJ = $(SRC:.cpp=.o)
-CC = g++
-RM = rm -f
-CPPFLAGS = -Wall -Wextra -Werror -std=c++11 -pedantic
+NAME		= 	pb
 
-NAME = stupid_phonebook
+COMP 		= 	c++
+
+COMPFLAGS	= 	-Wall -Wextra #-Werror
+
+SRCDIR 		= 	src
+OBJDIR 		= 	obj
+SRCS 		=	$(SRCDIR)/PhoneBook.cpp\
+	   			$(SRCDIR)/Contact.cpp\
+				$(SRCDIR)/main.cpp\
+
+OBJS 		=	$(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	@$(COMP) $(COMPFLAGS) -c $< -o $@
+
+$(NAME): $(OBJDIR) $(OBJS)
+	@$(COMP) $(COMPFLAGS) $(OBJS) -o $(NAME)
+	@echo "getting your stuff nice and tidy"
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
 
 clean:
-	$(RM) $(OBJ)
+	@echo "Removing objects"
+	@rm -f $(OBJS)
+	@rm -rf $(OBJDIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	@rm -f $(NAME)
+	@echo "Removing $(NAME)"
 
-re: fclean $(NAME)
-
-.PHONY: all clean fclean re
+re: fclean all
