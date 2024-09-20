@@ -31,10 +31,10 @@ public:
 
 	typedef Account		t;
 	// getters
-	static int	getNbAccounts( void );
-	static int	getTotalAmount( void );
-	static int	getNbDeposits( void );
-	static int	getNbWithdrawals( void );
+	static int	getNbAccounts( void ); // done
+	static int	getTotalAmount( void ); // done
+	static int	getNbDeposits( void ); // done
+	static int	getNbWithdrawals( void ); // done
 	static void	displayAccountsInfos( void );
 
 	Account( int initial_deposit );
