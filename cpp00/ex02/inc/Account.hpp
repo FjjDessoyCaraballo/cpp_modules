@@ -13,6 +13,14 @@
 #define __ACCOUNT_H__
 
 // ************************************************************************** //
+//                               Headers		                              //
+// ************************************************************************** //
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <functional>
+
+// ************************************************************************** //
 //                               Account Class                                //
 // ************************************************************************** //
 
@@ -22,7 +30,7 @@ class Account {
 public:
 
 	typedef Account		t;
-
+	// getters
 	static int	getNbAccounts( void );
 	static int	getTotalAmount( void );
 	static int	getNbDeposits( void );
@@ -31,7 +39,7 @@ public:
 
 	Account( int initial_deposit );
 	~Account( void );
-
+	
 	void	makeDeposit( int deposit );
 	bool	makeWithdrawal( int withdrawal );
 	int		checkAmount( void ) const;
@@ -46,7 +54,6 @@ private:
 	static int	_totalNbWithdrawals;
 
 	static void	_displayTimestamp( void );
-
 	int				_accountIndex;
 	int				_amount;
 	int				_nbDeposits;
