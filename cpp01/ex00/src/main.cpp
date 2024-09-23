@@ -8,22 +8,20 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "../inc/Zombie.hpp"
 
-int main(int argc, char **argv)
+int main()
 {
-    if (argc == 1)
-    {
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-        return (0);
-    }
-    for (int i = 1; i < argc; ++i)
-    {
-        for (int j = 0; argv[i][j]; ++j)
-        {
-            std::cout << (char)std::toupper(argv[i][j]);
-        }
-    }
-    std::cout << std::endl;
-    return (0);
+	// little zombie and some loser created using stack to announce them
+	Zombie zombie("aspargus");
+	zombie.announce();
+	randomChump("Felipe");
+	// little zombie created using heap (newZombie function uses new)
+	Zombie* zptr;
+	zptr = newZombie("Bigus Dickus");
+	zptr->announce();
+	// shotgun the little zombie with delete
+	// by shotguning, I mean we are effectively clearing the memory used by it
+	delete zptr;
+	return (0);
 }

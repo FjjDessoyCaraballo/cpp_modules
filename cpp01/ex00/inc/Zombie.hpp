@@ -8,22 +8,23 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
+
 #include <iostream>
 
-int main(int argc, char **argv)
+class Zombie
 {
-    if (argc == 1)
-    {
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-        return (0);
-    }
-    for (int i = 1; i < argc; ++i)
-    {
-        for (int j = 0; argv[i][j]; ++j)
-        {
-            std::cout << (char)std::toupper(argv[i][j]);
-        }
-    }
-    std::cout << std::endl;
-    return (0);
-}
+	private:
+		std::string _Name;
+	public:
+		Zombie(std::string name);
+		~Zombie();
+		void	announce( void );
+		void	zombie_name(std::string name);
+};
+
+void	randomChump( std::string name );
+Zombie*	newZombie( std::string name );
+
+#endif
