@@ -1,36 +1,32 @@
-NAME		=	bank
+NAME = bank
 
-COMPILER	=	c++
-COMPFLAGS	=	-Wall -Wextra -Werror
+COMP = c++
 
-SRCDIR		=	src
-OBJDIR		=	obj
-SRCS		=	$(SRCDIR)/Accounnt.cpp\
-				$(SRCDIR)/tests.cpp\
+COMPFLAGS = -Wall -Wextra #-Werror
 
-OBJS 		= 	$(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
+SRCDIR = src
+OBJDIR = obj
+SRCS = $(SRCDIR)/tests.cpp\
+	   $(SRCDIR)/Account.cpp\
+
+OBJS = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 
 all: $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	@$(COMPILER) $(COMPFLAGS) -c $< -o $@
+	@$(COMP) $(COMPFLAGS) -c $< -o $@
 
 $(NAME): $(OBJDIR) $(OBJS)
-	@$(COMPILER) $(COMPFLAGS) $(OBJS) -o $(NAME)
-	@echo "getting your stuff nice and tidy"
+	@$(COMP) $(COMPFLAGS) $(OBJS) -o $(NAME)
+	@echo "getting your stuff nice and tidy $(NAME)"
 
-$(OBJDIR)
-	@mkdir -p (OBJDIR)
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
 
 clean:
-	@echo "Removing objects"
-	@rm -f (OBJS)
-	@rm -rf (OBJDIR)
-
+	@rm -f $(OBJS)
+	@rm -rf $(OBJDIR)
 fclean: clean
 	@rm -f $(NAME)
 	@echo "Removing $(NAME)"
-
 re: fclean all
-
-.PHONY: all clean fclean re
