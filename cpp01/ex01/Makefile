@@ -1,17 +1,16 @@
-NAME = zombie
+NAME 		=	zombie
 
-COMP = c++
+COMP		=	c++
 
-COMPFLAGS = -Wall -Wextra -Werror -pedantic
+COMPFLAGS	=	-Wall -Wextra -Werror -pedantic
 
-SRCDIR = src
-OBJDIR = obj
-SRCS = $(SRCDIR)/main.cpp\
-	   $(SRCDIR)/Zombie.cpp\
-	   $(SRCDIR)/newZombie.cpp\
-	   $(SRCDIR)/randomChump.cpp\
+SRCDIR		=	src
+OBJDIR		=	obj
+SRCS 		=	$(SRCDIR)/main.cpp\
+				$(SRCDIR)/Zombie.cpp\
+				$(SRCDIR)/zombieHorde.cpp\
 
-OBJS = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
+OBJS		=	$(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 
 all: $(NAME)
 

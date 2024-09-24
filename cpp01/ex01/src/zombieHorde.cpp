@@ -10,21 +10,13 @@
 
 #include "../inc/Zombie.hpp"
 
-Zombie::Zombie( std::string name ): _Name(name)
+Zombie*	zombieHorde( int N, std::string name )
 {
-}
+	Zombie	*horde;
+	int		i;
 
-Zombie::~Zombie()
-{
-	std::cout << Zombie::_Name << std::endl;
-}
-
-void Zombie::announce()
-{
-	std::cout << Zombie::_Name << ": BraiiiiiiinnnzzzZ... " << std::endl;
-}
-
-void Zombie::zombieName(std::string name)
-{
-	this->_Name = name;
+	horde = new Zombie[N];
+	for (i = 0; N > i; i++)
+		horde[i].zombieName(name);
+	return (horde);
 }

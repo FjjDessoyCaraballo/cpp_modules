@@ -15,10 +15,13 @@ int main()
 	// little zombie and some loser created using stack to announce them
 	Zombie zombie("aspargus");
 	zombie.announce();
-	randomChump("Felipe");
+	randomChump("Marcos do Val");
+	randomChump("Felix de Oliveira");
 	// little zombie created using heap (newZombie function uses new)
 	Zombie* zptr;
 	zptr = newZombie("Bigus Dickus");
+	zptr->announce();
+	zptr = newZombie("Claudionor");
 	zptr->announce();
 	// shotgun the little zombie with delete
 	// by shotguning, I mean we are effectively clearing the memory used by it

@@ -8,23 +8,23 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#include "../inc/Zombie.hpp"
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
 
-Zombie::Zombie( std::string name ): _Name(name)
-{
-}
+#include <iostream>
 
-Zombie::~Zombie()
+class Zombie
 {
-	std::cout << Zombie::_Name << std::endl;
-}
+	private:
+		std::string _Name;
+	public:
+		Zombie(std::string name);
+		Zombie();
+		~Zombie();
+		void	announce( void );
+		void	zombieName(std::string name);
+};
 
-void Zombie::announce()
-{
-	std::cout << Zombie::_Name << ": BraiiiiiiinnnzzzZ... " << std::endl;
-}
+Zombie*	zombieHorde( int N, std::string name );
 
-void Zombie::zombieName(std::string name)
-{
-	this->_Name = name;
-}
+#endif

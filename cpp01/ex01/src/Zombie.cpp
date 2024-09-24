@@ -13,6 +13,9 @@
 Zombie::Zombie( std::string name ): _Name(name)
 {
 }
+Zombie::Zombie()
+{
+}
 
 Zombie::~Zombie()
 {
