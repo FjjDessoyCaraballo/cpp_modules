@@ -2,7 +2,7 @@ NAME 		=	zombie
 
 COMP		=	c++
 
-COMPFLAGS	=	-Wall -Wextra -Werror -pedantic
+COMPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98
 
 SRCDIR		=	src
 OBJDIR		=	obj
