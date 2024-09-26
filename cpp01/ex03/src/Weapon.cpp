@@ -9,3 +9,25 @@
 /* ************************************************************************** */
 
 #include "../inc/Weapon.hpp"
+
+Weapon::Weapon()
+{
+}
+
+Weapon::~Weapon()
+{
+}
+
+Weapon::Weapon( std::string type ): _Type(type)
+{
+}
+
+const std::string& Weapon::getType()
+{
+	return (this->_Type);
+}
+
+void Weapon::setType( std::string type )
+{
+	this->_Type = type;
+}

@@ -17,9 +17,11 @@
 class HumanB
 {
 	private:
+		std::string _Name;
 	public:
 		HumanB();
 		~HumanB();
+		HumanB( std::string name );
 };
 
 #endif

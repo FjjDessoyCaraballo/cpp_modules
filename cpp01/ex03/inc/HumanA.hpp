@@ -17,9 +17,11 @@
 class HumanA
 {
 	private:
+		std::string _Name;
 	public:
 		HumanA();
 		~HumanA();
+		HumanA( std::string name );
 };
 
 #endif

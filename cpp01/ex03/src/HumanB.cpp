@@ -9,3 +9,15 @@
 /* ************************************************************************** */
 
 #include "../inc/HumanB.hpp"
+
+HumanB::HumanB()
+{	
+}
+
+HumanB::~HumanB()
+{
+}
+
+HumanB::HumanB( std::string name ):_Name(name)
+{
+}

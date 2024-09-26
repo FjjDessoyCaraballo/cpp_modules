@@ -9,3 +9,15 @@
 /* ************************************************************************** */
 
 #include "../inc/HumanA.hpp"
+
+HumanA::HumanA()
+{
+}
+
+HumanA::~HumanA()
+{
+}
+
+HumanA::HumanA( std::string name ): _Name(name)
+{
+}
