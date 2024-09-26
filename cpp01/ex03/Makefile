@@ -1,12 +1,15 @@
-NAME 		=	str
+NAME 		=	violence
 
 COMP		=	c++
 
-COMPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98
+COMPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++11
 
 SRCDIR		=	src
 OBJDIR		=	obj
 SRCS 		=	$(SRCDIR)/main.cpp\
+				$(SRCDIR)/HumanB.cpp\
+				$(SRCDIR)/HumanA.cpp\
+				$(SRCDIR)/Weapon.cpp\
 
 OBJS		=	$(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 
@@ -17,7 +20,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 
 $(NAME): $(OBJDIR) $(OBJS)
 	@$(COMP) $(COMPFLAGS) $(OBJS) -o $(NAME)
-	@echo "getting your stuff nice and tidy $(NAME)"
+	@echo "getting your stuff nice and tidy: $(NAME)"
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)

@@ -18,10 +18,13 @@ class HumanA
 {
 	private:
 		std::string _Name;
+		Weapon		*_Weap;
 	public:
 		HumanA();
 		~HumanA();
-		HumanA( std::string name );
+		HumanA( std::string name, Weapon &Weap );
+		void attack();
+		std::string	getWeapon();
 };
 
 #endif

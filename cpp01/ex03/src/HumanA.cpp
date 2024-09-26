@@ -18,6 +18,16 @@ HumanA::~HumanA()
 {
 }
 
-HumanA::HumanA( std::string name ): _Name(name)
+HumanA::HumanA( std::string name, Weapon &Weap ): _Name(name), _Weap(&Weap)
 {
+}
+
+std::string	HumanA::getWeapon()
+{
+	return (_Weap->getType());
+}
+
+void	HumanA::attack()
+{
+	std::cout << this->_Name << " attacks with their " << getWeapon() << std::endl;
 }
