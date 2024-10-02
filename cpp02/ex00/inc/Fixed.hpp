@@ -20,7 +20,7 @@ class Fixed
 		static const int 	_il = 8;
 	public:
 		Fixed( void );
-		Fixed( const Fixed &other);
+		Fixed( const Fixed &other );
 		Fixed &operator=(const Fixed &other);
 		~Fixed( void );
 
