@@ -53,6 +53,12 @@ class Fixed
 
 		//postincrementation
 
+				// MIN MAX
+		Fixed &max(Fixed &a, Fixed &b);
+		Fixed &min(Fixed &a, Fixed &b);
+		const Fixed &max(const Fixed &a, const Fixed &b);
+		const Fixed &min(const Fixed &a, const Fixed &b);
+
 };
 
 std::ostream	&operator<<(std::ostream &other, Fixed const &nbr);

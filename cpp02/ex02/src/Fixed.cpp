@@ -207,6 +207,34 @@ bool Fixed::operator<(const Fixed &other) const
 	return (this->_fpn < other._fpn);
 }
 
+Fixed &Fixed::max(Fixed &a, Fixed &b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+Fixed &Fixed::min(Fixed &a, Fixed &b)
+{
+	if (a > b)
+		return (b);
+	return (a);
+}
+
+const Fixed &Fixed::max(const Fixed &a, const Fixed &b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+const Fixed &Fixed::min(const Fixed &a, const Fixed &b)
+{
+	if (a > b)
+		return (b);
+	return (a);
+}
+
 std::ostream	&operator<<(std::ostream &other, Fixed const &fix)
 {
 	other << fix.toFloat();
