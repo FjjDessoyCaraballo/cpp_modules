@@ -50,14 +50,18 @@ class Fixed
 		bool operator>(const Fixed &other) const;
 				// INCREMENTS
 		// preincrementation
-
+		Fixed operator++();
+		Fixed operator--();
 		//postincrementation
-
+		Fixed operator++(int);
+		Fixed operator--(int);
 				// MIN MAX
-		Fixed &max(Fixed &a, Fixed &b);
-		Fixed &min(Fixed &a, Fixed &b);
-		const Fixed &max(const Fixed &a, const Fixed &b);
-		const Fixed &min(const Fixed &a, const Fixed &b);
+		// regular min max
+		static Fixed &max(Fixed &a, Fixed &b);
+		static Fixed &min(Fixed &a, Fixed &b);
+		// const min max
+		static const Fixed &max(const Fixed &a, const Fixed &b);
+		static const Fixed &min(const Fixed &a, const Fixed &b);
 
 };
 

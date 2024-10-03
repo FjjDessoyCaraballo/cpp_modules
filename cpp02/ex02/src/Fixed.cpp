@@ -234,6 +234,35 @@ const Fixed &Fixed::min(const Fixed &a, const Fixed &b)
 		return (b);
 	return (a);
 }
+// preincrementation
+Fixed Fixed::operator++()
+{
+	this->_fpn++;
+	return (*this);
+}
+
+Fixed Fixed::operator--()
+{
+	this->_fpn--;
+	return (*this);
+}
+
+// postincrementation
+Fixed Fixed::operator++(int)
+{
+	Fixed tmp = *this;
+
+	this->_fpn++;
+	return (tmp);
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed tmp = *this;
+
+	this->_fpn--;
+	return (tmp);
+}
 
 std::ostream	&operator<<(std::ostream &other, Fixed const &fix)
 {
