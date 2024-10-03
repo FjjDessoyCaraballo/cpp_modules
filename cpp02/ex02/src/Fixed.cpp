@@ -133,6 +133,80 @@ Fixed	&Fixed::operator=(const Fixed &other)
 	return (*this);
 }
 
+Fixed Fixed::operator+(const Fixed &other) const
+{
+	Fixed ret_value(*this);
+
+	ret_value._fpn += other._fpn;
+	return (ret_value);
+}
+
+Fixed Fixed::operator-(const Fixed &other) const
+{
+	Fixed ret_value(*this);
+
+	ret_value._fpn -= other._fpn;
+	return (ret_value);
+}
+
+Fixed Fixed::operator/(const Fixed &other) const
+{
+	Fixed	ret_value(*this);
+	int		value;
+
+	value = (ret_value._fpn / other._fpn) * (1 << _il);
+	ret_value.setRawBits(value);
+	return (ret_value);
+}
+
+Fixed Fixed::operator*(const Fixed &other) const
+{
+	Fixed	ret_value(*this);
+	int		value;
+
+	value = (ret_value._fpn * other._fpn) / (1 << _il);
+	ret_value.setRawBits(value);
+	return (ret_value);
+}
+
+Fixed Fixed::operator/(const Fixed &other) const
+{
+	Fixed ret_value(*this);
+
+	
+	return (ret_value);
+}
+
+bool Fixed::operator==(const Fixed &other) const
+{
+	return (this->_fpn == other._fpn);
+}
+
+bool Fixed::operator!=(const Fixed &other) const
+{
+	return (this->_fpn != other._fpn);
+}
+
+bool Fixed::operator>=(const Fixed &other) const
+{
+	return (this->_fpn >= other._fpn);
+}
+
+bool Fixed::operator<=(const Fixed &other) const
+{
+	return (this->_fpn <= other._fpn);
+}
+
+bool Fixed::operator>(const Fixed &other) const
+{
+	return (this->_fpn > other._fpn);
+}
+
+bool Fixed::operator<(const Fixed &other) const
+{
+	return (this->_fpn < other._fpn);
+}
+
 std::ostream	&operator<<(std::ostream &other, Fixed const &fix)
 {
 	other << fix.toFloat();

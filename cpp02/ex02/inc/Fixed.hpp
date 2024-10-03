@@ -22,7 +22,6 @@ class Fixed
 	public:
 		Fixed( void );
 		Fixed( const Fixed &other );
-		Fixed &operator=(const Fixed &other);
 		~Fixed( void );
 		Fixed ( const int nbr );
 		Fixed ( const float nbr );
@@ -34,6 +33,26 @@ class Fixed
 
 		// setters
 		void	setRawBits ( int const raw );
+
+				// OPERATORS
+		// arithmetic operators
+		Fixed &operator=(const Fixed &other);
+		Fixed operator+(const Fixed &other) const;
+		Fixed operator-(const Fixed &other) const;
+		Fixed operator*(const Fixed &other) const;
+		Fixed operator/(const Fixed &other) const;
+		// logical operators
+		bool operator<=(const Fixed &other) const;
+		bool operator>=(const Fixed &other) const;
+		bool operator==(const Fixed &other) const;
+		bool operator!=(const Fixed &other) const;
+		bool operator<(const Fixed &other) const;
+		bool operator>(const Fixed &other) const;
+				// INCREMENTS
+		// preincrementation
+
+		//postincrementation
+
 };
 
 std::ostream	&operator<<(std::ostream &other, Fixed const &nbr);
