@@ -21,6 +21,7 @@ int main()
 	Zombie* zptr;
 	zptr = newZombie("Bigus Dickus");
 	zptr->announce();
+	delete zptr;
 	zptr = newZombie("Claudionor");
 	zptr->announce();
 	// shotgun the little zombie with delete

@@ -21,7 +21,7 @@ class Zombie
 		Zombie(std::string name);
 		~Zombie();
 		void	announce( void );
-		void	zombieName(std::string name)
+		void	zombieName(std::string name);
 };
 
 void	randomChump( std::string name );

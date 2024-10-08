@@ -38,6 +38,7 @@ int main(int argc, char **argv)
 			std::cerr << "(3) You are in a dream, wake up!" << std::endl;
 			return (2);
 		}
+		std::string originalFilename = argv[1];
 		std::string buffer;
 		std::string newContent; 
 		while (std::getline(inputFile, buffer))
@@ -51,7 +52,8 @@ int main(int argc, char **argv)
 			newContent += buffer + "\n";
 		}
 		inputFile.close();
-		std::ofstream outputFile(argv[1]);
+		std::string newFilename = originalFilename + ".replace";
+		std::ofstream outputFile(newFilename.c_str());
 		if (!outputFile)
 		{
 			std::cerr << "Error: something magical happened. Not good tho" << std::endl;
