@@ -8,32 +8,32 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-#define CLAPTRAP_HPP
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
 
-#include <iostream>
+#include "ClapTrap.hpp"
 
-class ClapTrap
+class ScavTrap: public ClapTrap
 {
 	private:
-		std::string _Name;
+		std::string	_Name;
 		u_int32_t	_HP;
 		u_int32_t	_MP;
-		u_int32_t _atkDmg;
-		std::string _target;
+		u_int32_t	_atkDmg;
+		bool		_guardGate;
+		std::string	_target;
 	public:
-		// Constructors
-		ClapTrap();
-		ClapTrap( std::string name );
+		//Constructors
+		ScavTrap();
+		ScavTrap( std::string name );
 		// Canonical Orthodox Form
-		ClapTrap( const ClapTrap &other );
-		ClapTrap &operator=(const ClapTrap &other);
+		ScavTrap( const ScavTrap &copy );
+		ScavTrap &operator=( const ScavTrap &other );
 		// Destructor
-		~ClapTrap();
-		// Public methods
-		void	attack( const std::string &target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
+		~ScavTrap();
+		// Methods
+		void	attack( const std::string &target );
+		void	guardGate();
 };
 
 #endif

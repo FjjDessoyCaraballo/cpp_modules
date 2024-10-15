@@ -1,7 +1,6 @@
 NAME 		=	fix
 
 COMP		=	c++
-
 COMPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++11
 
 SRCDIR		=	src
@@ -26,6 +25,7 @@ $(OBJDIR):
 clean:
 	@rm -f $(OBJS)
 	@rm -rf $(OBJDIR)
+
 fclean: clean
 	@rm -f $(NAME)
 	@echo "Removing $(NAME)"

@@ -17,10 +17,10 @@ ClapTrap::ClapTrap()
 	std::cout << "Constructor for " << _Name << " called" <<std::endl;
 }
 
-ClapTrap::ClapTrap( const ClapTrap &other )
+ClapTrap::ClapTrap( const ClapTrap &copy )
 {
 	std::cout << "Copy constructor for " << _Name << " called" <<std::endl;
-	*this = other;
+	*this = copy;
 }
 
 ClapTrap::ClapTrap( std::string name ): _Name(name), _HP(10), _MP(10), _atkDmg(0)

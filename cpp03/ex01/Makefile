@@ -1,4 +1,4 @@
-NAME	= claptrap
+NAME	= scavtrap
 
 COMP	= c++
 FLAGS	= -Wall -Werror -Wextra -std=c++11
@@ -7,6 +7,7 @@ SRCDIR	= src
 OBJDIR	= obj
 SRCS 	= 	$(SRCDIR)/main.cpp\
 			$(SRCDIR)/ClapTrap.cpp\
+			$(SRCDIR)/ScavTrap.cpp\
 
 OBJS	= $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 

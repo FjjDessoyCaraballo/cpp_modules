@@ -26,7 +26,7 @@ class ClapTrap
 		ClapTrap();
 		ClapTrap( std::string name );
 		// Canonical Orthodox Form
-		ClapTrap( const ClapTrap &other );
+		ClapTrap( const ClapTrap &copy );
 		ClapTrap &operator=(const ClapTrap &other);
 		// Destructor
 		~ClapTrap();
