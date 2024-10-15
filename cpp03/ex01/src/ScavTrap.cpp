@@ -23,13 +23,13 @@ ScavTrap::ScavTrap(): ClapTrap()
 	this->_HP = 100;
 	this->_MP = 50;
 	this->_atkDmg = 20;
-	this->_guardGate = false;
+	this->_guard = false;
 }
 
 ScavTrap::ScavTrap( const ScavTrap &copy ): ClapTrap(copy)
 {
 	std::cout << "ScavTrap copy constructor called" << std::endl;
-	this->_guardGate = copy._guardGate;
+	this->_guard = copy._guard;
 }
 
 ScavTrap::ScavTrap( std::string name): _Name(name)
@@ -52,7 +52,7 @@ ScavTrap &ScavTrap::operator=( const ScavTrap &other )
 	this->_HP = other._HP;
 	this->_MP = other._MP;
 	this->_atkDmg = other._atkDmg;
-	this->_guardGate = other._guardGate;
+	this->_guard = other._guard;
 	return (*this);
 }
 
@@ -65,9 +65,9 @@ void	ScavTrap::attack( const std::string &target )
 
 void	ScavTrap::guardGate()
 {
-	if (this->_guardGate == false)
+	if (this->_guard == false)
 	{
-		this->_guardGate = true;
+		this->_guard = true;
 		std::cout << _Name << " is now on guard mode!" << std::endl;
 	}
 	else

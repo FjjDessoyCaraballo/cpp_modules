@@ -20,7 +20,7 @@ class ScavTrap: public ClapTrap
 		u_int32_t	_HP;
 		u_int32_t	_MP;
 		u_int32_t	_atkDmg;
-		bool		_guardGate;
+		bool		_guard;
 		std::string	_target;
 	public:
 		//Constructors
