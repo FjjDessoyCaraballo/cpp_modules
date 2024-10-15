@@ -17,6 +17,9 @@ int main(void)
 
 	scav.attack("bragger");
 	scav.guardGate();
-
+	scav.takeDamage(5);
+	scav.beRepaired(5);
+	scav.takeDamage(5);
+	scav.takeDamage(5);
 	return (0);
 }
