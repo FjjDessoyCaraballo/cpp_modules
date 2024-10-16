@@ -8,12 +8,13 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-#define CLAPTRAP_HPP
+#ifndef DIAMONDTRAP_HPP
+#define DIAMONDTRAP_HPP
 
-#include <iostream>
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-class ClapTrap
+class DiamondTrap: public ScavTrap, public FragTrap
 {
 	private:
 		std::string _name;
@@ -22,18 +23,15 @@ class ClapTrap
 		u_int32_t _atkDmg;
 		std::string _target;
 	public:
-		// Constructors
-		ClapTrap();
-		ClapTrap( std::string name );
-		// Canonical Orthodox Form
-		ClapTrap( const ClapTrap &copy );
-		ClapTrap &operator=(const ClapTrap &other);
-		// Destructor
-		~ClapTrap();
-		// Public methods
-		void	attack( const std::string &target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
+		// constructors
+		DiamondTrap();
+		DiamondTrap( std::string name );
+		// canonical form
+		DiamondTrap( const DiamondTrap &other );
+		DiamondTrap &operator=( const DiamondTrap &other );
+		// destructor
+		~DiamondTrap();
+		// public methods
+		void	whoAmI();
 };
-
 #endif

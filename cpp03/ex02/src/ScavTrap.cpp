@@ -12,11 +12,6 @@
 
 // Constructors
 
-/** INHERITANCE
- * 
- * 
- * 
- */
 ScavTrap::ScavTrap(): ClapTrap()
 {
 	std::cout << "ScavTrap constructor called" << _name << std::endl;

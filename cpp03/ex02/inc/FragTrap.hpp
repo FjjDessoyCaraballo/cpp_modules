@@ -8,32 +8,29 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-#define CLAPTRAP_HPP
+#ifndef FRAGTRAP_HPP
+#define FRAGTRAP_HPP
 
-#include <iostream>
+#include "ClapTrap.hpp"
 
-class ClapTrap
+class FragTrap: public ClapTrap
 {
 	private:
-		std::string _name;
+		std::string	_name;
 		u_int32_t	_HP;
 		u_int32_t	_MP;
-		u_int32_t _atkDmg;
-		std::string _target;
+		u_int32_t	_atkDmg;
 	public:
-		// Constructors
-		ClapTrap();
-		ClapTrap( std::string name );
-		// Canonical Orthodox Form
-		ClapTrap( const ClapTrap &copy );
-		ClapTrap &operator=(const ClapTrap &other);
-		// Destructor
-		~ClapTrap();
-		// Public methods
-		void	attack( const std::string &target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
+		// constructors
+		FragTrap();
+		FragTrap( std::string name );
+		// canonical form
+		FragTrap( const FragTrap &copy );
+		FragTrap	&operator=(const FragTrap &other);
+		// destructor
+		~FragTrap();
+		// methods
+		void	highFivesGuys();
 };
 
 #endif
