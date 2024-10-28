@@ -14,24 +14,25 @@
 
 ClapTrap::ClapTrap()
 {
-	std::cout << "Constructor for " << _Name << " called" <<std::endl;
+	std::cout << "Standard ClapTrap constructor for " << _Name << " called" <<std::endl;
 }
 
-ClapTrap::ClapTrap( const ClapTrap &other )
+ClapTrap::ClapTrap( const ClapTrap &copy )
 {
-	std::cout << "Copy constructor for " << _Name << " called" <<std::endl;
-	*this = other;
+	std::cout << "ClapTrap copy constructor for " << _Name << " called" <<std::endl;
+	*this = copy;
 }
 
 ClapTrap::ClapTrap( std::string name ): _Name(name), _HP(10), _MP(10), _atkDmg(0)
 {
+	std::cout << "ClapTrap named constructor called for: " << name << std::endl;
 }
 
 // Destructor
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << _Name << std::endl;
+	std::cout << "ClapTrap Destructor called for: " << _Name << std::endl;
 }
 
 // Overloaded Operator

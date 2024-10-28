@@ -68,3 +68,13 @@ void	ScavTrap::guardGate()
 	else
 		std::cout << _name << " is already guarding the gates!" << std::endl;
 }
+
+int32_t	ScavTrap::getMp()
+{
+	return (this->_MP);
+}
+
+int32_t	ScavTrap::getAtk()
+{
+	return (this->_atkDmg);
+}

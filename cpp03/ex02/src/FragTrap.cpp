@@ -14,7 +14,7 @@
 
 FragTrap::FragTrap(): ClapTrap()
 {
-	std::cout << "FragTrap constructor called" << _name << std::endl;
+	std::cout << "FragTrap constructor called: " << _name << std::endl;
 	this->_HP = 100;
 	this->_MP = 100;
 	this->_atkDmg = 30;
@@ -25,16 +25,16 @@ FragTrap::FragTrap( const FragTrap &copy ): ClapTrap(copy)
 	std::cout << "FragTrap copy constructor called" << std::endl;
 }
 
-FragTrap::FragTrap( std::string name): _name(name)
+FragTrap::FragTrap( std::string name): ClapTrap(name)
 {
-	std::cout << _name << " has joined the battle!" << std::endl;
+	std::cout << "FragTrap named constructor called: " << _name << std::endl;
 }
 
 // Destructor
 
 FragTrap::~FragTrap()
 {
-	std::cout << _name << std::endl;
+	std::cout << "FragTrap destructor called: " << _name << std::endl;
 }
 
 // Overloaded operators

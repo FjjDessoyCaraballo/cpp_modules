@@ -24,11 +24,11 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
 clean:
-	@rm -r $(OBJS)
+	@rm -rf $(OBJS)
 	@rm -rf $(OBJDIR)
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -rf $(NAME)
 	@echo "Removing $(NAME)"
 
 re: fclean all

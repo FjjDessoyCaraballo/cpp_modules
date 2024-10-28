@@ -19,7 +19,7 @@
  */
 ScavTrap::ScavTrap(): ClapTrap()
 {
-	std::cout << "ScavTrap constructor called" << _name << std::endl;
+	std::cout << "ScavTrap default constructor called: " << _name << std::endl;
 	this->_HP = 100;
 	this->_MP = 50;
 	this->_atkDmg = 20;
@@ -32,16 +32,20 @@ ScavTrap::ScavTrap( const ScavTrap &copy ): ClapTrap(copy)
 	this->_guard = copy._guard;
 }
 
-ScavTrap::ScavTrap( std::string name): _name(name)
+ScavTrap::ScavTrap( std::string name): ClapTrap(name)
 {
-	std::cout << _name << " has joined the battle!" << std::endl;
+	std::cout << "ScavTrap named Contructor called: " << _name << std::endl;
+	this->_HP = 100;
+	this->_MP = 50;
+	this->_atkDmg = 20;
+	this->_guard = false;
 }
 
 // Destructor
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << _name << std::endl;
+	std::cout << "ScavTrap Destructor for " << _name << " called"<< std::endl;
 }
 
 // Overloaded operators
@@ -60,7 +64,12 @@ ScavTrap &ScavTrap::operator=( const ScavTrap &other )
 
 void	ScavTrap::attack( const std::string &target )
 {
-	std::cout << this->_name << " attacked " << target << " for " << this->_atkDmg << " amount of damage" << std::endl;
+	if (this->_HP > 0 && this->_MP > 0)
+		std::cout << this->_name << " attacked " << target << " for " << this->_atkDmg << " points of damage" << std::endl;
+	else if (this->_MP == 0)
+		std::cout << this->_name << " can't attack " << target << " because it has no energy!" << std::endl;
+	else
+		std::cout << this->_name << " can't attack " << target << " because it has no hitpoints!" << std::endl;
 }
 
 void	ScavTrap::guardGate()
@@ -73,3 +82,4 @@ void	ScavTrap::guardGate()
 	else
 		std::cout << _name << " is already guarding the gates!" << std::endl;
 }
+

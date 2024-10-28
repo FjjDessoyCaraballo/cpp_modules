@@ -15,7 +15,7 @@
 
 class ClapTrap
 {
-	private:
+	protected:
 		std::string _name;
 		u_int32_t	_HP;
 		u_int32_t	_MP;

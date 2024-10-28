@@ -61,3 +61,7 @@ void	FragTrap::highFivesGuys()
 		std::cout << _name << " is too exhausted to high five! ):" << std::endl;
 }
 
+int32_t	FragTrap::getHp()
+{
+	return (this->_HP);
+}

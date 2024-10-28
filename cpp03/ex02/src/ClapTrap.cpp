@@ -14,24 +14,25 @@
 
 ClapTrap::ClapTrap()
 {
-	std::cout << "Constructor for " << _name << " called" <<std::endl;
+	std::cout << "Standard ClapTrap constructor for " << _name << " called" <<std::endl;
 }
 
 ClapTrap::ClapTrap( const ClapTrap &copy )
 {
-	std::cout << "Copy constructor for " << _name << " called" <<std::endl;
+	std::cout << "ClapTrap copy constructor for " << _name << " called" <<std::endl;
 	*this = copy;
 }
 
 ClapTrap::ClapTrap( std::string name ): _name(name), _HP(10), _MP(10), _atkDmg(0)
 {
+	std::cout << "ClapTrap named constructor called for: " << name << std::endl;
 }
 
 // Destructor
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << _name << std::endl;
+	std::cout << "ClapTrap Destructor called for: " << _name << std::endl;
 }
 
 // Overloaded Operator
@@ -51,10 +52,7 @@ ClapTrap	&ClapTrap::operator=( const ClapTrap &other)
 void	ClapTrap::attack( const std::string &target )
 {
 	if (this->_HP > 0 && this->_MP > 0)
-	{
 		std::cout << this->_name << " attacked " << target << " for " << this->_atkDmg << " points of damage" << std::endl;
-		this->_MP--;
-	}
 	else if (this->_MP == 0)
 		std::cout << this->_name << " can't attack " << target << " because it has no energy!" << std::endl;
 	else

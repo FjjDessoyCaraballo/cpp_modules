@@ -12,15 +12,16 @@
 
 // Constructors
 
-DiamondTrap::DiamondTrap(): ScavTrap(), FragTrap(),
+DiamondTrap::DiamondTrap(): ClapTrap("defaultDiamondTrap_clap_trap")
 {
-	std::cout << "DiamondTrap constructor called" << _name << std::endl;
-	this->_HP = FragTrap::_HP;
-	this->_MP = 100;
-	this->_atkDmg = 30;
+	this->_name = "defaultDiamondTrap";
+	std::cout << "DiamondTrap constructor called" << this->_name << std::endl;
+	this->_HP = FragTrap::getHp();
+	this->_MP = ScavTrap::getMp();
+	this->_atkDmg = ScavTrap::getAtk();
 }
 
-DiamondTrap::DiamondTrap( const DiamondTrap &other ): ClapTrap(copy), ScavTrap(copy), FragTrap(copy)
+DiamondTrap::DiamondTrap( const DiamondTrap &other ): ClapTrap(other), ScavTrap(other), FragTrap(other)
 {
 	std::cout << "DiamondTrap copy constructor called" << std::endl;
 }
@@ -52,6 +53,18 @@ DiamondTrap &DiamondTrap::operator=( const DiamondTrap &other )
 
 void	DiamondTrap::whoAmI()
 {
-	std::cout << "Am I " << this->_name << " or " << (here we are going to declare claptrap name) << "?" << std::endl;
+	std::cout << "Am I " << this->_name << " or " << ClapTrap::_name << "?" << std::endl;
 }
 
+void	DiamondTrap::attack( const std::string &target )
+{
+	if (this->_HP > 0 && this->_MP > 0)
+	{
+		std::cout << this->_name << " attacked " << target << " for " << this->_atkDmg << " points of damage" << std::endl;
+		this->_MP--;
+	}
+	else if (this->_MP == 0)
+		std::cout << this->_name << " can't attack " << target << " because it has no energy!" << std::endl;
+	else
+		std::cout << this->_name << " can't attack " << target << " because it has no hitpoints!" << std::endl;
+}

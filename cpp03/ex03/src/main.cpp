@@ -55,4 +55,5 @@ int main(void)
 	{
 		DiamondTrap diad("Swagger");
 	}
+	return (0);
 }

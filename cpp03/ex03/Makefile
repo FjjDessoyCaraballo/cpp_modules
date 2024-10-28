@@ -1,4 +1,4 @@
-NAME	= fragtrap
+NAME	= diamondtrap
 
 COMP	= c++
 FLAGS	= -Wall -Werror -Wextra -std=c++11
@@ -9,6 +9,7 @@ SRCS 	= 	$(SRCDIR)/main.cpp\
 			$(SRCDIR)/ClapTrap.cpp\
 			$(SRCDIR)/ScavTrap.cpp\
 			$(SRCDIR)/FragTrap.cpp\
+			$(SRCDIR)/DiamondTrap.cpp
 
 OBJS	= $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 
@@ -25,7 +26,7 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
 clean:
-	@rm -rf $(OBJS)
+	@rm -r $(OBJS)
 	@rm -rf $(OBJDIR)
 
 fclean: clean

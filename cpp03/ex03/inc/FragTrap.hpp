@@ -13,7 +13,7 @@
 
 #include "ClapTrap.hpp"
 
-class FragTrap: public ClapTrap
+class FragTrap: virtual public ClapTrap
 {
 	private:
 		std::string	_name;
@@ -31,6 +31,8 @@ class FragTrap: public ClapTrap
 		~FragTrap();
 		// methods
 		void	highFivesGuys();
+		// getter
+		int32_t	getHp();
 };
 
 #endif

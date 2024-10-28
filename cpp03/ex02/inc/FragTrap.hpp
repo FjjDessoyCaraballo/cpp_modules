@@ -16,10 +16,7 @@
 class FragTrap: public ClapTrap
 {
 	private:
-		std::string	_name;
-		u_int32_t	_HP;
-		u_int32_t	_MP;
-		u_int32_t	_atkDmg;
+	
 	public:
 		// constructors
 		FragTrap();

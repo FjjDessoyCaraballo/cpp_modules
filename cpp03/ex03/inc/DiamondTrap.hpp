@@ -17,11 +17,11 @@
 class DiamondTrap: public ScavTrap, public FragTrap
 {
 	private:
-		std::string _name;
+		std::string	_name;
 		u_int32_t	_HP;
 		u_int32_t	_MP;
-		u_int32_t _atkDmg;
-		std::string _target;
+		u_int32_t 	_atkDmg;
+		std::string	_target;
 	public:
 		// constructors
 		DiamondTrap();
@@ -33,5 +33,7 @@ class DiamondTrap: public ScavTrap, public FragTrap
 		~DiamondTrap();
 		// public methods
 		void	whoAmI();
+		void	attack( const std::string &target);
 };
+
 #endif
