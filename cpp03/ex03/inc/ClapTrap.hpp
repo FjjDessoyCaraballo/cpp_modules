@@ -19,7 +19,7 @@ class ClapTrap
 		std::string _name;
 		u_int32_t	_HP;
 		u_int32_t	_MP;
-		u_int32_t _atkDmg;
+		u_int32_t	_atkDmg;
 		std::string _target;
 	public:
 		// Constructors

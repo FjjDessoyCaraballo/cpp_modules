@@ -16,6 +16,7 @@
 int main(void)
 {
 	std::cout << "### CLAPTRAP ###" << std::endl;
+	std::cout << std::endl;
 	{
 		ClapTrap clap("Clapper");
 		std::string flap = "flapper";
@@ -29,7 +30,10 @@ int main(void)
 		// clap should be dead ):
 		clap.beRepaired(5);
 	}
+	std::cout << std::endl;
 	std::cout << "### SCAVTRAP ###" << std::endl;
+	std::cout << std::endl;
+
 	{
 		ScavTrap scav("Scaver");
 
@@ -40,7 +44,9 @@ int main(void)
 		scav.takeDamage(5);
 		scav.takeDamage(5);
 	}
+	std::cout << std::endl;
 	std::cout << "### FRAGTRAP ###" << std::endl;
+	std::cout << std::endl;	
 	{
 		FragTrap frag("Fragger");
 
@@ -51,7 +57,9 @@ int main(void)
 		frag.takeDamage(25);	
 		frag.highFivesGuys();
 	}
+	std::cout << std::endl;
 	std::cout << "### DIAMONDTRAP ###" << std::endl;
+	std::cout << std::endl;
 	{
 		DiamondTrap diad("Swagger");
 	}

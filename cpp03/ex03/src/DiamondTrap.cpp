@@ -15,10 +15,10 @@
 DiamondTrap::DiamondTrap(): ClapTrap("defaultDiamondTrap_clap_trap")
 {
 	this->_name = "defaultDiamondTrap";
-	std::cout << "DiamondTrap constructor called" << this->_name << std::endl;
-	this->_HP = FragTrap::getHp();
-	this->_MP = ScavTrap::getMp();
-	this->_atkDmg = ScavTrap::getAtk();
+	std::cout << "DiamondTrap default constructor called: " << this->_name << std::endl;
+	this->_HP = FragTrap::_HP;
+	this->_MP = ScavTrap::_MP;
+	this->_atkDmg = FragTrap::_atkDmg;
 }
 
 DiamondTrap::DiamondTrap( const DiamondTrap &other ): ClapTrap(other), ScavTrap(other), FragTrap(other)
@@ -28,14 +28,18 @@ DiamondTrap::DiamondTrap( const DiamondTrap &other ): ClapTrap(other), ScavTrap(
 
 DiamondTrap::DiamondTrap( std::string name): _name(name)
 {
-	std::cout << _name << " has joined the battle!" << std::endl;
+	this->_name = "defaultDiamondTrap";
+	this->_HP = FragTrap::_HP;
+	this->_MP = ScavTrap::_MP;
+	this->_atkDmg = FragTrap::_atkDmg;
+	std::cout << "DiamondTrap named constructor called: " << this->_name << std::endl;
 }
 
 // Destructor
 
 DiamondTrap::~DiamondTrap()
 {
-	std::cout << _name << std::endl;
+	std::cout << "DiamondTrap destructor called: " << this->_name << std::endl;
 }
 
 // Overloaded operators
@@ -50,7 +54,6 @@ DiamondTrap &DiamondTrap::operator=( const DiamondTrap &other )
 }
 
 // Public methods
-
 void	DiamondTrap::whoAmI()
 {
 	std::cout << "Am I " << this->_name << " or " << ClapTrap::_name << "?" << std::endl;
