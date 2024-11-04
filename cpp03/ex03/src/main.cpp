@@ -30,6 +30,7 @@ int main(void)
 		// clap should be dead ):
 		clap.beRepaired(5);
 	}
+	
 	std::cout << std::endl;
 	std::cout << "### SCAVTRAP ###" << std::endl;
 	std::cout << std::endl;
