@@ -1,4 +1,4 @@
-NAME	= fragtrap
+NAME	= ft
 
 COMP	= c++
 FLAGS	= -Wall -Werror -Wextra -std=c++11

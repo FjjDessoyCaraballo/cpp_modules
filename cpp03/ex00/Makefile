@@ -1,4 +1,4 @@
-NAME	= claptrap
+NAME	= ct
 
 COMP	= c++
 FLAGS	= -Wall -Werror -Wextra -std=c++11

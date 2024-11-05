@@ -1,4 +1,4 @@
-NAME	= diamondtrap
+NAME	= dt
 
 COMP	= c++
 FLAGS	= -Wall -Werror -Wextra -std=c++11
