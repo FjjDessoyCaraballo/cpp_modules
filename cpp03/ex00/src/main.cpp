@@ -12,16 +12,20 @@
 
 int main(void)
 {
-	ClapTrap clap("Clapper");
-	std::string flap = "flapper";
+	std::cout << "### CLAPTRAP ###" << std::endl;
+	std::cout << std::endl;
+	{
+		ClapTrap clap("Clapper");
+		std::string flap = "flapper";
 
-	clap.attack(flap);
-	clap.attack("brapper");
-	clap.takeDamage(5);
-	clap.beRepaired(5);
-	clap.takeDamage(5);
-	clap.takeDamage(5);
-	// clap should be dead ):
-	clap.beRepaired(5);
+		clap.attack(flap);
+		clap.attack("brapper");
+		clap.takeDamage(5);
+		clap.beRepaired(5);
+		clap.takeDamage(5);
+		clap.takeDamage(5);
+		std::cout << "It was at this moment that clap found out he was dead" << std::endl;
+		clap.beRepaired(5);
+	}
 	return (0);
 }

@@ -78,6 +78,28 @@ int main(void)
 		frag.highFivesGuys();
 	}
 	std::cout << std::endl;
+	{
+		std::cout << "Oh boy, apparently Fragger is back and brought his friends now!" << std::endl;
+		FragTrap frag("Fragger");
+		ScavTrap scav("Scaver");
+		ClapTrap clap("Clapper");
+		std::cout << "The gang is all together! It would be a shame if A BAG OF ROTTEN APPLES APPEARED!" << std::endl;
+		frag.attack("bag of rotten apples");
+		scav.attack("bag of rotten apples");
+		clap.attack("bag of rotten apples");
+
+		std::cout << "OMG THE BAG OF ROTTEN APPLES WAS DEFEATED!" << std::endl;
+		frag.highFivesGuys();
+		std::cout << "Oh boy, a bag of rotten carrots appeared!1!1!!!11!" << std::endl;
+
+		frag.takeDamage(99);
+		std::cout << "Fragger is at the brink of death!" << std::endl;
+		frag.beRepaired(99);
+		std::cout << "The rotten apples took another swing at Fragger!" << std::endl;
+		frag.takeDamage(3);
+		frag.beRepaired(3);
+	}	
+	std::cout << std::endl;
 	std::cout << "### DIAMONDTRAP ###" << std::endl;
 	std::cout << std::endl;
 	{
