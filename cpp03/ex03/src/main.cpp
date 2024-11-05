@@ -30,11 +30,21 @@ int main(void)
 		std::cout << "It was at this moment that clap found out he was dead" << std::endl;
 		clap.beRepaired(5);
 	}
-	
+	// this test takes a lot of lines in the output, but it should be able to tell if the MP is really 20
+	// {
+	// 	std::cout << std::endl;
+	// 	ClapTrap clap("Clapper");
+	// 	std::cout << "Our hero makes another apparition!" << std::endl;
+	// 	std::cout << "Our is figthing his urges to take damage and repair itself to infinity!" << std::endl;
+	// 	for (int i = 0; i < 20; i++)
+	// 	{
+	// 		clap.takeDamage(5);
+	// 		clap.beRepaired(5);
+	// 	}
+	// }
 	std::cout << std::endl;
 	std::cout << "### SCAVTRAP ###" << std::endl;
 	std::cout << std::endl;
-
 	{
 		ScavTrap scav("Scaver");
 
@@ -45,11 +55,29 @@ int main(void)
 		scav.takeDamage(5);
 		scav.takeDamage(5);
 	}
+	{
+		std::cout << std::endl;
+		ScavTrap scav("Scaver");
+		ClapTrap clap("Clapper");
+		scav.takeDamage(70);
+		clap.takeDamage(70);
+		std::cout << "Our heroes are mortally wounded! Are they going to recover?!" << std::endl;
+		for (int i = 0; i < 50; i++)
+		{
+			scav.beRepaired(1);
+			clap.beRepaired(1);
+		}
+		scav.guardGate();
+		clap.attack("bag of rotten apples");
+		std::cout << "is this the end for our heroes?" << std::endl;
+		std::cout << std::endl;
 
+	}
 	{
 		std::cout << std::endl;
 		std::cout << "look out! Scaver is back! And he brought something!" << std::endl;
 		std::cout << std::endl;
+		
 		ScavTrap scav("Scaver");
 		ClapTrap clap("Clapper");
 
@@ -64,9 +92,13 @@ int main(void)
 		clap.beRepaired(5);
 		std::cout << "Seems like this is the end of our mighty Scaver and his friend Clapper" << std::endl;
 	}
+
+
 	std::cout << std::endl;
 	std::cout << "### FRAGTRAP ###" << std::endl;
 	std::cout << std::endl;	
+
+
 	{
 		FragTrap frag("Fragger");
 
@@ -74,16 +106,21 @@ int main(void)
 		frag.takeDamage(75);
 		frag.beRepaired(50);
 		frag.takeDamage(25);
-		frag.takeDamage(25);	
+		frag.takeDamage(25);
+		std::cout << std::endl;	
+		std::cout << "Lets hope our hero is still up for a high five!" << std::endl;
 		frag.highFivesGuys();
 	}
 	std::cout << std::endl;
 	{
 		std::cout << "Oh boy, apparently Fragger is back and brought his friends now!" << std::endl;
+		
 		FragTrap frag("Fragger");
 		ScavTrap scav("Scaver");
 		ClapTrap clap("Clapper");
+		
 		std::cout << "The gang is all together! It would be a shame if A BAG OF ROTTEN APPLES APPEARED!" << std::endl;
+		
 		frag.attack("bag of rotten apples");
 		scav.attack("bag of rotten apples");
 		clap.attack("bag of rotten apples");
@@ -103,7 +140,7 @@ int main(void)
 	std::cout << "### DIAMONDTRAP ###" << std::endl;
 	std::cout << std::endl;
 	{
-		DiamondTrap diad("Swagger");
+		DiamondTrap diad("Ice Cube");
 	}
 	return (0);
 }

@@ -17,11 +17,10 @@ int main(void)
 	std::cout << std::endl;
 	{
 		ClapTrap clap("Clapper");
-		std::string flap = "flapper";
 
-		clap.attack(flap);
-		clap.attack("brapper");
-		clap.takeDamage(5);
+		clap.attack("Flapper");
+		clap.attack("Brapper");
+		clap.takeDamage(50);
 		clap.beRepaired(5);
 		clap.takeDamage(5);
 		clap.takeDamage(5);
@@ -42,6 +41,25 @@ int main(void)
 		scav.beRepaired(5);
 		scav.takeDamage(5);
 		scav.takeDamage(5);
+	}
+
+	{
+		std::cout << std::endl;
+		ScavTrap scav("Scaver");
+		ClapTrap clap("Clapper");
+		scav.takeDamage(70);
+		clap.takeDamage(70);
+		std::cout << "Our heroes are mortally wounded! Are they going to recover?!" << std::endl;
+		for (int i = 0; i < 50; i++)
+		{
+			scav.beRepaired(1);
+			clap.beRepaired(1);
+		}
+		scav.guardGate();
+		clap.attack("bag of rotten apples");
+		std::cout << "is this the end for our heroes?" << std::endl;
+		std::cout << std::endl;
+
 	}
 
 	{

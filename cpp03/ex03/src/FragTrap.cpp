@@ -52,12 +52,12 @@ FragTrap &FragTrap::operator=( const FragTrap &other )
 
 void	FragTrap::highFivesGuys()
 {
-	if (this->_MP > 0)
+	if (this->_MP > 0 || this->_HP > 0)
 	{
 		std::cout << _name << " requests the highest of fives!" << std::endl;
 		std::cout << "**SCHMACK!**" << std::endl;
 	}
 	else
-		std::cout << _name << " is too exhausted to high five! ):" << std::endl;
+		std::cout << _name << " is too exhausted/dead to high five! ):" << std::endl;
 }
 

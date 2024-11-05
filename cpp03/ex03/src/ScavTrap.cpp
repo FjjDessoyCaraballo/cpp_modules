@@ -17,12 +17,15 @@
  * 
  * 
  */
-ScavTrap::ScavTrap(): ClapTrap()
+ScavTrap::ScavTrap()
 {
 	std::cout << "ScavTrap default constructor called: " << _name << std::endl;
-	this->_HP = 100;
-	this->_MP = 50;
-	this->_atkDmg = 20;
+	this->_guard = false;
+}
+
+ScavTrap::ScavTrap( std::string name): ClapTrap(name)
+{
+	std::cout << "ScavTrap named Contructor called: " << _name << std::endl;
 	this->_guard = false;
 }
 
@@ -32,14 +35,6 @@ ScavTrap::ScavTrap( const ScavTrap &copy ): ClapTrap(copy)
 	this->_guard = copy._guard;
 }
 
-ScavTrap::ScavTrap( std::string name): ClapTrap(name)
-{
-	std::cout << "ScavTrap named Contructor called: " << _name << std::endl;
-	this->_HP = 100;
-	this->_MP = 50;
-	this->_atkDmg = 20;
-	this->_guard = false;
-}
 
 // Destructor
 
@@ -76,8 +71,13 @@ void	ScavTrap::guardGate()
 {
 	if (this->_guard == false)
 	{
-		this->_guard = true;
-		std::cout << _name << " is now on guard mode!" << std::endl;
+		if (this->_MP > 0)
+		{
+			this->_guard = true;
+			std::cout << _name << " is now on guard mode!" << std::endl;
+		}
+		else
+			std::cout << _name << " can't guard because he's exhausted!" << std::endl;
 	}
 	else
 		std::cout << _name << " is already guarding the gates!" << std::endl;

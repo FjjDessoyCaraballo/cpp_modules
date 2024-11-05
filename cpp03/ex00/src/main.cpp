@@ -27,5 +27,16 @@ int main(void)
 		std::cout << "It was at this moment that clap found out he was dead" << std::endl;
 		clap.beRepaired(5);
 	}
+	{
+		std::cout << std::endl;
+		ClapTrap clap("Clapper");
+		std::cout << "Our hero makes another apparition!" << std::endl;
+		std::cout << "Our is figthing his urges to take damage and repair itself to infinity!" << std::endl;
+		for (int i = 0; i < 20; i++)
+		{
+			clap.takeDamage(5);
+			clap.beRepaired(5);
+		}
+	}
 	return (0);
 }

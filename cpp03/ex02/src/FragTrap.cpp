@@ -11,18 +11,9 @@
 #include "../inc/FragTrap.hpp"
 
 // Constructors
-
-FragTrap::FragTrap(): ClapTrap()
+FragTrap::FragTrap()
 {
 	std::cout << "FragTrap constructor called: " << _name << std::endl;
-	this->_HP = 100;
-	this->_MP = 100;
-	this->_atkDmg = 30;
-}
-
-FragTrap::FragTrap( const FragTrap &copy ): ClapTrap(copy)
-{
-	std::cout << "FragTrap copy constructor called" << std::endl;
 }
 
 FragTrap::FragTrap( std::string name): ClapTrap(name)
@@ -30,15 +21,18 @@ FragTrap::FragTrap( std::string name): ClapTrap(name)
 	std::cout << "FragTrap named constructor called: " << _name << std::endl;
 }
 
-// Destructor
+FragTrap::FragTrap( const FragTrap &copy ): ClapTrap(copy)
+{
+	std::cout << "FragTrap copy constructor called" << std::endl;
+}
 
+// Destructor
 FragTrap::~FragTrap()
 {
 	std::cout << "FragTrap destructor called: " << _name << std::endl;
 }
 
 // Overloaded operators
-
 FragTrap &FragTrap::operator=( const FragTrap &other )
 {
 	std::cout << "FragTrap assignament operator called" << std::endl;
@@ -52,7 +46,7 @@ FragTrap &FragTrap::operator=( const FragTrap &other )
 
 void	FragTrap::highFivesGuys()
 {
-	if (this->_MP > 0)
+	if (this->_MP > 0 || this->_HP > 0)
 	{
 		std::cout << _name << " requests the highest of fives!" << std::endl;
 		std::cout << "**SCHMACK!**" << std::endl;
