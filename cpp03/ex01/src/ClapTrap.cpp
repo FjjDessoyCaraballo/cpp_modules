@@ -53,11 +53,11 @@ ClapTrap	&ClapTrap::operator=( const ClapTrap &other)
 void	ClapTrap::attack( const std::string &target )
 {
 	if (this->_HP > 0 && this->_MP > 0)
-		std::cout << this->_name << " attacked " << target << " for " << this->_atkDmg << " points of damage" << std::endl;
+		std::cout << this->_name << " clap attacked " << target << " for " << this->_atkDmg << " points of damage" << std::endl;
 	else if (this->_MP == 0)
-		std::cout << this->_name << " can't attack " << target << " because it has no energy!" << std::endl;
+		std::cout << this->_name << " can't clap attack " << target << " because it has no energy!" << std::endl;
 	else
-		std::cout << this->_name << " can't attack " << target << " because it has no hitpoints!" << std::endl;
+		std::cout << this->_name << " can't clap attack " << target << " because it has no hitpoints!" << std::endl;
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)

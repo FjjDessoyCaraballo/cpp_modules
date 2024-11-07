@@ -23,18 +23,17 @@ ScavTrap::ScavTrap()
 	this->_guard = false;
 }
 
-ScavTrap::ScavTrap( std::string name): ClapTrap(name)
-{
-	std::cout << "ScavTrap named Contructor called: " << _name << std::endl;
-	this->_guard = false;
-}
-
 ScavTrap::ScavTrap( const ScavTrap &copy ): ClapTrap(copy)
 {
 	std::cout << "ScavTrap copy constructor called" << std::endl;
 	this->_guard = copy._guard;
 }
 
+ScavTrap::ScavTrap( std::string name): ClapTrap(name)
+{
+	std::cout << "ScavTrap named Contructor called: " << _name << std::endl;
+	this->_guard = false;
+}
 
 // Destructor
 
@@ -56,28 +55,27 @@ ScavTrap &ScavTrap::operator=( const ScavTrap &other )
 }
 
 // Public methods
-
 void	ScavTrap::attack( const std::string &target )
 {
 	if (this->_HP > 0 && this->_MP > 0)
-		std::cout << this->_name << " attacked " << target << " for " << this->_atkDmg << " points of damage" << std::endl;
+		std::cout << this->_name << " scav attacked " << target << " for " << this->_atkDmg << " points of damage" << std::endl;
 	else if (this->_MP == 0)
-		std::cout << this->_name << " can't attack " << target << " because it has no energy!" << std::endl;
+		std::cout << this->_name << " can't scav attack " << target << " because it has no energy!" << std::endl;
 	else
-		std::cout << this->_name << " can't attack " << target << " because it has no hitpoints!" << std::endl;
+		std::cout << this->_name << " can't scav attack " << target << " because it has no hitpoints!" << std::endl;
 }
 
 void	ScavTrap::guardGate()
 {
 	if (this->_guard == false)
 	{
-		if (this->_MP > 0)
+		if (this->_MP > 0 && this->_HP > 0)
 		{
 			this->_guard = true;
 			std::cout << _name << " is now on guard mode!" << std::endl;
 		}
 		else
-			std::cout << _name << " can't guard because he's exhausted!" << std::endl;
+			std::cout << _name << " can't guard because he's exhausted/dead!" << std::endl;
 	}
 	else
 		std::cout << _name << " is already guarding the gates!" << std::endl;

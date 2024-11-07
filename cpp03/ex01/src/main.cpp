@@ -61,7 +61,6 @@ int main(void)
 		std::cout << std::endl;
 
 	}
-
 	{
 		std::cout << std::endl;
 		std::cout << "look out! Scaver is back! And he brought something!" << std::endl;

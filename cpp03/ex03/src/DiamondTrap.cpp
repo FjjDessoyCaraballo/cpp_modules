@@ -26,7 +26,7 @@ DiamondTrap::DiamondTrap( const DiamondTrap &other ): ClapTrap(other), ScavTrap(
 	std::cout << "DiamondTrap copy constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap( std::string name): _name(name)
+DiamondTrap::DiamondTrap(std::string name): ClapTrap(name + "_clap_trap"), ScavTrap(name), FragTrap(name), _name(name)
 {
 	this->_name = "defaultDiamondTrap";
 	this->_HP = FragTrap::_HP;
@@ -57,17 +57,4 @@ DiamondTrap &DiamondTrap::operator=( const DiamondTrap &other )
 void	DiamondTrap::whoAmI()
 {
 	std::cout << "Am I " << this->_name << " or " << ClapTrap::_name << "?" << std::endl;
-}
-
-void	DiamondTrap::attack( const std::string &target )
-{
-	if (this->_HP > 0 && this->_MP > 0)
-	{
-		std::cout << this->_name << " attacked " << target << " for " << this->_atkDmg << " points of damage" << std::endl;
-		this->_MP--;
-	}
-	else if (this->_MP == 0)
-		std::cout << this->_name << " can't attack " << target << " because it has no energy!" << std::endl;
-	else
-		std::cout << this->_name << " can't attack " << target << " because it has no hitpoints!" << std::endl;
 }

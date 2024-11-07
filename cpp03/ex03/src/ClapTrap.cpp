@@ -12,9 +12,14 @@
 
 //Constructors
 
-ClapTrap::ClapTrap()
+ClapTrap::ClapTrap(): _name("Clapper"), _HP(100), _MP(100), _atkDmg(30)
 {
 	std::cout << "Standard ClapTrap constructor for " << _name << " called" <<std::endl;
+}
+
+ClapTrap::ClapTrap( std::string name ): _name(name), _HP(100), _MP(100), _atkDmg(30)
+{
+	std::cout << "ClapTrap named constructor called for: " << this->_name << std::endl;
 }
 
 ClapTrap::ClapTrap( const ClapTrap &copy )
@@ -23,20 +28,14 @@ ClapTrap::ClapTrap( const ClapTrap &copy )
 	*this = copy;
 }
 
-ClapTrap::ClapTrap( std::string name ): _name(name), _HP(10), _MP(10), _atkDmg(0)
-{
-	std::cout << "ClapTrap named constructor called for: " << name << std::endl;
-}
 
 // Destructor
-
 ClapTrap::~ClapTrap()
 {
 	std::cout << "ClapTrap Destructor called for: " << _name << std::endl;
 }
 
 // Overloaded Operator
-
 ClapTrap	&ClapTrap::operator=( const ClapTrap &other)
 {
 	std::cout << "ClapTrap assignament operator called" << std::endl;
@@ -48,15 +47,14 @@ ClapTrap	&ClapTrap::operator=( const ClapTrap &other)
 }
 
 // Public methods
-
 void	ClapTrap::attack( const std::string &target )
 {
 	if (this->_HP > 0 && this->_MP > 0)
-		std::cout << this->_name << " attacked " << target << " for " << this->_atkDmg << " points of damage" << std::endl;
+		std::cout << this->_name << " clap attacked " << target << " for " << this->_atkDmg << " points of damage" << std::endl;
 	else if (this->_MP == 0)
-		std::cout << this->_name << " can't attack " << target << " because it has no energy!" << std::endl;
+		std::cout << this->_name << " can't clap attack " << target << " because it has no energy!" << std::endl;
 	else
-		std::cout << this->_name << " can't attack " << target << " because it has no hitpoints!" << std::endl;
+		std::cout << this->_name << " can't clap attack " << target << " because it has no hitpoints!" << std::endl;
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
@@ -74,7 +72,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this->_MP > 0 && this->_HP > 0 && this->_HP + amount <= 10)
+	if (this->_MP > 0 && this->_HP > 0)
 	{	
 		this->_HP += amount;
 		std::cout << this->_name << " repaired " << amount << " worth of HP" << std::endl;
