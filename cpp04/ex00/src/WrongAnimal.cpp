@@ -17,12 +17,12 @@ WrongAnimal::WrongAnimal()
 
 WrongAnimal::~WrongAnimal()
 {
-	std::cout << "WrongAnimal named constructor called" << std::endl;
+	std::cout << "WrongAnimal destructor called" << std::endl;
 }
 
 WrongAnimal::WrongAnimal( std::string type ): _type(type)
 {
-
+	std::cout << "WrongAnimal named constructor called" << std::endl;
 }
 
 WrongAnimal::WrongAnimal( const WrongAnimal &other )

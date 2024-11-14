@@ -17,12 +17,12 @@ WrongCat::WrongCat()
 
 WrongCat::~WrongCat()
 {
-	std::cout << "WrongCat named constructor called" << std::endl;
+	std::cout << "WrongCat destructor called" << std::endl;
 }
 
 WrongCat::WrongCat( std::string type ): _type(type)
 {
-
+	std::cout << "WrongCat named constructor called" << std::endl;
 }
 
 WrongCat::WrongCat( const WrongCat &other )
