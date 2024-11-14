@@ -8,4 +8,35 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#include "WrongAnimal.hpp"
+#include "../inc/WrongAnimal.hpp"
+
+WrongAnimal::WrongAnimal()
+{
+	std::cout << "WrongAnimal default constructor called" << std::endl;
+}
+
+WrongAnimal::~WrongAnimal()
+{
+	std::cout << "WrongAnimal named constructor called" << std::endl;
+}
+
+WrongAnimal::WrongAnimal( std::string type ): _type(type)
+{
+
+}
+
+WrongAnimal::WrongAnimal( const WrongAnimal &other )
+{
+	this->_type = other._type;
+}
+
+WrongAnimal &WrongAnimal::operator=( const WrongAnimal &other )
+{
+	this->_type = other._type;
+	return (*this);
+}
+
+void	WrongAnimal::makeSound() const
+{
+	std::cout << "WrongAnimal standard sound" << std::endl;
+}
