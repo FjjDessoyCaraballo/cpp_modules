@@ -8,9 +8,7 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-
-#ifndef WRONGANIMAL_CPP
-#define WRONGANIAML_CPP
+#pragma once
 
 #include <iostream>
 
@@ -29,8 +27,9 @@ class WrongAnimal
 		WrongAnimal( const WrongAnimal &other );
 		WrongAnimal &operator=( const WrongAnimal &other );
 
-		// Public methods
-		virtual void makeSound() const;
-};
+		// getters
+		std::string getType() const;
 
-#endif
+		// Public methods
+		void makeSound() const;
+};

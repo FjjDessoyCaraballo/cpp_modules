@@ -40,3 +40,8 @@ void	WrongCat::makeSound() const
 {
 	std::cout << "WOOF! Wait..." << std::endl;
 }
+
+std::string	WrongCat::getType() const
+{
+	return (_type);
+}
