@@ -8,24 +8,24 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef AAnimal_HPP
+#define AAnimal_HPP
 
 #include <iostream>
 
-class Animal
+class AAnimal
 {
 	protected:
 		std::string _type;
 	public:
 		// Constructor
-		Animal();
-		Animal( std::string );
+		AAnimal();
+		AAnimal( std::string );
 		// Destructor
-		virtual ~Animal();
+		virtual ~AAnimal();
 		// Orthodox Canonical Form
-		Animal( const Animal &other );
-		Animal &operator=( const Animal &other );
+		AAnimal( const AAnimal &other );
+		AAnimal &operator=( const AAnimal &other );
 		// Public methods
 		virtual void makeSound() const;
 		// Getter

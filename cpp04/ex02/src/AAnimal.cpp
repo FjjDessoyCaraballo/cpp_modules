@@ -8,40 +8,40 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#include "../inc/Animal.hpp"
+#include "../inc/AAnimal.hpp"
 
-Animal::Animal()
+AAnimal::AAnimal()
 {
-	std::cout << "Animal default constructor called" << std::endl;
+	std::cout << "AAnimal default constructor called" << std::endl;
 }
 
-Animal::Animal( std::string type ): _type(type)
+AAnimal::AAnimal( std::string type ): _type(type)
 {
-	std::cout << "Animal named constructor called" << std::endl;
+	std::cout << "AAnimal named constructor called" << std::endl;
 }
 
-Animal::~Animal()
+AAnimal::~AAnimal()
 {
-	std::cout << "Animal destructor called" << std::endl;
+	std::cout << "AAnimal destructor called" << std::endl;
 }
 
-Animal::Animal( const Animal &other )
+AAnimal::AAnimal( const AAnimal &other )
 {
 	this->_type = other._type;
 }
 
-Animal &Animal::operator=( const Animal &other )
+AAnimal &AAnimal::operator=( const AAnimal &other )
 {
 	this->_type = other._type;
 	return (*this);
 }
 
-void Animal::makeSound() const
+void AAnimal::makeSound() const
 {
-	std::cout << "Standard animal sound" << std::endl;
+	std::cout << "Standard AAnimal sound" << std::endl;
 }
 
-std::string Animal::getType() const
+std::string AAnimal::getType() const
 {
 	return (this->_type);
 }

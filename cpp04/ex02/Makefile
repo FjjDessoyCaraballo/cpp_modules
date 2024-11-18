@@ -1,4 +1,4 @@
-NAME		=	animal
+NAME		=	Animal
 
 COMP		=	c++
 FLAGS		=	-Wall -Wextra -Werror -std=c++11 -fsanitize=address
@@ -8,11 +8,11 @@ OBJ_DIR		=	obj
 INC_DIR		=	inc
 
 SRC			=	$(SRC_DIR)/main.cpp\
-				$(SRC_DIR)/Animal.cpp\
+				$(SRC_DIR)/AAnimal.cpp\
 				$(SRC_DIR)/Dog.cpp\
 				$(SRC_DIR)/Cat.cpp\
 				$(SRC_DIR)/WrongCat.cpp\
-				$(SRC_DIR)/WrongAnimal.cpp\
+				$(SRC_DIR)/WrongAAnimal.cpp\
 				$(SRC_DIR)/Brain.cpp\
 
 OBJS		=	$(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC))

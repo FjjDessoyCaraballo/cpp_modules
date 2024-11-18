@@ -8,9 +8,9 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#include "../inc/WrongAnimal.hpp"
+#include "../inc/WrongAAnimal.hpp"
 #include "../inc/WrongCat.hpp"
-#include "../inc/Animal.hpp"
+#include "../inc/AAnimal.hpp"
 #include "../inc/Dog.hpp"
 #include "../inc/Cat.hpp"
 #include "../inc/Brain.hpp"
@@ -21,9 +21,9 @@ int main(void)
 	// std::cout << "###################### EX01 ############################" << std::endl;
 	// std::cout << "########################################################" << std::endl;
 	// {
-	// 	const Animal* meta = new Animal();
-	// 	const Animal* j = new Dog();
-	// 	const Animal* i = new Cat();
+	// 	const AAnimal* meta = new AAnimal();
+	// 	const AAnimal* j = new Dog();
+	// 	const AAnimal* i = new Cat();
 
 	// 	std::cout << j->getType() << " " << std::endl;
 	// 	std::cout << i->getType() << " " << std::endl;
@@ -38,8 +38,8 @@ int main(void)
 	// 	delete	j;
 	// }
 	// {
-	// 	const WrongAnimal* meta = new WrongAnimal();
-	// 	const WrongAnimal* j = new WrongCat();
+	// 	const WrongAAnimal* meta = new WrongAAnimal();
+	// 	const WrongAAnimal* j = new WrongCat();
 
 	// 	std::cout << j->getType() << std::endl;
 	// 	std::cout << meta->getType() << std::endl;
@@ -55,8 +55,8 @@ int main(void)
     std::cout << "###################### EX02 ############################" << std::endl;
     std::cout << "########################################################" << std::endl;
     {
-        const Animal* i = new Dog();
-        const Animal* j = new Cat();
+        const AAnimal* i = new Dog();
+        const AAnimal* j = new Cat();
 
         delete i;
         delete j;

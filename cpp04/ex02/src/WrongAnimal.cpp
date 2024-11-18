@@ -8,40 +8,40 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#include "../inc/WrongAnimal.hpp"
+#include "../inc/WrongAAnimal.hpp"
 
-WrongAnimal::WrongAnimal()
+WrongAAnimal::WrongAAnimal()
 {
-	std::cout << "WrongAnimal default constructor called" << std::endl;
+	std::cout << "WrongAAnimal default constructor called" << std::endl;
 }
 
-WrongAnimal::~WrongAnimal()
+WrongAAnimal::~WrongAAnimal()
 {
-	std::cout << "WrongAnimal destructor called" << std::endl;
+	std::cout << "WrongAAnimal destructor called" << std::endl;
 }
 
-WrongAnimal::WrongAnimal( std::string type ): _type(type)
+WrongAAnimal::WrongAAnimal( std::string type ): _type(type)
 {
-	std::cout << "WrongAnimal named constructor called" << std::endl;
+	std::cout << "WrongAAnimal named constructor called" << std::endl;
 }
 
-WrongAnimal::WrongAnimal( const WrongAnimal &other )
+WrongAAnimal::WrongAAnimal( const WrongAAnimal &other )
 {
 	this->_type = other._type;
 }
 
-WrongAnimal &WrongAnimal::operator=( const WrongAnimal &other )
+WrongAAnimal &WrongAAnimal::operator=( const WrongAAnimal &other )
 {
 	this->_type = other._type;
 	return (*this);
 }
 
-void	WrongAnimal::makeSound() const
+void	WrongAAnimal::makeSound() const
 {
-	std::cout << "WrongAnimal standard sound" << std::endl;
+	std::cout << "WrongAAnimal standard sound" << std::endl;
 }
 
-std::string	WrongAnimal::getType() const
+std::string	WrongAAnimal::getType() const
 {
 	return (_type);
 }

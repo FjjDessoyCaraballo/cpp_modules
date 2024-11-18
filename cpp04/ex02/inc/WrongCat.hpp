@@ -11,9 +11,9 @@
 #pragma once
 
 #include <iostream>
-#include "WrongAnimal.hpp"
+#include "WrongAAnimal.hpp"
 
-class WrongCat: public WrongAnimal
+class WrongCat: public WrongAAnimal
 {
 	private:
 		std::string _type;
