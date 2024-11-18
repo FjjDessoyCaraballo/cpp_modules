@@ -1,7 +1,7 @@
 NAME		=	animal
 
 COMP		=	c++
-FLAGS		=	-Wall -Wextra -Werror -std=c++11 #-fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror -std=c++11 -fsanitize=address
 
 SRC_DIR		=	src
 OBJ_DIR		=	obj

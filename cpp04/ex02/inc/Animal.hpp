@@ -8,40 +8,28 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef ANIMAL_HPP
+#define ANIMAL_HPP
 
-#include "Animal.hpp"
-#include "Brain.hpp"
+#include <iostream>
 
-class Dog: public Animal
+class Animal
 {
 	protected:
-		Brain		*_brain;
-		std::string	_type;
+		std::string _type;
 	public:
 		// Constructor
-		Dog();
-		Dog( std::string );
-		
+		Animal();
+		Animal( std::string );
 		// Destructor
-		~Dog();
-		
+		virtual ~Animal();
 		// Orthodox Canonical Form
-		Dog( const Dog &other );
-		Dog 		&operator=( const Dog &other );
-		
+		Animal( const Animal &other );
+		Animal &operator=( const Animal &other );
 		// Public methods
-		void		makeSound() const;
-		void		compare( const Dog &other );
-
+		virtual void makeSound() const;
 		// Getter
-		std::string	getType() const;
-		std::string	getIdeas(int index) const;
-		Brain		*getBrain() const;
-
-
-		// Setter
+		std::string getType() const;
 };
 
 #endif

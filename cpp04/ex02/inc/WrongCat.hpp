@@ -8,40 +8,29 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-#define DOG_HPP
+#pragma once
 
-#include "Animal.hpp"
-#include "Brain.hpp"
+#include <iostream>
+#include "WrongAnimal.hpp"
 
-class Dog: public Animal
+class WrongCat: public WrongAnimal
 {
-	protected:
-		Brain		*_brain;
-		std::string	_type;
+	private:
+		std::string _type;
 	public:
-		// Constructor
-		Dog();
-		Dog( std::string );
-		
-		// Destructor
-		~Dog();
-		
-		// Orthodox Canonical Form
-		Dog( const Dog &other );
-		Dog 		&operator=( const Dog &other );
-		
-		// Public methods
-		void		makeSound() const;
-		void		compare( const Dog &other );
+		// constructors
+		WrongCat();
+		WrongCat( std::string type );
+		// destructors
+		~WrongCat();
 
-		// Getter
+		// canonical orthodox form
+		WrongCat( const WrongCat &other );
+		WrongCat &operator=( const WrongCat &other );
+
+		// getters
 		std::string	getType() const;
-		std::string	getIdeas(int index) const;
-		Brain		*getBrain() const;
 
-
-		// Setter
+		// Public methods
+		void makeSound() const;
 };
-
-#endif
