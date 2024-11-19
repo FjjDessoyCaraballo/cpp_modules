@@ -13,10 +13,12 @@
 #include <iostream>
 #include "AMateria.hpp"
 
+class AMateria;
+
 class ICharacter
 {
-	private:
 	protected:
+		const std::string _name;
 	public:
 		virtual ~ICharacter() {};
 		virtual	std::string const& getName() const = 0;

@@ -9,6 +9,8 @@ INC_DIR		=	inc
 
 SRC			=	$(SRC_DIR)/main.cpp\
 				$(SRC_DIR)/AMateria.cpp\
+				$(SRC_DIR)/ICharacter.cpp\
+				$(SRC_DIR)/IMateriaSource.cpp\
 
 OBJS		=	$(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
 

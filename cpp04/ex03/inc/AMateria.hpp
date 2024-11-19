@@ -15,11 +15,22 @@
 
 class AMateria
 {
-	private:
 	protected:
+		std::string _type;
 	public:
+		// constructor
+		AMateria();
 		AMateria( std::string const& type);
+		
+		// destructor
+		virtual ~AMateria();
+		
+		// canonical orthodox form
+		AMateria( AMateria const& ref );
+		AMateria &operator=( AMateria const& ref );
+
+		// public methods
 		const std::string& getType() const; // returns materia type
 		virtual AMateria* clone() const = 0;
-		virtual void use(ICharacter& target);
+		virtual void use( ICharacter& target );
 };
