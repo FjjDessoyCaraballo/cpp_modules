@@ -11,15 +11,13 @@
 #pragma once
 
 #include <iostream>
+#include "AMateria.hpp"
 #include "ICharacter.hpp"
 
-class AMateria
+class IMateriaSource
 {
-	private:
-	protected:
 	public:
-		AMateria( std::string const& type);
-		const std::string& getType() const; // returns materia type
-		virtual AMateria* clone() const = 0;
-		virtual void use(ICharacter& target);
+		virtual ~IMateriaSource() {};
+		virtual void leanMateria(AMateria*) = 0;
+		virtual AMateria* createMateria(std::string const& type) = 0;
 };

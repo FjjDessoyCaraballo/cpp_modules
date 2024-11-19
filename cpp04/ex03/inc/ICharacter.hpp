@@ -11,15 +11,16 @@
 #pragma once
 
 #include <iostream>
-#include "ICharacter.hpp"
+#include "AMateria.hpp"
 
-class AMateria
+class ICharacter
 {
 	private:
 	protected:
 	public:
-		AMateria( std::string const& type);
-		const std::string& getType() const; // returns materia type
-		virtual AMateria* clone() const = 0;
-		virtual void use(ICharacter& target);
+		virtual ~ICharacter() {};
+		virtual	std::string const& getName() const = 0;
+		virtual void equip(AMateria& m) = 0;
+		virtual void unequip(int idx) = 0;
+		virtual void use(int idx, ICharacter& target) = 0;
 };

@@ -8,18 +8,4 @@
 /*        --------/   														* */
 /* ************************************************************************** */
 
-#pragma once
-
-#include <iostream>
-#include "ICharacter.hpp"
-
-class AMateria
-{
-	private:
-	protected:
-	public:
-		AMateria( std::string const& type);
-		const std::string& getType() const; // returns materia type
-		virtual AMateria* clone() const = 0;
-		virtual void use(ICharacter& target);
-};
+#include "../inc/ICharacter.hpp"
