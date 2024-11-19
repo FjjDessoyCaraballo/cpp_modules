@@ -25,7 +25,7 @@ WrongCat::WrongCat( std::string type ): _type(type)
 	std::cout << "WrongCat named constructor called" << std::endl;
 }
 
-WrongCat::WrongCat( const WrongCat &other )
+WrongCat::WrongCat( const WrongCat &other ): WrongAnimal(other)
 {
 	this->_type = other._type;
 }

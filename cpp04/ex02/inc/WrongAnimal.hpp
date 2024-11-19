@@ -12,20 +12,20 @@
 
 #include <iostream>
 
-class WrongAAnimal
+class WrongAnimal
 {
 	private:
 		std::string _type;
 	public:
 		// constructors
-		WrongAAnimal();
-		WrongAAnimal( std::string type );
+		WrongAnimal();
+		WrongAnimal( std::string type );
 		// destructors
-		~WrongAAnimal();
+		~WrongAnimal();
 
 		// canonical orthodox form
-		WrongAAnimal( const WrongAAnimal &other );
-		WrongAAnimal &operator=( const WrongAAnimal &other );
+		WrongAnimal( const WrongAnimal &other );
+		WrongAnimal &operator=( const WrongAnimal &other );
 
 		// getters
 		std::string getType() const;

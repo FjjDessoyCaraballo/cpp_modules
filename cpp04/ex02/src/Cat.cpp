@@ -18,7 +18,7 @@ Cat::Cat(): _type("cat")
 }
 
 
-Cat::Cat(const Cat &other)
+Cat::Cat(const Cat &other): AAnimal(other)
 {
     this->_type = other._type;
     this->_brain = new Brain(*other._brain);

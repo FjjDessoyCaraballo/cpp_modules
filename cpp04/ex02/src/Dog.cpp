@@ -18,7 +18,7 @@ Dog::Dog(): _type("Dog")
 }
 
 
-Dog::Dog(const Dog &other)
+Dog::Dog(const Dog& other): AAnimal(other)
 {
     this->_type = other._type;
     this->_brain = new Brain(*other._brain);
@@ -33,7 +33,7 @@ Dog::~Dog()
 	std::cout << "Dog destructor called" << std::endl;
 }
 
-Dog &Dog::operator=(Dog const &other)
+Dog &Dog::operator=(const Dog& other)
 {
 	if (this == &other)
 		return (*this);
