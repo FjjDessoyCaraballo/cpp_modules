@@ -9,66 +9,8 @@
 /* ****************************************************************************/
 
 #include "../inc/Bureaucrat.hpp"
-
-// int main(void)
-// {
-// 	try
-// 	{
-// 		Bureaucrat	officer1("Bob", 151);
-// 		Bureaucrat	officer2("Roger", 1);
-		
-
-// 		std::cout << officer1 << std::endl;
-// 		std::cout << officer2 << std::endl;
-		
-// 		std::cout << std::endl;
-// 		std::cout << "###################### CHANGING GRADES ######################" << std::endl;
-// 		std::cout << std::endl;
-
-// 		Bureaucrat	officer3("David", 50);
-// 		std::cout << officer3 << std::endl;
-// 		std::cout << "deducting 5 grade points to " << officer3.getName() << " which current grade is " << officer3.getGrade() << std::endl;
-// 		officer3.changeGrade(-5);
-// 		std::cout << officer3 << std::endl;
-// 		std::cout << "Adding 5 grade points to " << officer3.getName() << " which current grade is " << officer3.getGrade() << std::endl;
-// 		officer3.changeGrade(5);
-
-// 		Bureaucrat	officer4("Wilson", 100);
-// 		std::cout << officer4 << std::endl;
-// 		std::cout << "Adding 0 grade points to " << officer4.getName() << " which current grade is " << officer4.getGrade() << std::endl;
-// 		officer4.changeGrade(0);
-// 		std::cout << officer4 << std::endl;
-
-// 		std::cout << std::endl;
-// 		std::cout << "###################### EXCEPTIONS! ######################" << std::endl;
-// 		std::cout << std::endl;
-// 		std::cout << "We are going to put grade over and under the limits 0 and >150" << std::endl;
-// 		std::cout << std::endl;
-		
-// 		std::cout << std::endl;
-// 		std::cout << officer2.getName() << " has " << officer2.getGrade() << " grade" << std::endl;
-// 		std::cout << "We will deduct 2 points, which should be inadmissible" << std::endl;	
-// 		officer2.changeGrade(-2);
-
-// 		std::cout << std::endl;		
-// 		std::cout << officer1.getName() << " has " << officer1.getGrade() << " grade" << std::endl;
-// 		std::cout << "We will give it 3 points, which should be inadmissible" << std::endl;
-// 		officer1.changeGrade(3);
-// 	}
-// 	catch (const Bureaucrat::GradeTooHighException& error) {
-// 		std::cerr << "Exception: " << error.what() << std::endl;
-// 	}
-// 	catch (const Bureaucrat::GradeTooLowException& error) {
-// 		std::cerr << "Exception: " << error.what() << std::endl;
-// 	}
-// 	catch (const std::exception& error) {
-// 		std::cerr << "Unknown exception: " << error.what() << std::endl;
-// 	}
-// 	return (0);
-// }
-
-#include <cstdlib> // For std::isdigit
-#include <cctype>  // For std::isdigit
+#include <cstdlib>
+#include <cctype>
 
 int main(int argc, char **argv)
 {
