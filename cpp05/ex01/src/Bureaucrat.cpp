@@ -48,6 +48,28 @@ void	Bureaucrat::changeGrade( int8_t grade )
 		throw GradeTooLowException();
 }
 
+void	Bureaucrat::signForm(Form &form)
+{
+	if (form.getSignature() == false)
+	{
+		if (this->getGrade() > form.getExecutionGrade())
+		{
+			std::cout << this->getName() << " couldn't sign " << form.getName() << " because execution grade is below necessary" << std::endl;
+			return ;
+		}
+		if (this->getGrade() > form.getSignatureGrade())
+		{
+			std::cout << this->getName() << " couldn't sign " << form.getName() << " because signature grade is below necessary" << std::endl;	
+			return ;
+		}
+		form.beSigned(*this);
+		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	}
+	else
+		std::cout << this->getName() << " couldn't sign " << form.getName() << " because form is already signed" << std::endl;
+}
+
+
 std::string	Bureaucrat::getName() const
 {
 	return (this->_name);

@@ -66,10 +66,10 @@ std::ostream	&operator<<(std::ostream &other, const Bureaucrat& ref)
 
 const char* Bureaucrat::GradeTooHighException::what() const noexcept
 {
-	return ("You're really good at your job! And in the public sector that means you are fired!");
+	return ("\e[0;31mYou're really good at your job! And in the public sector that means you are fired!\e[0m");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const noexcept
 {
-	return ("This is outrageous! I demand your immediate official office removal!");
+	return ("\e[0;31mThis is outrageous! I demand your immediate official office removal!\e[0m");
 }
