@@ -50,6 +50,7 @@ void	Bureaucrat::changeGrade( int8_t grade )
 
 void	Bureaucrat::signForm(Form &form)
 {
+	
 	if (form.getSignature() == false)
 	{
 		if (this->getGrade() > form.getExecutionGrade())

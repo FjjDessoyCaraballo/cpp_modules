@@ -12,7 +12,8 @@
 
 #include <iostream>
 #include <stdexcept>
-#include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
@@ -33,7 +34,7 @@ class Form
 		Form &operator=( const Form& ref);
 
 		// public methods
-		void	beSigned( Bureaucrat &officer );
+		void	beSigned( Bureaucrat const &officer );
 		
 		// getters
 		std::string	getName() const;

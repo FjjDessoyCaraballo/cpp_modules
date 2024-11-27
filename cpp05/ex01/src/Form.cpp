@@ -9,14 +9,15 @@
 /* ****************************************************************************/
 
 #include "../inc/Form.hpp"
+#include "../inc/Bureaucrat.hpp"
 
-Form::Form( std::string name, int16_t gradeSig, int16_t gradeExec ): _name(name), _gradeSignature(gradeSig), _gradeExecution(gradeExec), _signature(false)
+Form::Form( std::string name, int16_t gradeSig, int16_t gradeExec ): _name(name), _signature(false), _gradeSignature(gradeSig), _gradeExecution(gradeExec) 
 {
 	if (gradeSig > 150 || gradeExec > 150)
 		throw GradeToolowException();
 	if (gradeSig < 1 || gradeExec < 1)
 		throw GradeTooHighException();
-	std::cout << "Form " << this->_name << " created";
+	std::cout << "Form " << this->_name << " created" << std::endl;
 }
 
 Form::~Form()
@@ -56,9 +57,9 @@ bool	Form::getSignature() const
 	return (this->_signature);
 }
 
-void	Form::beSigned(Bureaucrat &officer)
+void	Form::beSigned( Bureaucrat const &officer )
 {
-	if (officer.getGrade() > (this->getExecutionGrade() && this->getSignatureGrade()))
+	if ((officer.getGrade() < this->getExecutionGrade()) && (officer.getGrade() < this->getSignatureGrade()))
 		this->_signature = true;
 }
 
@@ -76,5 +77,9 @@ const char* Form::GradeToolowException::what() const noexcept
 
 std::ostream &operator<<( std::ostream& other, const Form& ref)
 {
-	std::cout << 
+	std::cout << "Form " << ref.getName() << " created" << std::endl;
+	std::cout << "Necessary grades" << std::endl;
+	std::cout << "EXECUTION GRADE: " << ref.getExecutionGrade() << std::endl;
+	std::cout << "SIGNATURE GRADE: " << ref.getSignatureGrade() << std::endl;
+	return (other);
 }
