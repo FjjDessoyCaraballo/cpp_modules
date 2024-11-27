@@ -16,7 +16,7 @@ Bureaucrat::Bureaucrat( std::string name, int grade ): _name(name), _grade(grade
 		throw GradeTooHighException();
 	if (grade > 150)
 		throw GradeTooLowException();
-	std::cout << "Bureaucrat " << this->getName() << " with grade " << this->getGrade() << " created" << std::endl;
+	std::cout << this->getName() << ", bureaucrat grade " << this->getGrade() << std::endl;
 }
 
 Bureaucrat::~Bureaucrat()
@@ -50,7 +50,7 @@ void	Bureaucrat::changeGrade( int8_t grade )
 
 void	Bureaucrat::signForm(Form &form)
 {
-	
+
 	if (form.getSignature() == false)
 	{
 		if (this->getGrade() > form.getExecutionGrade())

@@ -8,10 +8,12 @@ OBJ_DIR		=	obj
 INC_DIR		=	inc
 
 SRC			=	$(SRC_DIR)/main.cpp\
-				$(SRC_DIR)/Bureaucrat.cpp
+				$(SRC_DIR)/Bureaucrat.cpp\
+				$(SRC_DIR)/PresidentialPardonForm.cpp\
+				$(SRC_DIR)/RobotomyRequestForm.hpp\
+				$(SRC_DIR)/ShrubberyCreationForm.cpp\
 
 OBJ 		=	$(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
-
 
 all: $(NAME)
 

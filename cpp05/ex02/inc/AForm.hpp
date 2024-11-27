@@ -12,45 +12,49 @@
 
 #include <iostream>
 #include <stdexcept>
-#include "AForm.hpp"
 
-class AForm;
+class Bureaucrat;
 
-class	Bureaucrat
+class AForm
 {
 	private:
-		const std::string	_name;
-		int16_t				_grade;
-	public:
+		const std::string 	_name;
+		bool				_signature;
+		const int16_t		_gradeSignature;
+		const int16_t		_gradeExecution;
+	protected:
 		// constructor
-		Bureaucrat( std::string name, int grade );
+		AForm()
+		AForm( std::string name, int16_t gradeS, int16_t gradeE );
 		
+	public:
 		// destructor
-		~Bureaucrat();
+		virtual ~AForm();
 
-		// Canonical Form
-		Bureaucrat( const Bureaucrat& ref );
-		Bureaucrat &operator=( const Bureaucrat& ref );
+		// canonical Aform
+		AForm( const AForm& ref );
+		AForm &operator=( const AForm& ref);
 
 		// public methods
-		void		changeGrade( int8_t grade );
-		void		signForm(Form &form);
-
+		void	beSigned( Bureaucrat const &officer );
+		
 		// getters
 		std::string	getName() const;
-		int16_t		getGrade() const;
+		int16_t		getSignatureGrade() const;
+		int16_t		getExecutionGrade() const;
+		bool		getSignature() const;
 
-		// exceptions
-		class	GradeTooHighException : public std::exception
+		// execeptions
+		class GradeTooHighException : public std::exception
 		{
 			public:
 				const char* what() const noexcept;
 		};
-		class	GradeTooLowException : public std::exception
+		class GradeToolowException : public std::exception
 		{
 			public:
 				const char* what() const noexcept;
 		};
 };
 
-std::ostream &operator<<( std::ostream& other, const Bureaucrat& ref );
+std::ostream &operator<<( std::ostream& other, const AForm& ref);

@@ -71,7 +71,7 @@ int main(void)
 			std::cout << std::endl;
 
 			Form form1("AC404", 75, 75);
-			Form form2("ZH404", 120, 120);
+			Form form2("ZH88", 120, 120);
 			Bureaucrat officer1("Bob", 32);
 			Bureaucrat officer2("Will", 100);
 			std::cout << std::endl;
