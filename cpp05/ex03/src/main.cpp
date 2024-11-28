@@ -9,48 +9,78 @@
 /* ****************************************************************************/
 
 #include "../inc/Bureaucrat.hpp"
-#include <cstdlib>
-#include <cctype>
+#include "../inc/AForm.hpp"
+#include "../inc/ShrubberyCreationForm.hpp"
+#include "../inc/PresidentialPardonForm.hpp"
+#include "../inc/RobotomyRequestForm.hpp"
 
-int main(int argc, char **argv)
+int main(void)
 {
-    if (argc == 4)
-    {
-        try {
-            for (int i = 0; argv[2][i]; i++) {
-                if (!std::isdigit(argv[2][i]) && argv[2][i] != '-') {
-                    throw std::invalid_argument("Grade must be a valid integer.");
-                }
-            }
-			for (int i = 0; argv[3][i]; i++) {
-                if (!std::isdigit(argv[3][i]) && argv[3][i] != '-') {
-                    throw std::invalid_argument("Grade change must be a valid integer.");
-                }
-            }
-            Bureaucrat officer(argv[1], std::stoi(argv[2]));
-			int change_grade = std::stoi(argv[3]);
-			if (change_grade == 0)
-            	std::cout << officer << std::endl;
-			else
-			{
-				officer.changeGrade(change_grade);
-				std::cout << officer << std::endl;
-			}
-        }
-        catch (const Bureaucrat::GradeTooHighException& error) {
-            std::cerr << "Exception: " << error.what() << std::endl;
-        }
-        catch (const Bureaucrat::GradeTooLowException& error) {
-            std::cerr << "Exception: " << error.what() << std::endl;
-        }
-        catch (const std::invalid_argument& error) {
-            std::cerr << "Invalid input: " << error.what() << std::endl;
-        }
-        catch (const std::exception& error) {
-            std::cerr << "Unknown exception: " << error.what() << std::endl;
-        }
-    }
-    else
-        std::cout << "Usage: " << argv[0] << " <name> <grade> <grade change>" << std::endl;
-    return 0;
+	{
+		{
+			std::cout << " ### CONSTRUCTORS ### " << std::endl;
+			RobotomyRequestForm form1("Bill, the janitor Robotomization");
+			std::cout << std::endl;
+			PresidentialPardonForm form2("Bill's brother Pardon");
+			std::cout << std::endl;
+			ShrubberyCreationForm form3("./tree");
+			std::cout << std::endl;
+			Bureaucrat Bob("Bob, the builder", 75);
+
+			Bureaucrat Steve("Steve Seagull", 149);
+
+			Bureaucrat John("John Johnatan Johnson", 30);
+
+			Bureaucrat Gerard("Gerard, the very french guy", 2);
+			std::cout << std::endl;
+			std::cout << std::endl;
+			
+			std::cout << " ### BOB FORM EXECUTIONS ###" << std::endl;
+			std::cout << " BOB SHOULD BE ABLE TO EXECUTE A SCF-VB420 ";
+			
+			std::cout << std::endl;
+			Bob.executeForm(form1);
+			std::cout << std::endl;
+			Bob.executeForm(form2);
+			std::cout << std::endl;
+			Bob.executeForm(form3);
+			std::cout << std::endl;
+			
+			std::cout << " ### STEVE FORM EXECUTIONS ###" << std::endl;
+			std::cout << " STEVE SHOULDN'T BE ABLE TO EXECUTE ANYTHING " << std::endl;
+			
+			std::cout << std::endl;
+			Steve.executeForm(form1);
+			std::cout << std::endl;
+			Steve.executeForm(form2);
+			std::cout << std::endl;
+			Steve.executeForm(form3);
+			std::cout << std::endl;
+			
+			std::cout << " ### JOHN FORM EXECUTIONS ###" << std::endl;
+			std::cout << " JOHN SHOULD BE ABLE TO EXECUTE A SCF-VB420 AND RRF-C66" << std::endl;
+			
+			std::cout << std::endl;
+			John.executeForm(form1);
+			std::cout << std::endl;
+			John.executeForm(form2);
+			std::cout << std::endl;
+			John.executeForm(form3);
+			std::cout << std::endl;
+			
+			std::cout << " ### GERARD FORM EXECUTIONS ###" << std::endl;
+			std::cout << " GERARD SHOULD BE ABLE TO EXECUTE THEM ALL " << std::endl;
+			
+			std::cout << std::endl;
+			Gerard.executeForm(form1);
+			std::cout << std::endl;
+			Gerard.executeForm(form2);
+			std::cout << std::endl;
+			Gerard.executeForm(form3);
+			std::cout << std::endl;
+			std::cout << std::endl;
+
+		}
+	}
+	return (0);
 }
