@@ -19,13 +19,10 @@ class Bureaucrat;
 class RobotomyRequestForm: public AForm
 {
 	private:
-		std::string	_name;
-		int8_t		_gradeSignature;
-		int8_t		_gradeExecution;
-		bool		_signature;
+		std::string _target;
 	public:	
 		// constructor
-		RobotomyRequestForm( std::string name );
+		RobotomyRequestForm( std::string target );
 		
 		// destructor
 		~RobotomyRequestForm();
@@ -36,9 +33,10 @@ class RobotomyRequestForm: public AForm
 
 		// public methods
 		void performRobotomy( Bureaucrat const &officer );
+		void execute( const Bureaucrat& executor ) const;
 
 		// getters
-
+		std::string getTarget() const;
 
 		// setters
 

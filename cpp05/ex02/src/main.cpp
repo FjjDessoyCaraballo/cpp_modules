@@ -9,114 +9,77 @@
 /* ****************************************************************************/
 
 #include "../inc/Bureaucrat.hpp"
-#include "../inc/Form.hpp"
+#include "../inc/AForm.hpp"
+#include "../inc/ShrubberyCreationForm.hpp"
+#include "../inc/PresidentialPardonForm.hpp"
+#include "../inc/RobotomyRequestForm.hpp"
 
 int main(void)
 {
 	{
-		try
 		{
+			std::cout << " ### CONSTRUCTORS ### " << std::endl;
+			RobotomyRequestForm form1("Bill, the janitor Robotomization");
 			std::cout << std::endl;
-			std::cout << "\e[0;31m### FIRST TEST ###\e[0m" << std::endl;
+			PresidentialPardonForm form2("Bill's brother Pardon");
 			std::cout << std::endl;
-			std::cout << "\e[0;31m### CONSTRUCTORS ###\e[0m" << std::endl;
+			ShrubberyCreationForm form3("./tree");
 			std::cout << std::endl;
-			Form form1("AC404", 75, 75);
-			Bureaucrat officer1("Bob", 32);
-			Bureaucrat officer2("Will", 100);
+			Bureaucrat Bob("Bob, the builder", 75);
+
+			Bureaucrat Steve("Steve Seagull", 149);
+
+			Bureaucrat John("John Johnatan Johnson", 30);
+
+			Bureaucrat Gerard("Gerard, the very french guy", 2);
 			std::cout << std::endl;
-			std::cout << "\e[0;31m### OFFICERS ###\e[0m" << std::endl;
 			std::cout << std::endl;
-			std::cout << officer1 << std::endl;
-			std::cout << officer2 << std::endl;
+			
+			std::cout << " ### BOB FORM EXECUTIONS ###" << std::endl;
+			std::cout << " BOB SHOULD BE ABLE TO EXECUTE A SCF-VB420 ";
+			
 			std::cout << std::endl;
-			std::cout << "\e[0;31m### FORMS ###\e[0m" << std::endl;
+			Bob.executeForm(form1);
 			std::cout << std::endl;
-			std::cout << form1 << std::endl;
+			Bob.executeForm(form2);
 			std::cout << std::endl;
-			std::cout << "\e[0;31m### FORM SIGNING ###\e[0m" << std::endl;
+			Bob.executeForm(form3);
 			std::cout << std::endl;
-			officer1.signForm(form1);
-			officer2.signForm(form1);
+			
+			std::cout << " ### STEVE FORM EXECUTIONS ###" << std::endl;
+			std::cout << " STEVE SHOULDN'T BE ABLE TO EXECUTE ANYTHING " << std::endl;
+			
 			std::cout << std::endl;
-			std::cout << "\e[0;31m### DESTRUCTORS and/or EXCEPTIONS ###\e[0m" << std::endl;
+			Steve.executeForm(form1);
 			std::cout << std::endl;
-		} catch (const Bureaucrat::GradeTooHighException& error) {
-			std::cerr << "Exception: " << error.what() << std::endl;
-    	   }
-		catch (const Bureaucrat::GradeTooLowException& error) {
-			std::cerr << "Exception: " << error.what() << std::endl;
-		}
-		catch (const Form::GradeTooHighException& error) {
-			std::cerr << "Exception: " << error.what() << std::endl;
-		}
-		catch (const Form::GradeToolowException& error) {
-			std::cerr << "Exception: " << error.what() << std::endl;
-		}
-		catch (const std::invalid_argument& error) {
-			std::cerr << "Invalid input: " << error.what() << std::endl;
-		}
-    	   catch (const std::exception& error) {
-			std::cerr << "Unknown exception: " << error.what() << std::endl;
-		}
-	}
-	{
-		try
-		{
+			Steve.executeForm(form2);
 			std::cout << std::endl;
-			std::cout << "\e[0;31m### SECOND TEST ###\e[0m" << std::endl;
+			Steve.executeForm(form3);
+			std::cout << std::endl;
+			
+			std::cout << " ### JOHN FORM EXECUTIONS ###" << std::endl;
+			std::cout << " JOHN SHOULD BE ABLE TO EXECUTE A SCF-VB420 AND RRF-C66" << std::endl;
+			
+			std::cout << std::endl;
+			John.executeForm(form1);
+			std::cout << std::endl;
+			John.executeForm(form2);
+			std::cout << std::endl;
+			John.executeForm(form3);
+			std::cout << std::endl;
+			
+			std::cout << " ### GERARD FORM EXECUTIONS ###" << std::endl;
+			std::cout << " GERARD SHOULD BE ABLE TO EXECUTE THEM ALL " << std::endl;
+			
+			std::cout << std::endl;
+			Gerard.executeForm(form1);
+			std::cout << std::endl;
+			Gerard.executeForm(form2);
+			std::cout << std::endl;
+			Gerard.executeForm(form3);
+			std::cout << std::endl;
 			std::cout << std::endl;
 
-			std::cout << "\e[0;31m### CONSTRUCTORS ###\e[0m" << std::endl;
-			std::cout << std::endl;
-
-			Form form1("AC404", 75, 75);
-			Form form2("ZH88", 120, 120);
-			Bureaucrat officer1("Bob", 32);
-			Bureaucrat officer2("Will", 100);
-			std::cout << std::endl;
-
-			std::cout << "\e[0;31m### OFFICERS ###\e[0m" << std::endl;
-			std::cout << std::endl;
-
-			std::cout << officer1 << std::endl;
-			std::cout << officer2 << std::endl;
-
-			std::cout << std::endl;
-			std::cout << "\e[0;31m### FORMS ###\e[0m" << std::endl;
-			std::cout << std::endl;
-
-			std::cout << form1 << std::endl;
-			std::cout << form2 << std::endl;
-
-			std::cout << std::endl;
-
-			std::cout << "\e[0;31m### FORM SIGNING ###\e[0m" << std::endl;
-			std::cout << std::endl;
-
-			officer1.signForm(form1);
-			officer2.signForm(form2);
-			std::cout << std::endl;
-
-			std::cout << "\e[0;31m### DESTRUCTORS and/or EXCEPTIONS ###\e[0m" << std::endl;
-			std::cout << std::endl;
-		} catch (const Bureaucrat::GradeTooHighException& error) {
-			std::cerr << "Exception: " << error.what() << std::endl;
-    	   }
-		catch (const Bureaucrat::GradeTooLowException& error) {
-			std::cerr << "Exception: " << error.what() << std::endl;
-		}
-		catch (const Form::GradeTooHighException& error) {
-			std::cerr << "Exception: " << error.what() << std::endl;
-		}
-		catch (const Form::GradeToolowException& error) {
-			std::cerr << "Exception: " << error.what() << std::endl;
-		}
-		catch (const std::invalid_argument& error) {
-			std::cerr << "Invalid input: " << error.what() << std::endl;
-		}
-		catch (const std::exception& error) {
-			std::cerr << "Unknown exception: " << error.what() << std::endl;
 		}
 	}
 	return (0);

@@ -24,7 +24,6 @@ class AForm
 		const int16_t		_gradeExecution;
 	protected:
 		// constructor
-		AForm()
 		AForm( std::string name, int16_t gradeS, int16_t gradeE );
 		
 	public:
@@ -37,6 +36,7 @@ class AForm
 
 		// public methods
 		void	beSigned( Bureaucrat const &officer );
+		virtual void execute( const Bureaucrat& executor ) const = 0;
 		
 		// getters
 		std::string	getName() const;
@@ -50,7 +50,12 @@ class AForm
 			public:
 				const char* what() const noexcept;
 		};
-		class GradeToolowException : public std::exception
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char* what() const noexcept;
+		};
+		class AlreadySigned : public std::exception
 		{
 			public:
 				const char* what() const noexcept;

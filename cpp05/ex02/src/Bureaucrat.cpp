@@ -9,6 +9,7 @@
 /* ****************************************************************************/
 
 #include "../inc/Bureaucrat.hpp"
+#include "../inc/AForm.hpp"
 
 Bureaucrat::Bureaucrat( std::string name, int grade ): _name(name), _grade(grade)
 {
@@ -85,6 +86,28 @@ std::ostream	&operator<<(std::ostream &other, const Bureaucrat& ref)
 {
 	other << ref.getName() << ", bureaucrat grade " << ref.getGrade();
 	return (other);
+}
+
+void 		Bureaucrat::executeForm( AForm const &form )
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << this->getName() << " executed " << form.getName() << std::endl;
+	}
+	catch (AForm::AlreadySigned &error)
+	{
+		std::cerr << "Exception: " << error.what() << std::endl;
+	}
+	catch (AForm::GradeTooLowException &error)
+	{
+		std::cerr << "Exception: " << error.what() << std::endl;
+	}
+}
+
+const char* Bureaucrat::AlreadySigned::what() const noexcept
+{
+	return ("\e[0;31mStop being silly. It is obvious that the document was already signed! Linda, escort the good sir out, please\e[0m");
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const noexcept

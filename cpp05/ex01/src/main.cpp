@@ -50,7 +50,7 @@ int main(void)
 		catch (const Form::GradeTooHighException& error) {
 			std::cerr << "Exception: " << error.what() << std::endl;
 		}
-		catch (const Form::GradeToolowException& error) {
+		catch (const Form::GradeTooLowException& error) {
 			std::cerr << "Exception: " << error.what() << std::endl;
 		}
 		catch (const std::invalid_argument& error) {

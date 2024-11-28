@@ -19,13 +19,10 @@ class Bureaucrat;
 class PresidentialPardonForm: public AForm
 {
 	private:
-		std::string	_name;
-		int8_t		_gradeSignature;
-		int8_t		_gradeExecution;
-		bool		_signature;
+		std::string _target;
 	public:	
 		// constructor
-		PresidentialPardonForm( std::string name );
+		PresidentialPardonForm( std::string target );
 		
 		// destructor
 		~PresidentialPardonForm();
@@ -35,10 +32,10 @@ class PresidentialPardonForm: public AForm
 		PresidentialPardonForm &operator=( const PresidentialPardonForm& ref );
 
 		// public methods
-		void pardonTarget( Bureaucrat const &officer );
+		void execute( const Bureaucrat& executor ) const;
 
 		// getters
-
+		std::string getTarget() const;
 
 		// setters
 

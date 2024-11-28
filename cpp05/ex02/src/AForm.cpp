@@ -11,14 +11,10 @@
 #include "../inc/AForm.hpp"
 #include "../inc/Bureaucrat.hpp"
 
-AForm::AForm()
-{
-}
-
 AForm::AForm( std::string name, int16_t gradeSig, int16_t gradeExec ): _name(name), _signature(false), _gradeSignature(gradeSig), _gradeExecution(gradeExec) 
 {
 	if (gradeSig > 150 || gradeExec > 150)
-		throw GradeToolowException();
+		throw GradeTooLowException();
 	if (gradeSig < 1 || gradeExec < 1)
 		throw GradeTooHighException();
 }
@@ -72,11 +68,15 @@ const char*	AForm::GradeTooHighException::what() const noexcept
 	return ("\e[0;31mThis Aform needs to go through the Department of Absurd Values!\e[0m");
 }
 
-const char* AForm::GradeToolowException::what() const noexcept
+const char* AForm::GradeTooLowException::what() const noexcept
 {
 	return ("\e[0;31mYou have no idea how bureaucracy works, do you? You need to sign a petititon with your local magistrate first, file in a OA51 with a city counselor, wait for 14 working days, get it stamped on the District Office (they only work from 10.00 to 11.00 on Wednesdays), and then schedule an appointment through our ridiculously slow website www.bureaucracy.com/appointments. The next possible appointment is in July 2035. Good evening and NEXT!\e[0m");
 }
 
+const char* AForm::AlreadySigned::what() const noexcept
+{
+	return ("\e[0;31mStop being silly. It is obvious that the document was already signed! Linda, escort the good sir out, please\e[0m");
+}
 
 std::ostream &operator<<( std::ostream& other, const AForm& ref)
 {

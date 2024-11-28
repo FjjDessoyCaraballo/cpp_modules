@@ -17,13 +17,10 @@
 class ShrubberyCreationForm: public AForm
 {
 	private:
-		std::string	_name;
-		int8_t		_gradeSignature;
-		int8_t		_gradeExecution;
-		bool		_signature;
+		std::string	_target;
 	public:	
 		// constructor
-		ShrubberyCreationForm( std::string name );
+		ShrubberyCreationForm( std::string target );
 		
 		// destructor
 		~ShrubberyCreationForm();
@@ -34,9 +31,10 @@ class ShrubberyCreationForm: public AForm
 
 		// public methods
 		void createTree( std::string& file );
+		void execute( const Bureaucrat& executor ) const;
 
 		// getters
-
+		std::string getTarget() const;
 
 		// setters
 

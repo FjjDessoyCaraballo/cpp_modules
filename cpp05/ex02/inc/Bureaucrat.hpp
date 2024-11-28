@@ -12,7 +12,6 @@
 
 #include <iostream>
 #include <stdexcept>
-#include "AForm.hpp"
 
 class AForm;
 
@@ -34,7 +33,8 @@ class	Bureaucrat
 
 		// public methods
 		void		changeGrade( int8_t grade );
-		void		signForm(Form &form);
+		void		signForm(AForm &form);
+		void 		executeForm( AForm const &form );
 
 		// getters
 		std::string	getName() const;
@@ -47,6 +47,11 @@ class	Bureaucrat
 				const char* what() const noexcept;
 		};
 		class	GradeTooLowException : public std::exception
+		{
+			public:
+				const char* what() const noexcept;
+		};
+		class AlreadySigned : public std::exception
 		{
 			public:
 				const char* what() const noexcept;
