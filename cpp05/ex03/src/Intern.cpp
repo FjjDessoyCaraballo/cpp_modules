@@ -36,16 +36,19 @@ Intern &Intern::operator=( const Intern& ref)
 AForm*	Intern::makePPF( std::string target )
 {
 	AForm *ppf = new PresidentialPardonForm(target);
+	return (ppf);
 }
 
 AForm*	Intern::makeRRF( std::string target )
 {
-	AForm *ppf = new RobotomyRequestForm(target);
+	AForm *rrf = new RobotomyRequestForm(target);
+	return (rrf);
 }
 
 AForm*	Intern::makeSCF( std::string target )
 {
-	AForm *ppf = new ShrubberyCreationForm(target);
+	AForm *scf = new ShrubberyCreationForm(target);
+	return (scf);
 }
 
 AForm*	Intern::makeForm( std::string form, std::string target )
@@ -65,7 +68,7 @@ AForm*	Intern::makeForm( std::string form, std::string target )
 	return (formReturn);
 }
 
-const char *Intern::Exception::what() const
+const char *Intern::Exception::what() const noexcept
 {
 	return ("The intern said you were asking for some weird forms. Now, we do love to have a laugh at them, but we disencourage the general public of taking such actions towards our poorly paid interns. Why? Who are you now? Linda, get him out of here");
 }
