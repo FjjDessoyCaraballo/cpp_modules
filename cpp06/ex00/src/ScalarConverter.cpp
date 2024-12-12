@@ -34,14 +34,20 @@ void ScalarConverter::convert( std::string str )
 	try
 	{
 		bool isChar = false;
+		bool isFloat = false;
 		if (!str.empty() && str.back() == 'f')
+		{
+			isFloat = true;
 			str.pop_back();
+		}
 		if (str.length() == 1 && std::isprint(str[0]) && !std::isdigit(str[0]))
 		{
 			char c = str[0];
 			std::cout << "char: " << c << std::endl;
 			isChar = true;
 		}
+		else if (isFloat == true)
+			std::cout << "char: '*'" << std::endl;
 		else
 			std::cout << "char: " << "impossible" << std::endl;
 		
@@ -51,9 +57,16 @@ void ScalarConverter::convert( std::string str )
 		{
 			size_t decimalPos = str.find('.');
 
-			long longIntValue = std::strtol(str.c_str(), &end, 10);
-			if (decimalPos != std::string::npos)
-				std::cout << "int: " << str.substr(0, decimalPos) << std::endl;
+			int longIntValue;
+			longIntValue = static_cast<int>(std::strtol(str.c_str(), &end, 10));
+			if (longIntValue > INT_MAX)
+				std::cout << "int: impossible" << std::endl;
+			else if (decimalPos != std::string::npos)
+			{
+				std::string noDecimal = str.substr(0, decimalPos);
+				longIntValue = std::strtol(noDecimal.c_str(), &end, 10);
+				std::cout << "int: " << longIntValue << std::endl;
+			}
 			else if (*end == '\0' && errno == 0)
 				std::cout << "int: " << longIntValue << std::endl;
 			else
@@ -61,18 +74,44 @@ void ScalarConverter::convert( std::string str )
 		}
 		else
 			std::cout << "int: impossible" << std::endl;
+		
+		
 
 		errno = 0;
-		float floatValue = std::strtof(str.c_str(), &end);
-
+		int floatValue;
+		floatValue = static_cast<float>(std::strtof(str.c_str(), &end));
+		if (floatValue > 0)
+		{
+			if (std::isinf(floatValue))
+				std::cout << "double: +inf" << std::endl;
+		}
+		if (floatValue < 0)
+		{
+			if (std::isinf(floatValue))
+				std::cout << "double: -inf" << std::endl;
+		}
 		if (*end == '\0' && errno == 0)
 			std::cout << "float: " << floatValue << "f" << std::endl;
 		else
 			std::cout << "float: impossible" << std::endl;
 
+
 		errno = 0;
-		double doubleValue = std::strtod(str.c_str(), &end);
-		if (*end == '\0' && errno == 0)
+		int doubleValue;
+		doubleValue = static_cast<double>(std::strtod(str.c_str(), &end));
+		if (doubleValue > 0)
+		{
+			if (std::isinf(doubleValue))
+				std::cout << "double: +inf" << std::endl;
+		}
+		if (doubleValue < 0)
+		{
+			if (std::isinf(doubleValue))
+				std::cout << "double: -inf" << std::endl;
+		}
+		if (std::isnan(doubleValue))
+			std::cout << "double: nan" << std::endl;
+		else if (*end == '\0' && errno == 0)
 			std::cout << "double: " << doubleValue << std::endl;
 		else
 			std::cout << "double: impossible" << std::endl;

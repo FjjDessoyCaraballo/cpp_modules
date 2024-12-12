@@ -11,6 +11,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <cerrno>
+#include <cmath>
+#include <limits.h>
 
 class ScalarConverter
 {

@@ -1,4 +1,4 @@
-NAME		=	scalar
+NAME		=	convert
 
 COMP		=	c++
 FLAGS		=	-Wall -Wextra -Werror -std=c++11 -fsanitize=address
