@@ -59,8 +59,8 @@ void ScalarConverter::convert( std::string str )
 			else
 				std::cout << "int: impossible" << std::endl;
 		}
-		// else
-		// 	std::cout << "int: impossible" << std::endl;
+		else
+			std::cout << "int: impossible" << std::endl;
 
 		errno = 0;
 		float floatValue = std::strtof(str.c_str(), &end);
