@@ -1,21 +1,16 @@
-NAME		=	bureaucrat
+NAME		=	scalar
 
 COMP		=	c++
-FLAGS		=	-Wall -Wextra -Werror -std=c++11
+FLAGS		=	-Wall -Wextra -Werror -std=c++11 -fsanitize=address
 
 SRC_DIR		=	src
-OBJ_DIR		=	obj
 INC_DIR		=	inc
+OBJ_DIR		=	obj
 
 SRC			=	$(SRC_DIR)/main.cpp\
-				$(SRC_DIR)/Bureaucrat.cpp\
-				$(SRC_DIR)/PresidentialPardonForm.cpp\
-				$(SRC_DIR)/AForm.cpp\
-				$(SRC_DIR)/RobotomyRequestForm.cpp\
-				$(SRC_DIR)/ShrubberyCreationForm.cpp\
-				$(SRC_DIR)/Intern.cpp\
+				$(SRC_DIR)/ScalarConverter.cpp\
 
-OBJ 		=	$(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+OBJ			=	$(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
@@ -32,9 +27,10 @@ clean:
 	@echo "Removing objects"
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -rf $(NAME)
+	@rm -rf $(NAME_ASAN)
 	@echo "Removing executable $(NAME)"
 
 re: fclean all
 
-.PHONY: re fclean clean all
+.PHONY: all clean fclean re
