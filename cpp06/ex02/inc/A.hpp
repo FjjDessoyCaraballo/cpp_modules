@@ -8,19 +8,10 @@
 /*        --------/   														  */
 /* ****************************************************************************/
 
-#include "../inc/Serializer.hpp"
+#pragma once
 
-int main(void)
+#include "Base.hpp"
+
+class A: public Base
 {
-	Data data = {42};
-	Data *dataPtr = &data;
-
-	uintptr_t testPtr;
-	testPtr = Serializer::serialize(dataPtr);
-	std::cout << "Serialized: " << testPtr << std::endl;
-
-	Data *retPtr;
-	retPtr = Serializer::deserialize(testPtr);
-	std::cout << "Deserialized: " << retPtr->intValue << std::endl;
-	return (0);
-}
+};

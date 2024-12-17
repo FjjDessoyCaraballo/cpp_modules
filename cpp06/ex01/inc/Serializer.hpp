@@ -8,19 +8,27 @@
 /*        --------/   														  */
 /* ****************************************************************************/
 
-#include "../inc/Serializer.hpp"
+#pragma once
 
-int main(void)
+#include "Data.h"
+#include <iostream>
+#include <cstdint>
+
+class Serializer
 {
-	Data data = {42};
-	Data *dataPtr = &data;
+	private:
+		// constructor
+		Serializer();
 
-	uintptr_t testPtr;
-	testPtr = Serializer::serialize(dataPtr);
-	std::cout << "Serialized: " << testPtr << std::endl;
+		// destructor
+		~Serializer();
+	public:
+		// canonical form
+		Serializer( const Serializer& ref );
+		Serializer &operator=( const Serializer& ref );
 
-	Data *retPtr;
-	retPtr = Serializer::deserialize(testPtr);
-	std::cout << "Deserialized: " << retPtr->intValue << std::endl;
-	return (0);
-}
+		// public methods
+		static uintptr_t	serialize(Data* ptr);
+		static Data*		deserialize(uintptr_t raw);
+};
+

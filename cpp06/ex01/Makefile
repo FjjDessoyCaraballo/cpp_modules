@@ -1,4 +1,4 @@
-NAME		=	scalar
+NAME		=	serial
 
 COMP		=	c++
 FLAGS		=	-Wall -Wextra -Werror -std=c++11 -fsanitize=address
@@ -7,8 +7,8 @@ SRC_DIR		=	src
 INC_DIR		=	inc
 OBJ_DIR		=	obj
 
-SRC			=	$(SRC_DIR)/main.cpp\
-				$(SRC_DIR)/ScalarConverter.cpp\
+SRC			=	$(SRC_DIR)/Serializer.cpp\
+				$(SRC_DIR)/main.cpp\
 
 OBJ			=	$(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
@@ -28,7 +28,6 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
-	@rm -rf $(NAME_ASAN)
 	@echo "Removing executable $(NAME)"
 
 re: fclean all

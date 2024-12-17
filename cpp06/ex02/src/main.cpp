@@ -8,19 +8,42 @@
 /*        --------/   														  */
 /* ****************************************************************************/
 
-#include "../inc/Serializer.hpp"
+#include "../inc/Base.hpp"
+#include "../inc/C.hpp"
+#include "../inc/B.hpp"
+#include "../inc/A.hpp"
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+
+static Base* Generate()
+{
+	int a = rand() % 3;
+
+	if (a == 1)
+		return (new A());
+	else if (a == 2)
+		return (new B());
+	else if (a == 3)
+		return (new C());
+	else
+	{
+		std::cerr << "Something terribly wrong happened" << std::endl;
+		return (NULL);
+	}
+}
+
+static void identify(Base *p)
+{
+
+}
+
+static void identify(Base &p)
+{
+
+}
 
 int main(void)
 {
-	Data data = {42};
-	Data *dataPtr = &data;
-
-	uintptr_t testPtr;
-	testPtr = Serializer::serialize(dataPtr);
-	std::cout << "Serialized: " << testPtr << std::endl;
-
-	Data *retPtr;
-	retPtr = Serializer::deserialize(testPtr);
-	std::cout << "Deserialized: " << retPtr->intValue << std::endl;
 	return (0);
 }

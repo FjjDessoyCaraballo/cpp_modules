@@ -8,24 +8,12 @@
 /*        --------/   														  */
 /* ****************************************************************************/
 
-#include <iostream>
-#include <cstdlib>
-#include <cerrno>
+#ifndef DATA_H
+#define DATA_H
 
-class ScalarConverter
+struct Data
 {
-	private:
-		ScalarConverter();
-		~ScalarConverter();
-	public:
-	// constructor
-		
-	// destructor
-
-	// canonical form
-		ScalarConverter( const ScalarConverter& ref );
-		ScalarConverter& operator=( const ScalarConverter& ref );
-
-	// public methods
-		static void convert( std::string str );
+	int		intValue;
 };
+
+#endif

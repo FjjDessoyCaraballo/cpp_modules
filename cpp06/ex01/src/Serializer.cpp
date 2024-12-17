@@ -10,17 +10,31 @@
 
 #include "../inc/Serializer.hpp"
 
-int main(void)
+Serializer::Serializer()
 {
-	Data data = {42};
-	Data *dataPtr = &data;
+}
 
-	uintptr_t testPtr;
-	testPtr = Serializer::serialize(dataPtr);
-	std::cout << "Serialized: " << testPtr << std::endl;
+Serializer::~Serializer()
+{
+}
 
-	Data *retPtr;
-	retPtr = Serializer::deserialize(testPtr);
-	std::cout << "Deserialized: " << retPtr->intValue << std::endl;
-	return (0);
+Serializer::Serializer( const Serializer& ref)
+{
+	(void)ref;
+}
+
+Serializer &Serializer::operator=( const Serializer& ref )
+{
+	(void)ref;
+	return (*this);
+}
+
+uintptr_t	Serializer::serialize(Data* ptr)
+{
+	return (reinterpret_cast<uintptr_t>(ptr));
+}
+
+Data*		Serializer::deserialize(uintptr_t raw)
+{
+	return (reinterpret_cast<Data*>(raw));
 }
