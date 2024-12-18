@@ -13,7 +13,7 @@ SRC				=	$(SRC_DIR)/main.cpp\
 					$(SRC_DIR)/B.cpp\
 					$(SRC_DIR)/C.cpp\
 
-OBJ				=	$(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)%.o)
+OBJ				=	$(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
