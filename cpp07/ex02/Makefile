@@ -7,7 +7,7 @@ SRC_DIR					=	src
 OBJ_DIR					=	obj
 INC_DIR					=	inc
 
-SRC						=	$(SRC_DIR)/main.cpp\
+SRC						=	$(SRC_DIR)/main.cpp
 
 OBJ						=	$(SRC: $(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
@@ -15,7 +15,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(COMP) $(FLAGS) -o $@ $^
-	@echo "Getting your stuff nice and tidy"
+	@echo "Getting your stuff nice and tidy: $(NAME)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)
