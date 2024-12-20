@@ -35,22 +35,22 @@ Intern &Intern::operator=( const Intern& ref)
 
 AForm*	Intern::makePPF( std::string target )
 {
-	AForm *ppf = new PresidentialPardonForm(target);
 	std::cout << "Intern has created a Presidential Pardon Form" << std::endl;
+	AForm *ppf = new PresidentialPardonForm(target);
 	return (ppf);
 }
 
 AForm*	Intern::makeRRF( std::string target )
 {
-	AForm *rrf = new RobotomyRequestForm(target);
 	std::cout << "Intern has created a Robotomy Request Form" << std::endl;
+	AForm *rrf = new RobotomyRequestForm(target);
 	return (rrf);
 }
 
 AForm*	Intern::makeSCF( std::string target )
 {
-	AForm *scf = new ShrubberyCreationForm(target);
 	std::cout << "Intern has created a Shrubbery Creation Form" << std::endl;
+	AForm *scf = new ShrubberyCreationForm(target);
 	return (scf);
 }
 
