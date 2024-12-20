@@ -20,12 +20,12 @@ Serializer::~Serializer()
 
 Serializer::Serializer( const Serializer& ref)
 {
-	(void)ref;
+	static_cast<void>(ref);
 }
 
 Serializer &Serializer::operator=( const Serializer& ref )
 {
-	(void)ref;
+	static_cast<void>(ref);
 	return (*this);
 }
 

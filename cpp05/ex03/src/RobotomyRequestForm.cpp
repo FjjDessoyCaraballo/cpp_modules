@@ -28,7 +28,7 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 RobotomyRequestForm::RobotomyRequestForm( const RobotomyRequestForm& ref ): AForm(ref.getName() + "_copy", 72, 45)
 {
-		this->_target = ref.getTarget();
+	this->_target = ref.getTarget();
 }
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=( const RobotomyRequestForm& ref )

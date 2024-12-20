@@ -20,12 +20,12 @@ ScalarConverter::~ScalarConverter()
 
 ScalarConverter::ScalarConverter( const ScalarConverter& ref )
 {
-	(void)ref;
+	static_cast<void>(ref);
 }
 
 ScalarConverter &ScalarConverter::operator=( const ScalarConverter& ref )
 {
-	(void)ref;
+	static_cast<void>(ref);
 	return (*this);
 }
 
