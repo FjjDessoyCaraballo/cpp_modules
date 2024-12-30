@@ -16,71 +16,35 @@
 
 int main(void)
 {
-	{
-		{
-			std::cout << " ### CONSTRUCTORS ### " << std::endl;
-			RobotomyRequestForm form1("Bill, the janitor Robotomization");
-			std::cout << std::endl;
-			PresidentialPardonForm form2("Bill's brother Pardon");
-			std::cout << std::endl;
-			ShrubberyCreationForm form3("./tree");
-			std::cout << std::endl;
-			Bureaucrat Bob("Bob, the builder", 75);
+		RobotomyRequestForm form3("Bill, the janitor Robotomization");
+		PresidentialPardonForm form2("Bill's brother Pardon");
+		ShrubberyCreationForm form1("./tree");
+        Bureaucrat bob("Bob", 50);
+        Bureaucrat rog("Roger", 5);
+        Bureaucrat jef("Jeff", 148);
 
-			Bureaucrat Steve("Steve Seagull", 149);
+    try {
+        std::cout << "\n### BOB FORMS ###\n\n";
+        bob.signForm(form1);
+        bob.executeForm(form1);
+    } catch (const std::exception& error) {
+        std::cerr << "Unhandled exception: " << error.what() << std::endl;
+    }
+    try {
+        std::cout << "\n### ROGER FORMS ###\n\n";
+        rog.signForm(form2);
+        rog.executeForm(form2);
+	} catch (const std::exception& error) {
+        std::cerr << "Unhandled exception: " << error.what() << std::endl;
+    }
 
-			Bureaucrat John("John Johnatan Johnson", 30);
-
-			Bureaucrat Gerard("Gerard, the very french guy", 2);
-			std::cout << std::endl;
-			std::cout << std::endl;
-			
-			std::cout << " ### BOB FORM EXECUTIONS ###" << std::endl;
-			std::cout << " BOB SHOULD BE ABLE TO EXECUTE A SCF-VB420 ";
-			
-			std::cout << std::endl;
-			Bob.executeForm(form1);
-			std::cout << std::endl;
-			Bob.executeForm(form2);
-			std::cout << std::endl;
-			Bob.executeForm(form3);
-			std::cout << std::endl;
-			
-			std::cout << " ### STEVE FORM EXECUTIONS ###" << std::endl;
-			std::cout << " STEVE SHOULDN'T BE ABLE TO EXECUTE ANYTHING " << std::endl;
-			
-			std::cout << std::endl;
-			Steve.executeForm(form1);
-			std::cout << std::endl;
-			Steve.executeForm(form2);
-			std::cout << std::endl;
-			Steve.executeForm(form3);
-			std::cout << std::endl;
-			
-			std::cout << " ### JOHN FORM EXECUTIONS ###" << std::endl;
-			std::cout << " JOHN SHOULD BE ABLE TO EXECUTE A SCF-VB420 AND RRF-C66" << std::endl;
-			
-			std::cout << std::endl;
-			John.executeForm(form1);
-			std::cout << std::endl;
-			John.executeForm(form2);
-			std::cout << std::endl;
-			John.executeForm(form3);
-			std::cout << std::endl;
-			
-			std::cout << " ### GERARD FORM EXECUTIONS ###" << std::endl;
-			std::cout << " GERARD SHOULD BE ABLE TO EXECUTE THEM ALL " << std::endl;
-			
-			std::cout << std::endl;
-			Gerard.executeForm(form1);
-			std::cout << std::endl;
-			Gerard.executeForm(form2);
-			std::cout << std::endl;
-			Gerard.executeForm(form3);
-			std::cout << std::endl;
-			std::cout << std::endl;
-
-		}
-	}
+    try {
+        std::cout << "\n### JEFF FORMS ###\n\n";
+		rog.signForm(form3);
+		rog.executeForm(form3);
+	} catch (const std::exception& error) {
+        std::cerr << "Exception: " << error.what() << std::endl;
+    }
+	std::cout << std::endl;
 	return (0);
 }

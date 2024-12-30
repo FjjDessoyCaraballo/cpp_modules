@@ -52,29 +52,30 @@ void	Bureaucrat::changeGrade( int8_t grade )
 void Bureaucrat::signForm(AForm &form)
 {
     try
-	{
-		if (form.getSignature() == false) 
-		{
-			if (this->getGrade() >= form.getSignatureGrade())
-			{
-				std::cerr << this->getName() << " couldn't sign " << form.getName() << " because signature grade is below necessary" << std::endl;
-				throw GradeTooLowException();
-			}
-			form.beSigned(*this);
-			std::cout << this->getName() << " signed " << form.getName() << std::endl;
-		}
-		else
-			throw AForm::AlreadySigned();
-	}
-	catch (GradeTooLowException &error)
-	{
-		std::cerr << "Exception: " << error.what() << std::endl;
-	}
-	catch (AForm::AlreadySigned &error)
-	{
-		std::cerr << "Exception: " << error.what() << std::endl;
-	}
+    {
+        if (form.getSignature() == false) 
+        {
+            if (this->getGrade() > form.getSignatureGrade())
+            {
+                std::cerr << this->getName() << " couldn't sign " << form.getName() << " because signature grade is too low" << std::endl;
+                throw GradeTooLowException();
+            }
+            form.beSigned(*this);
+            std::cout << this->getName() << " signed " << form.getName() << std::endl;
+        }
+        else
+            throw AForm::AlreadySigned();
+    }
+    catch (GradeTooLowException &error)
+    {
+        std::cerr << "Exception: " << error.what() << std::endl;
+    }
+    catch (AForm::AlreadySigned &error)
+    {
+        std::cerr << "Exception: " << error.what() << std::endl;
+    }
 }
+
 
 std::string	Bureaucrat::getName() const
 {
@@ -92,26 +93,27 @@ std::ostream	&operator<<(std::ostream &other, const Bureaucrat& ref)
 	return (other);
 }
 
-void 		Bureaucrat::executeForm( AForm const &form )
+void	Bureaucrat::executeForm(AForm const &form)
 {
-	try
-	{
-		if (this->getGrade() > form.getExecutionGrade())
-			throw GradeTooLowException();
-		if (form.getSignature() == false)
-			throw AForm::NotSigned();
-		form.execute(*this);
-		std::cout << this->getName() << " executed " << form.getName() << std::endl;
-	}
-	catch (AForm::GradeTooLowException &error)
-	{
-		std::cerr << "Officer could not execute: " << error.what() << std::endl;
-	}
-	catch (AForm::NotSigned &error)
-	{
-		std::cerr << "Form not signed: " << error.what() << std::endl;
-	}
+    try
+    {
+        if (this->getGrade() > form.getExecutionGrade())
+            throw GradeTooLowException();
+        if (form.getSignature() == false)
+            throw AForm::NotSigned();
+        form.execute(*this);
+        std::cout << this->getName() << " executed " << form.getName() << std::endl;
+    }
+    catch (GradeTooLowException &error)
+    {
+        std::cerr << "Officer could not execute: " << error.what() << std::endl;
+    }
+    catch (AForm::NotSigned &error)
+    {
+        std::cerr << "Form not signed: " << error.what() << std::endl;
+    }
 }
+
 
 const char* Bureaucrat::GradeTooHighException::what() const noexcept
 {
