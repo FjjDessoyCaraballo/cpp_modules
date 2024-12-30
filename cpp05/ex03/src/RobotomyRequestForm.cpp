@@ -46,8 +46,8 @@ std::string RobotomyRequestForm::getTarget() const
 
 void	RobotomyRequestForm::execute( const Bureaucrat& executor ) const
 {
-	if (this->getSignature() == true)
-		throw AlreadySigned();
+	if (this->getSignature() == false)
+		throw NotSigned();
 	if ((this->getExecutionGrade() < executor.getGrade())
 		&& (this->getSignatureGrade() < executor.getGrade()))
 		throw GradeTooLowException();

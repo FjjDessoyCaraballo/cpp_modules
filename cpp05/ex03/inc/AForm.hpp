@@ -60,6 +60,11 @@ class AForm
 			public:
 				const char* what() const noexcept;
 		};
+		class NotSigned : public std::exception
+		{
+			public:
+				const char* what() const noexcept;
+		};
 };
 
 std::ostream &operator<<( std::ostream& other, const AForm& ref);

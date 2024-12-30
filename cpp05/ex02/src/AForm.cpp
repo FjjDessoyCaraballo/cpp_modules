@@ -58,7 +58,7 @@ bool	AForm::getSignature() const
 
 void	AForm::beSigned( Bureaucrat const &officer )
 {
-	if ((officer.getGrade() < this->getExecutionGrade()) && (officer.getGrade() < this->getSignatureGrade()))
+	if (officer.getGrade() <= this->getSignatureGrade())
 		this->_signature = true;
 }
 
@@ -76,6 +76,11 @@ const char* AForm::GradeTooLowException::what() const noexcept
 const char* AForm::AlreadySigned::what() const noexcept
 {
 	return ("\e[0;31mStop being silly. It is obvious that the document was already signed! Linda, escort the good sir out, please\e[0m");
+}
+
+const char* AForm::NotSigned::what() const noexcept
+{
+	return ("\e[0;31mStop being silly. It is obvious that the document was NOT signed! Linda, escort the good sir out, please\e[0m");
 }
 
 std::ostream &operator<<( std::ostream& other, const AForm& ref)

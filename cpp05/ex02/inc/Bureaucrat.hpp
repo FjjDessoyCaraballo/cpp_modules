@@ -51,11 +51,6 @@ class	Bureaucrat
 			public:
 				const char* what() const noexcept;
 		};
-		class AlreadySigned : public std::exception
-		{
-			public:
-				const char* what() const noexcept;
-		};
 };
 
 std::ostream &operator<<( std::ostream& other, const Bureaucrat& ref );
