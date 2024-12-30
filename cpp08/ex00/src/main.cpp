@@ -8,10 +8,15 @@
 /*        --------/   														  */
 /* ****************************************************************************/
 
-#include "../inc/Easyfind.hpp"
+#include "../inc/easyfind.hpp"
 
 int main(void)
 {
-	std::cout << "Hello world!" << std::endl;
+	std::vector<int>vec = {1,2,3,4,5,6,7,9};
+	int result = ::easyfind(vec, 8);
+
+	if (result == -1)
+		return (-1);
+	
 	return (0);
 }
