@@ -8,22 +8,42 @@
 /*        --------/   														  */
 /* ****************************************************************************/
 
-#pragma once
+#include "../inc/Span.hpp"
 
-#include <iostream>
-#include <vector>
-#include <stdexcept>
+Span::Span( uint32_t limit ): _max(limit)
+{
+}
 
-template <typename T>
-int easyfind(const T& container, int num) {
-	int index = 0;
-	for (auto iter = container.begin(); iter != container.end(); ++iter, ++index) {
-		std::cout << container[index] << "[" << index << "]" << std::endl;
-		if (*iter == num) {
-			std::cout << "Found element at index: " << index << std::endl;
-			return (index);
-		}
-	}
-	std::cerr << "Element not found" << std::endl;
-	return (-1);
+Span::~Span()
+{
+}
+
+Span::Span( const Span& ref )
+{
+	this->_storage = ref._storage;
+	this->_max = ref._max;
+}
+
+Span &Span::operator=( const Span& ref )
+{
+	if (this == &ref)
+		return (*this);
+	this->_storage = ref._storage;
+	this->_max = ref._max;
+	return (*this);	
+}
+
+void	Span::addNumber(uint32_t num)
+{
+
+}
+
+uint32_t	Span::shortestSpan()
+{
+
+}
+
+uint32_t	Span::longestSpan()
+{
+	
 }

@@ -1,14 +1,12 @@
 NAME			=	easyfind
 
-SRC_DIR			=	src
-INC_DIR			=	inc
-OBJ_DIR			=	obj
-
 COMP			=	c++
 FLAGS			=	-Wall -Wextra -Werror -std=c++11 -I$(INC_DIR)
 
-SRC				=	$(SRC_DIR)/main.cpp
+SRC_DIR			=	src
+OBJ_DIR			=	obj
 
+SRC				=	$(SRC_DIR)/main.cpp
 OBJ				=	$(SRC: $(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 all: $(NAME)

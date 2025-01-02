@@ -8,7 +8,7 @@
 /*        --------/   														  */
 /* ****************************************************************************/
 
-#include "../inc/Easyfind.hpp"
+#include "../inc/Span.hpp"
 #include <iostream>
 
 int main(void)

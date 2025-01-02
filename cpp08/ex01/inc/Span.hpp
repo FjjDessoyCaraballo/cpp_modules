@@ -10,20 +10,28 @@
 
 #pragma once
 
-#include <iostream>
 #include <vector>
 #include <stdexcept>
+#include <stdint.h>
 
-template <typename T>
-int easyfind(const T& container, int num) {
-	int index = 0;
-	for (auto iter = container.begin(); iter != container.end(); ++iter, ++index) {
-		std::cout << container[index] << "[" << index << "]" << std::endl;
-		if (*iter == num) {
-			std::cout << "Found element at index: " << index << std::endl;
-			return (index);
-		}
-	}
-	std::cerr << "Element not found" << std::endl;
-	return (-1);
-}
+class Span
+{
+	private:
+		uint32_t	_storage;
+		uint32_t	_max;	
+	public:
+		// constructor
+		Span( uint32_t limit );
+
+		// destructor
+		~Span();
+
+		// canonical form
+		Span( const Span& ref );
+		Span 		&operator=( const Span& ref );
+
+		// public methods
+		void 		addNumber(uint32_t num);
+		uint32_t	shortestSpan();
+		uint32_t	longestSpan();
+};
