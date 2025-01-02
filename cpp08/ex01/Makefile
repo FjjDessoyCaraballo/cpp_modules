@@ -1,12 +1,15 @@
 NAME				=	span
 
 COMP				=	c++
-FLAGS				=	-Wall -Werror -Wextra
+FLAGS				=	-Wall -Werror -Wextra -fsanitize=address
 
 SRC_DIR				=	src
 OBJ_DIR				=	obj
 
-SRC					=	$(SRC_DIR)/main.cpp
+SRC					=	$(SRC_DIR)/main.cpp\
+						$(SRC_DIR)/Span.cpp
+
+
 OBJ					=	$(SRC: $(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 all: $(NAME)

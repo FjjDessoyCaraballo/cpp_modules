@@ -17,8 +17,8 @@
 class Span
 {
 	private:
-		uint32_t	_storage;
-		uint32_t	_max;	
+		std::vector<int>	_container;
+		uint32_t			_max;	
 	public:
 		// constructor
 		Span( uint32_t limit );
@@ -31,7 +31,16 @@ class Span
 		Span 		&operator=( const Span& ref );
 
 		// public methods
-		void 		addNumber(uint32_t num);
+		void 		addNumber( uint32_t num );
+		void		addRange( uint32_t range );
 		uint32_t	shortestSpan();
 		uint32_t	longestSpan();
+
+
+		// exceptions
+		class noSpan : std::exception
+		{
+			public:
+				const char* what() const noexcept;
+		};
 };
