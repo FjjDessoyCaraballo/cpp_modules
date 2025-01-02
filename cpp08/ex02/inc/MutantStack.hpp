@@ -8,27 +8,33 @@
 /*        --------/   														  */
 /* ****************************************************************************/
 
-#include "../inc/Span.hpp"
-#include <iostream>
+#pragma once
 
-int main(void)
+#include <stdexcept>
+
+template <typename T>
+class MutantStack
 {
-	{
-		Span sp = Span(5);
-		sp.addNumber(6);
-		sp.addNumber(3);
-		sp.addNumber(17);
-		sp.addNumber(9);
-		sp.addNumber(11);
-		std::cout << sp.shortestSpan() << std::endl;
-		std::cout << sp.longestSpan() << std::endl;
-	}
-	{
-		Span sp = Span(15000);
+	private:
+		T*		_stack;
+	public:
+		//constructors
+		MutantStack();
 
-		sp.addRange(12000);
-		std::cout << sp.shortestSpan() << std::endl;
-		std::cout << sp.longestSpan() << std::endl;	
-	}
-	return (0);
-}
+		// destructor
+		~MutantStack();
+
+		// canonical  form
+		MutantStack( const MutantStack& ref );
+		MutantStack &operator=( const MutantStack& ref );
+
+		// public methods
+		void	push( int num );
+		void	pop( int num );
+		int		begin();
+		int		end();
+
+		//exceptions
+};
+
+#include "MutantStack.tpp"
