@@ -11,13 +11,24 @@
 #pragma once
 
 #include <stdexcept>
+#include <deque>
 
 template <typename T>
 class MutantStack
 {
 	private:
 		T*		_stack;
+		size_t	_size;
+		size_t	_capacity;
 	public:
+		//public typedef
+		typedef T* iterator;
+
+		// conversion operator
+		operator std::deque<T>() const {
+			return (std::deque<T>(this->begin(), this->end()));
+		};
+
 		//constructors
 		MutantStack();
 
@@ -29,12 +40,14 @@ class MutantStack
 		MutantStack &operator=( const MutantStack& ref );
 
 		// public methods
-		void	push( int num );
-		void	pop( int num );
-		int		begin();
-		int		end();
+		void			push( int num );
+		void			pop();
+		T&				top();
+		size_t			size() const;
 
-		//exceptions
+		// iterators
+		iterator		end() const;
+		iterator		begin() const;
 };
 
 #include "MutantStack.tpp"

@@ -41,14 +41,13 @@ Array<T>::Array(const Array& ref): _array(new T[ref._size]), _size(ref._size) {
 template <typename T>
 Array<T>& Array<T>::operator=(const Array& ref) {
     if (this == &ref)
-        return *this;
-    delete[] this->_array;
+        return (*this);
+    delete [] this->_array;
     this->_array = new T[ref._size];
     this->_size = ref._size;
-    for (uint32_t i = 0; i < this->_size; i++) {
+    for (uint32_t i = 0; i < this->_size; i++)
         this->_array[i] = ref._array[i];
-    }
-    return *this;
+    return (*this);
 }
 
 // Operator overloads
