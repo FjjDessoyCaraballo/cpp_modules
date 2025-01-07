@@ -48,15 +48,25 @@ void	Database::setMatrix( std::fstream &file )
 {
 	std::vector<std::string> file_parse;
 	std::string line;
-	size_t line_count = 0;
+	size_t line_count = 0; // for throwing informative exceptions
 
+	if (!std::getline(file,line)) // for skipping the header row
+		throw DbFormat();
 	while (std::getline(file, line))
 	{
 		file_parse.push_back(line); // at this point we have the whole file in a container
 		size_t comma_pos = line.find(',');
 		if (comma_pos == 10 || comma_pos != std::string::npos)
 		{
-			
+			std::string date = line.substr(0, comma_pos);
+			if (date.empty())
+				throw DbFormat();
+			std::string value = line.substr(comma_pos + 1);
+			if (value.empty())
+				throw DbFormat();
+			float valueDb = std::stof(value);
+			this->_dbDateColumn.push_back(date);
+			this->_dbValueColumn.push_back(valueDb);
 		}
 		else
 		{
@@ -65,13 +75,14 @@ void	Database::setMatrix( std::fstream &file )
 		}
 		line_count++;
 	}
-	// for (size_t i = 0; i < file_parse.size(); ++i) // proof
-	// 	std::cout << file_parse[i] << std::endl;
-	// for (size_t i = 0; i < file_parse.size(); ++i) // separate into two columns
+	this->_matrixDb.resize(_dbValueColumn.size());
+	for (size_t i = 0; i < _dbValueColumn.size(); i++)
+	{
+		this->_matrixDb.push_back({_dbDateColumn[i], _dbValueColumn[i]});
+	}
+	// for (size_t i = 0; i < _matrixDb.size(); ++i) // proof
 	// {
-	// 	std::string parse_line = file_parse[i];
-	// 	if (parse_line.empty())
-	// 		break ;
+	// 	std::cout << _matrixDb[i].first << "," << _matrixDb[i].second << std::endl;
 	// }
 }
 
@@ -88,5 +99,5 @@ const char* Database::MissingNewDb::what() const noexcept
 
 const char* Database::DbFormat::what() const noexcept
 {
-	return ("Format of database is incorrect")
+	return ("Format of database is incorrect");
 }
