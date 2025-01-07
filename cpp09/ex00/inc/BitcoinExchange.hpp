@@ -13,12 +13,18 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+#include <vector>
 
 class Database
 {
 	private:
-		std::fstream filedb;
-		std::fstream subdb;
+		std::fstream				_filedb;
+		std::fstream				_subdb;
+		void						setMatrix( std::fstream &file );
+		std::vector<std::string>	_dbDateColumn; // original db
+		std::vector<int>			_dbValueColumn; // original db
+		std::vector<std::string>	_injectDateColumn; // input
+		std::vector<int>			_injectValueColumn; // input
 	public:
 		// constructor
 		Database( std::string newdb );
@@ -32,7 +38,6 @@ class Database
 
 		// public methods
 
-
 		// exceptions
 		class MissingDb : std::exception
 		{
@@ -44,4 +49,9 @@ class Database
 			public:
 				const char* what() const noexcept override;
 		};
+		class DbFormat : std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		}
 };
