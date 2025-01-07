@@ -1,7 +1,7 @@
 NAME					=	mstack
 
 COMP					=	c++
-FLAGS					=	-Wall -Werror -Wextra
+FLAGS					=	-Wall -Werror -Wextra -std=c++11
 
 SRC_DIR					=	src
 OBJ_DIR					=	obj
