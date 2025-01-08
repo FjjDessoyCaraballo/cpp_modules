@@ -26,15 +26,6 @@ Database::Database( std::string newdb )
 		this->_fileDb.close();
 	if (this->_inj.is_open())
 		this->_inj.close();
-	// ### FOR DEBUGGING ###
-	// for (auto it = _matrixDb.begin(); it != _matrixDb.end(); ++it)
-	// {
-	// 	std::cout << it->first << "," << it->second << std::endl;
-	// }
-	// for (auto it = _injectionTable.begin(); it != _injectionTable.end(); ++it)
-	// {
-	// 	std::cout << it->first << "," << it->second << std::endl;
-	// }
 	applyExchangeRate();
 }
 
@@ -101,7 +92,26 @@ void	Database::applyExchangeRate()
 {
 	for (auto it = _injectionTable.begin(); it != _injectionTable.end(); ++it)
 	{
-		
+		const std::string& injDate = it->first;
+		const float injValue = it->second;
+		bool match = false;
+
+		for (auto db_it = _matrixDb.begin(); db_it != _matrixDb.end(); ++db_it)
+		{
+			const std::string& dbDate = db_it->first;
+			const float dbValue = db_it->second;
+
+			if (injDate == dbDate)
+			{
+				std::cout << injDate << " => " << dbValue << " = " << (dbValue * injValue) << std::endl;
+				match = true;
+				break ;
+			}
+			else
+			{
+				// under work: need to round down to closest available date
+			}
+		}
 	}
 }
 
