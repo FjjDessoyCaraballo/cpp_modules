@@ -38,7 +38,7 @@ class Span
 
 
 		// exceptions
-		class noSpan : std::exception
+		class noSpan : public std::exception
 		{
 			public:
 				const char* what() const noexcept;

@@ -18,14 +18,11 @@
 class Database
 {
 	private:
-		std::fstream									_filedb;
-		std::fstream									_subdb;
-		void											setMatrix( std::fstream &file );
-		std::vector<std::string>						_dbDateColumn; // original db
-		std::vector<float>								_dbValueColumn; // original db
-		std::vector<std::string>						_injectDateColumn; // input
-		std::vector<float>								_injectValueColumn; // input
+		std::fstream									_fileDb;
+		std::fstream									_inj;
 		std::vector<std::pair<std::string, float>>		_matrixDb; // db of two columns with only data
+		std::vector<std::pair<std::string, float>>		_injectionTable; // exchange rate file
+		std::vector<std::pair<std::string, float>>		setMatrix( std::fstream &file, bool print );
 	public:
 		// constructor
 		Database( std::string newdb );
@@ -40,17 +37,17 @@ class Database
 		// public methods
 
 		// exceptions
-		class MissingDb : std::exception
+		class MissingDb : public std::exception
 		{
 			public:
 				const char* what() const noexcept override;
 		};
-		class MissingNewDb : std::exception
+		class MissingNewDb : public std::exception
 		{
 			public:
 				const char* what() const noexcept override;
 		};
-		class DbFormat : std::exception
+		class DbFormat : public std::exception
 		{
 			public:
 				const char* what() const noexcept override;
