@@ -13,16 +13,18 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
-#include <vector>
+// #include <vector>
+#include <map>
 
 class Database
 {
 	private:
 		std::fstream									_fileDb;
 		std::fstream									_inj;
-		std::vector<std::pair<std::string, float>>		_matrixDb; // db of two columns with only data
-		std::vector<std::pair<std::string, float>>		_injectionTable; // exchange rate file
-		std::vector<std::pair<std::string, float>>		setMatrix( std::fstream &file, bool print );
+		std::multimap<std::string, float>				_matrixDb; // db of two columns with only data
+		std::multimap<std::string, float>				_injectionTable; // exchange rate file
+		std::multimap<std::string, float>				setMatrix( std::fstream &file, bool injection );
+		void											applyExchangeRate(void);
 	public:
 		// constructor
 		Database( std::string newdb );

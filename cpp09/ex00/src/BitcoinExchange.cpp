@@ -10,15 +10,6 @@
 
 #include "../inc/BitcoinExchange.hpp"
 
-// TO DO:
-/**
- * 1. find a way to parse out the input document in a scalable way;
- * 2. find out what can be acceptable input;
- * 3. make the exchange operations.
- * 
- * Matrix with the .csv file is done. All we need to do is match with input
- */
-
 Database::Database( std::string newdb )
 {
 	this->_inj.open(newdb, std::ios::in);
@@ -31,14 +22,24 @@ Database::Database( std::string newdb )
 	}
 	this->_matrixDb = setMatrix(this->_fileDb, false);
 	this->_injectionTable = setMatrix(this->_inj, true);
+	if (this->_fileDb.is_open())	
+		this->_fileDb.close();
+	if (this->_inj.is_open())
+		this->_inj.close();
+	// ### FOR DEBUGGING ###
+	// for (auto it = _matrixDb.begin(); it != _matrixDb.end(); ++it)
+	// {
+	// 	std::cout << it->first << "," << it->second << std::endl;
+	// }
+	// for (auto it = _injectionTable.begin(); it != _injectionTable.end(); ++it)
+	// {
+	// 	std::cout << it->first << "," << it->second << std::endl;
+	// }
+	applyExchangeRate();
 }
 
 Database::~Database()
 {
-	if (this->_fileDb.is_open())
-		this->_fileDb.close();
-	if (this->_inj.is_open())
-		this->_inj.close();
 }
 
 Database::Database( const Database& ref )
@@ -48,59 +49,61 @@ Database::Database( const Database& ref )
 
 Database &Database::operator=( const Database& ref )
 {
+	if (this == &ref)
+		return (*this);
 	static_cast<void>(ref);
 	return (*this);
 }
 
-
-std::vector<std::pair<std::string, float>>	Database::setMatrix( std::fstream &file, bool print )
+std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool injection)
 {
-	std::vector<std::string>	file_parse;
-	std::vector<std::string>	dbDateColumn;
-	std::vector<float>			dbValueColumn;
-	std::string 				line;
-	size_t 						line_count = 0; // for throwing informative exceptions
-
-	if (!std::getline(file,line)) // for skipping the header row
+	std::multimap<std::string, float> matrix;
+	std::string line;
+	size_t line_count = 0;
+	
+	if (injection == false && !std::getline(file, line))
 		throw DbFormat();
-	while (std::getline(file, line))
-	{
-		file_parse.push_back(line); // at this point we have the whole file in a container
+    while (std::getline(file, line))
+    {
 		size_t comma_pos = line.find(',');
-		if (comma_pos == 10 || comma_pos != std::string::npos)
-		{
-			std::string date = line.substr(0, comma_pos);
-			if (date.empty())
-				throw DbFormat();
-			std::string value = line.substr(comma_pos + 1);
-			if (value.empty())
-				throw DbFormat();
-			float valueDb = std::stof(value);
-			dbDateColumn.push_back(date);
-			dbValueColumn.push_back(valueDb);
-		}
-		else
+		if (comma_pos == std::string::npos)
 		{
 			std::cerr << "Line " << line_count << std::endl;
 			throw DbFormat();
 		}
+		std::string date = line.substr(0, comma_pos);
+		if (date.empty())
+			throw DbFormat();
+		std::string valueStr = line.substr(comma_pos + 1);
+		if (valueStr.empty())
+			throw DbFormat();		
+		try 
+		{
+			float valueDb = std::stof(valueStr);
+		    matrix.emplace(date, valueDb);
+		} 
+		catch (const std::invalid_argument& e)
+		{
+			std::cerr << "Invalid argument: " << e.what() << " at line " << line_count << std::endl;
+			throw DbFormat();
+		} 
+		catch (const std::out_of_range& e)
+		{
+			std::cerr << "Out of range: " << e.what() << " at line " << line_count << std::endl;
+			throw DbFormat();
+		}
 		line_count++;
 	}
-	std::vector<std::pair<std::string, float>> matrix(dbValueColumn.size());
-	for (size_t i = 0; i < dbValueColumn.size(); i++)
-	{
-		matrix.push_back({dbDateColumn[i], dbValueColumn[i]});
-	}
-	if (print == true)
-	{
-		for (size_t i = 0; i < matrix.size(); ++i) // proof
-		{
-			std::cout << matrix[i].first << "," << matrix[i].second << std::endl;
-		}
-	}
-	return (matrix);
+	return matrix;
 }
 
+void	Database::applyExchangeRate()
+{
+	for (auto it = _injectionTable.begin(); it != _injectionTable.end(); ++it)
+	{
+		
+	}
+}
 
 const char* Database::MissingDb::what() const noexcept
 {
