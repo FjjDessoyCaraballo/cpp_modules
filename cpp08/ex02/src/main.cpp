@@ -35,5 +35,6 @@ int main(void)
 		++it;
 	}
 	std::stack<int> s(mstack);
+	std::cout << s.top() << std::endl;
 	return (0);
 }

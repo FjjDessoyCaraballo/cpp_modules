@@ -85,7 +85,7 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 		}
 		line_count++;
 	}
-	return matrix;
+	return (matrix);
 }
 
 void	Database::applyExchangeRate()
@@ -107,9 +107,22 @@ void	Database::applyExchangeRate()
 				match = true;
 				break ;
 			}
+		}
+		if (match == false) // No exact match found
+		{
+			// Find the earliest previous date
+			auto prev_it = _matrixDb.upper_bound(injDate); // Iterator to first element greater than injDate
+			if (prev_it != _matrixDb.begin()) // Check if there's a previous date
+			{
+				--prev_it; // Move iterator to the largest date less than injDate
+				const std::string& prevDate = prev_it->first;
+				const float prevValue = prev_it->second;
+				
+				std::cout << "No exact match for " << injDate << ". Using previous date: " << prevDate << " with value " << prevValue << " => Adjusted value: " << (prevValue * injValue) << std::endl;
+			}
 			else
 			{
-				// under work: need to round down to closest available date
+				std::cout << "No exact or earlier date found for " << injDate << "." << std::endl;
 			}
 		}
 	}
