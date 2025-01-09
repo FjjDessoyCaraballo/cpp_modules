@@ -50,5 +50,6 @@ class ScalarConverter
 		static void printInt( long n, bool print );
 		static void printFloat( float nf, std::string str, bool print );
 		static void printDouble( double nd, std::string str, bool print );
+		static void pseudoLiterals( std::string );
 
 };

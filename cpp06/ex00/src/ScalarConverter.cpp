@@ -173,30 +173,66 @@ void ScalarConverter::printDouble( double nd, std::string str, bool print )
 	}
 }
 
-void ScalarConverter::convert( std::string str )
+void	ScalarConverter::pseudoLiterals( std::string str )
 {
-	long 	nl;
 	float	nf;
 	double	nd;
 
+	if (str == "+inf" || str == "+inff")
+	{
+		printChar(0, false);
+		printInt(0, false);
+		nf = std::numeric_limits<float>::infinity();
+		std::cout << "float: " << nf << std::endl;
+		nd = std::numeric_limits<double>::infinity();
+		std::cout << "double: " << nd << std::endl;
+		return ;
+	}
+	else if (str == "-inf" || str == "+inff")
+	{
+		printChar(0, false);
+		printInt(0, false);
+		nf = -std::numeric_limits<float>::infinity();
+		std::cout << "float: " << nf << std::endl;
+		nd = -std::numeric_limits<double>::infinity();
+		std::cout << "double: " << nd << std::endl;
+		return ;
+	}
+	else if (str == "nan" || str == "nanf")
+	{
+		printChar(0, false);
+		printInt(0, false);
+		nf = std::numeric_limits<float>::has_quiet_NaN;
+		nd = std::numeric_limits<double>::has_quiet_NaN;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
+		return ;
+	}
+}
+
+void ScalarConverter::convert( std::string str )
+{
+	if (str == "+inf" || str == "-inf"
+		|| str == "+inff" || str == "-inff" 
+		|| str == "nan" || str == "nanf")
+	{
+		pseudoLiterals(str);
+		return ;
+	}
+
+	long 	nl;
+	float	nf;
+	double	nd;
 	enum type type = NONE;
 
 	if (isChar(str))
-	{
 		type = CHAR;
-	}
 	else if (isInt(str))
-	{
 		type = INT;
-	}
 	else if (isFloat(str))
-	{
 		type = FLOAT;
-	}
 	else if (isDouble(str))
-	{
 		type = DOUBLE;
-	}
 	try
 	{
 		switch (type)
