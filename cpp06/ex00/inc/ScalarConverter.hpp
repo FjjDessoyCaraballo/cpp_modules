@@ -8,11 +8,22 @@
 /*        --------/   														  */
 /* ****************************************************************************/
 
+#pragma once
+
 #include <iostream>
 #include <cstdlib>
 #include <cerrno>
 #include <cmath>
-#include <limits.h>
+#include <limits>
+#include <iomanip>
+
+typedef enum type {
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+	NONE,
+} 			type;
 
 class ScalarConverter
 {
@@ -30,4 +41,14 @@ class ScalarConverter
 
 	// public methods
 		static void convert( std::string str );
+		static bool isDigit( int c );
+		static bool isChar( std::string );
+		static bool isInt( std::string );
+		static bool isFloat( std::string );
+		static bool isDouble( std::string );
+		static void printChar( char c, bool print );
+		static void printInt( long n, bool print );
+		static void printFloat( float nf, std::string str, bool print );
+		static void printDouble( double nd, std::string str, bool print );
+
 };
