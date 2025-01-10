@@ -50,25 +50,25 @@ static void identify(Base* p)
 static void identify(Base& p)
 {
 	try {
-		A &a = dynamic_cast<A&>(p);
+		A& a = dynamic_cast<A&>(p);
 		(void)a;
 		std::cout << "T'was a type base reference to A!" << std::endl;
 		return ;
 	} catch (std::exception &e) {
 	}
 	try {
-		B &b = dynamic_cast<B&>(p);
+		B& b = dynamic_cast<B&>(p);
 		(void)b;
 		std::cout << "T'was a type base reference to B!" << std::endl;
 		return ;
 	} catch (std::exception &e) {
 	}
 	try {
-		C &c = dynamic_cast<C&>(p);
+		C& c = dynamic_cast<C&>(p);
 		(void)c;
 		std::cout << "T'was a type base reference to C!" << std::endl;
 		return ;
-	} catch (std::exception &e) {
+	} catch (std::exception& e) {
 	}
 }
 
@@ -76,7 +76,8 @@ int main(void)
 {
 	Base *test1 = generate();
 	Base *test2 = generate();
-
+	if (test1 == NULL || test2 == NULL)
+		return (1);
 	std::cout << " ### TESTING FOR THE POINTER IDENTIFICATION ### " << std::endl;
 	if (test1)
 		identify(test1);
