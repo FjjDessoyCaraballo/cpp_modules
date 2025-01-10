@@ -57,11 +57,11 @@ bool ScalarConverter::isInt( std::string str )
 bool ScalarConverter::isFloat( std::string str )
 {
 	unsigned int len = str.length();
-	if (str[len - 1] != 'f') // need to reassure that it is at the end
+	if (str[len - 1] != 'f')
 		return (false);
 	bool comma = false;
 
-	for (size_t i = 0; i < str.size(); i++)
+	for (size_t i = 0; i < len - 1; i++)
 	{
 		if (i == 0 && (str[0] == '-' || str[0] == '+'))
 			continue ;
@@ -76,7 +76,6 @@ bool ScalarConverter::isFloat( std::string str )
 			return (false);
 	}
 	return (true);
-	
 }
 bool ScalarConverter::isDouble( std::string str )
 {
@@ -183,17 +182,17 @@ void	ScalarConverter::pseudoLiterals( std::string str )
 		printChar(0, false);
 		printInt(0, false);
 		nf = std::numeric_limits<float>::infinity();
-		std::cout << "float: " << nf << std::endl;
+		std::cout << "float: " << nf << "f" << std::endl;
 		nd = std::numeric_limits<double>::infinity();
 		std::cout << "double: " << nd << std::endl;
 		return ;
 	}
-	else if (str == "-inf" || str == "+inff")
+	else if (str == "-inf" || str == "-inff")
 	{
 		printChar(0, false);
 		printInt(0, false);
 		nf = -std::numeric_limits<float>::infinity();
-		std::cout << "float: " << nf << std::endl;
+		std::cout << "float: " << nf << "f" << std::endl;
 		nd = -std::numeric_limits<double>::infinity();
 		std::cout << "double: " << nd << std::endl;
 		return ;
@@ -212,6 +211,14 @@ void	ScalarConverter::pseudoLiterals( std::string str )
 
 void ScalarConverter::convert( std::string str )
 {
+	if (str.empty())
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+		return ;
+	}
 	if (str == "+inf" || str == "-inf"
 		|| str == "+inff" || str == "-inff" 
 		|| str == "nan" || str == "nanf")
@@ -235,6 +242,7 @@ void ScalarConverter::convert( std::string str )
 		type = DOUBLE;
 	try
 	{
+		std::cout << type << std::endl;
 		switch (type)
 		{
 			case CHAR:
@@ -296,80 +304,3 @@ void ScalarConverter::convert( std::string str )
 		std::cerr << "Blasphemous! " << e.what() << std::endl;
 	}
 }
-
-
-// if (str.length() == 1 && std::isprint(str[0]) && !std::isdigit(str[0]))
-		// {
-		// 	char c = str[0];
-		// 	std::cout << "char: " << c << std::endl;
-		// 	isChar = true;
-		// }
-		// else if (isFloat == true)
-		// 	std::cout << "char: '*'" << std::endl;
-		// else
-		// 	std::cout << "char: " << "impossible" << std::endl;
-		
-		// char *end = {};
-		// errno = 0;
-		// if (isChar == false)
-		// {
-		// 	size_t decimalPos = str.find('.');
-
-		// 	int longIntValue;
-		// 	longIntValue = static_cast<int>(std::strtol(str.c_str(), &end, 10));
-		// 	if (longIntValue > INT_MAX)
-		// 		std::cout << "int: impossible" << std::endl;
-		// 	else if (decimalPos != std::string::npos)
-		// 	{
-		// 		std::string noDecimal = str.substr(0, decimalPos);
-		// 		longIntValue = std::strtol(noDecimal.c_str(), &end, 10);
-		// 		std::cout << "int: " << longIntValue << std::endl;
-		// 	}
-		// 	else if (*end == '\0' && errno == 0)
-		// 		std::cout << "int: " << longIntValue << std::endl;
-		// 	else
-		// 		std::cout << "int: impossible" << std::endl;
-		// }
-		// else
-		// 	std::cout << "int: impossible" << std::endl;
-		
-		
-
-		// errno = 0;
-		// float floatValue;
-		// floatValue = static_cast<float>(std::stof(str));
-		// if (floatValue > 0)
-		// {
-		// 	if (std::isinf(floatValue))
-		// 		std::cout << "double: +inf" << std::endl;
-		// }
-		// if (floatValue < 0)
-		// {
-		// 	if (std::isinf(floatValue))
-		// 		std::cout << "double: -inf" << std::endl;
-		// }
-		// if (*end == '\0' && errno == 0)
-		// 	std::cout << "float: " << floatValue << "f" << std::endl;
-		// else
-		// 	std::cout << "float: impossible" << std::endl;
-
-
-		// errno = 0;
-		// double doubleValue;
-		// doubleValue = static_cast<double>(std::stod(str));
-		// if (doubleValue > 0)
-		// {
-		// 	if (std::isinf(doubleValue))
-		// 		std::cout << "double: +inf" << std::endl;
-		// }
-		// if (doubleValue < 0)
-		// {
-		// 	if (std::isinf(doubleValue))
-		// 		std::cout << "double: -inf" << std::endl;
-		// }
-		// if (std::isnan(doubleValue))
-		// 	std::cout << "double: nan" << std::endl;
-		// else if (*end == '\0' && errno == 0)
-		// 	std::cout << "double: " << doubleValue << std::endl;
-		// else
-		// 	std::cout << "double: impossible" << std::endl;
