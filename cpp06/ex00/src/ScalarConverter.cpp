@@ -138,7 +138,7 @@ void ScalarConverter::printFloat( float nf, std::string str, bool print )
 			len--;
 		for (size_t i = 0; i < len; i++)
 		{
-			if (str[i] == '.')
+			if (str[i] == '.' && isDigit(str[i + 1]))
 				set = len - i - 1;
 		}
 		std::cout << "float: " << std::fixed << std::setprecision(set) << nf << "f" << std::endl;
@@ -162,7 +162,10 @@ void ScalarConverter::printDouble( double nd, std::string str, bool print )
 		for (size_t i = 0; i < len; i++)
 		{
 			if (str[i] == '.')
-				set = len - i - 1;
+			{
+				if (isDigit(str[i + 1]))
+					set = len - i - 1;
+			}
 		}
 		std::cout << "double: " << std::fixed << std::setprecision(set) << nd << std::endl;
 	}
