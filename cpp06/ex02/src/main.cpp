@@ -14,6 +14,7 @@
 #include "../inc/A.hpp"
 #include <iostream>
 #include <random>
+#include <stdexcept>
 
 static Base* generate()
 {
@@ -37,14 +38,19 @@ static Base* generate()
 
 static void identify(Base* p)
 {
+	try {
 	if (dynamic_cast<C*>(p))
 		std::cout << "It's a C pointer!" << std::endl;
 	else if (dynamic_cast<A*>(p))
 		std::cout << "It's a A pointer!" << std::endl;
 	else if (dynamic_cast<B*>(p))
 		std::cout << "It's a B pointer!" << std::endl;
-	else
-		std::cout << "Stop giving me garbage!" << std::endl;
+	if (p == NULL) {
+		std::cerr << "Error: could not cast" << std::endl;
+	}
+	} catch (std::exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
 }
 
 static void identify(Base& p)
@@ -55,6 +61,7 @@ static void identify(Base& p)
 		std::cout << "T'was a type base reference to A!" << std::endl;
 		return ;
 	} catch (std::exception &e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
 	}
 	try {
 		B& b = dynamic_cast<B&>(p);
@@ -62,6 +69,7 @@ static void identify(Base& p)
 		std::cout << "T'was a type base reference to B!" << std::endl;
 		return ;
 	} catch (std::exception &e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
 	}
 	try {
 		C& c = dynamic_cast<C&>(p);
@@ -69,26 +77,23 @@ static void identify(Base& p)
 		std::cout << "T'was a type base reference to C!" << std::endl;
 		return ;
 	} catch (std::exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
 	}
 }
 
 int main(void)
 {
-	Base *test1 = generate();
+	// Base *test1 = generate();
+	Base *test1 = NULL;
 	Base *test2 = generate();
-	if (test1 == NULL || test2 == NULL)
-		return (1);
+
 	std::cout << " ### TESTING FOR THE POINTER IDENTIFICATION ### " << std::endl;
-	if (test1)
-		identify(test1);
-	if (test2)
-		identify(test2);
+	identify(test1);
+	identify(test2);
 
 	std::cout << " ### TESTING FOR THE REFERENCE IDENTIFICATION ### " << std::endl;
-	if (test1)
-		identify(*test1);
-	if (test2)
-		identify(*test2);
+	identify(*test1);
+	identify(*test2);
 
 	delete test1;
 	delete test2;

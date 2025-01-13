@@ -39,7 +39,9 @@ bool ScalarConverter::isDigit( int c )
 
 bool ScalarConverter::isChar( std::string str )
 {
-	if (str.length() == 1 && !isDigit(str[0]))
+	char c = str[0];
+
+	if (str.length() == 1 && c >)
 		return (true);
 	return (false);
 }
@@ -245,7 +247,6 @@ void ScalarConverter::convert( std::string str )
 		type = DOUBLE;
 	try
 	{
-		std::cout << type << std::endl;
 		switch (type)
 		{
 			case CHAR:

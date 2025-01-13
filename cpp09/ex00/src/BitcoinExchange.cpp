@@ -21,7 +21,19 @@ Database::Database( std::string newdb )
 		throw MissingDb();
 	}
 	this->_matrixDb = setMatrix(this->_fileDb, false);
+	if (parseDate(_matrixDb) == false)
+	{
+		this->_fileDb.close();
+		this->_inj.close();
+		return ;
+	}
 	this->_injectionTable = setMatrix(this->_inj, true);
+	if (parseDate(_injectionTable) == false)
+	{
+		this->_fileDb.close();
+		this->_inj.close();
+		return ;
+	}
 	if (this->_fileDb.is_open())	
 		this->_fileDb.close();
 	if (this->_inj.is_open())
@@ -71,7 +83,7 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 		try 
 		{
 			float valueDb = std::stof(valueStr);
-		    matrix.emplace(date, valueDb);
+			matrix.emplace(date, valueDb);
 		} 
 		catch (const std::invalid_argument& e)
 		{
@@ -86,6 +98,47 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 		line_count++;
 	}
 	return (matrix);
+}
+
+bool	Database::parseDate(std::multimap<std::string, float> matrix)
+{
+	for (auto it = matrix.begin(); it != matrix.end(); ++it)
+	{
+		// check the first column for the dates
+		const std::string& date = it->first;
+		size_t first_hiphen = date.find('-');
+		size_t second_hiphen = date.rfind('-');
+		if (first_hiphen == std::string::npos || second_hiphen == std::string::npos)
+			return (false);
+
+		size_t year = std::stoi(date.substr(0, first_hiphen));
+		size_t day = std::stoi(date.substr(first_hiphen + 2));
+		size_t month = std::stoi(date.substr(second_hiphen + 2));
+		bool leap_year = false;
+
+		std::cout << year << " " <<  day  << " " << month << std::endl;
+		if (year % 4 == 0 || year % 100 == 0 | year % 400 == 0)
+			leap_year = true;
+		if (leap_year && month == 2 && day != 29)
+			return (false);
+		else if (!leap_year && month == 2 && day != 28)
+			return (false);
+		else if (month < 1 || month > 12)
+			return (false);
+		else if (month % 2 == 0)
+		{
+			if (month == 2)
+				continue ;
+			if (day != 30)
+				return (false);
+		}
+		else if (month % 2 != 0)
+		{
+			if (day != 31)
+				return (false);
+		}
+	}
+	return (true);
 }
 
 void	Database::applyExchangeRate()
@@ -110,8 +163,8 @@ void	Database::applyExchangeRate()
 		}
 		if (match == false) // no exact match found
 		{
-			auto prev_it = _matrixDb.upper_bound(injDate); // iterator to first element greater than injDate
-			if (prev_it != _matrixDb.begin()) // check if there's a previous date
+			auto prev_it = _matrixDb.upper_bound(injDate);
+			if (prev_it != _matrixDb.begin())
 			{
 				--prev_it; // Move iterator to the largest date less than injDate
 				const std::string& prevDate = prev_it->first;
