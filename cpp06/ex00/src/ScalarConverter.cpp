@@ -41,7 +41,7 @@ bool ScalarConverter::isChar( std::string str )
 {
 	char c = str[0];
 
-	if (str.length() == 1 && c >)
+	if (str.length() == 1 && (c >= 0 && c <= 122))
 		return (true);
 	return (false);
 }
@@ -100,13 +100,21 @@ bool ScalarConverter::isDouble( std::string str )
 	return (true);
 }
 
-void ScalarConverter::printChar( char c, bool print )
+void ScalarConverter::printChar( long nl, bool print )
 {
+	int n = static_cast<int>(nl);
+
+	if (n < 0 || n > 127)
+		print = false;
 	if (print == true)
 	{
-		if (!std::isprint(c))
+		if (isDigit(n) || (n >= 32 && n <= 126))
+		{
+			char c = static_cast<unsigned char>(n);
+			std::cout << "char: " << "'" << c << "'" << std::endl;
+		}
+		else
 			std::cout << "char: non-displayable" << std::endl;
-		std::cout << "char: " << c << std::endl;
 	}
 	else
 		std::cout << "char: impossible" << std::endl;
@@ -251,9 +259,17 @@ void ScalarConverter::convert( std::string str )
 		{
 			case CHAR:
 			{
-				printChar(str[0], true);
-				nl = static_cast<int>(str[0]);
-				printInt(nl, false);
+				if (str.length() == 1 && !isDigit(str[0]))
+				{
+					nl = static_cast<long>(str[0]);
+					printChar(str[0], true);
+				}
+				else
+				{
+					nl = std::stol(str);
+					printChar(nl, true);
+				}
+				printInt(nl, true);
 				nf = static_cast<float>(str[0]);
 				printFloat(nf, str, false);
 				nd = static_cast<double>(str[0]);
@@ -263,7 +279,8 @@ void ScalarConverter::convert( std::string str )
 			case INT:
 			{
 				nl = std::stol(str);
-				printChar(0, false);
+
+				printChar(nl, true);
 				printInt(nl, true);
 				nf = static_cast<float>(nl);
 				printFloat(nf, str, true);

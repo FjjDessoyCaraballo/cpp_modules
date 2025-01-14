@@ -46,7 +46,7 @@ class ScalarConverter
 		static bool isInt( std::string );
 		static bool isFloat( std::string );
 		static bool isDouble( std::string );
-		static void printChar( char c, bool print );
+		static void printChar( long nl, bool print );
 		static void printInt( long n, bool print );
 		static void printFloat( float nf, std::string str, bool print );
 		static void printDouble( double nd, std::string str, bool print );
