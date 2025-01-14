@@ -71,7 +71,7 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 		size_t comma_pos = line.find(',');
 		if (comma_pos == std::string::npos)
 		{
-			std::cerr << "Line " << line_count << std::endl;
+			std::cerr << "Line " << line_count << std::endl; // for debugging
 			throw DbFormat();
 		}
 		std::string date = line.substr(0, comma_pos);
@@ -115,16 +115,22 @@ bool	Database::parseDate(std::multimap<std::string, float> matrix)
 		size_t day = std::stoi(date.substr(first_hiphen + 2));
 		size_t month = std::stoi(date.substr(second_hiphen + 2));
 		bool leap_year = false;
-
-		std::cout << year << " " <<  day  << " " << month << std::endl;
 		if (year % 4 == 0 || year % 100 == 0 | year % 400 == 0)
 			leap_year = true;
-		if (leap_year && month == 2 && day != 29)
+		if (leap_year)
+		{
+			if (month == 2 && day > 29)
+				return (false);
+		}
+		else if (!leap_year)
+		{
+			if (month == 2 && day > 28)
+				return (false);
+		}
+		else if (month <= 1 || month >= 12)
+		{
 			return (false);
-		else if (!leap_year && month == 2 && day != 28)
-			return (false);
-		else if (month < 1 || month > 12)
-			return (false);
+		}
 		else if (month % 2 == 0)
 		{
 			if (month == 2)
@@ -169,7 +175,7 @@ void	Database::applyExchangeRate()
 				--prev_it; // Move iterator to the largest date less than injDate
 				const std::string& prevDate = prev_it->first;
 				const float prevValue = prev_it->second;
-				std::cout << "No exact match for " << injDate << ". Using previous date: " << prevDate << " with value " << prevValue << " => Adjusted value: " << (prevValue * injValue) << std::endl;
+				std::cout << prevDate << " (" << injDate << ")" << " => " << prevValue << (prevValue * injValue) << std::endl;
 			}
 			else
 				std::cout << "No exact or earlier date found for " << injDate << "." << std::endl;
