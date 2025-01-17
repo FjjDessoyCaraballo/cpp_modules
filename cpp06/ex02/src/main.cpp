@@ -61,7 +61,7 @@ static void identify(Base& p)
 		std::cout << "T'was a type base reference to A!" << std::endl;
 		return ;
 	} catch (std::exception &e) {
-		std::cerr << "Exception: " << e.what() << std::endl;
+		// std::cerr << "Exception for A: " << e.what() << std::endl;
 	}
 	try {
 		B& b = dynamic_cast<B&>(p);
@@ -69,7 +69,7 @@ static void identify(Base& p)
 		std::cout << "T'was a type base reference to B!" << std::endl;
 		return ;
 	} catch (std::exception &e) {
-		std::cerr << "Exception: " << e.what() << std::endl;
+		// std::cerr << "Exception for B: " << e.what() << std::endl;
 	}
 	try {
 		C& c = dynamic_cast<C&>(p);
@@ -77,25 +77,49 @@ static void identify(Base& p)
 		std::cout << "T'was a type base reference to C!" << std::endl;
 		return ;
 	} catch (std::exception& e) {
-		std::cerr << "Exception: " << e.what() << std::endl;
+		// std::cerr << "Exception for C: " << e.what() << std::endl;
 	}
+
+	std::cerr << "Error: could not identify type" << std::endl;
 }
 
-int main(void)
+int main(void) 
 {
-	// Base *test1 = generate();
-	Base *test1 = NULL;
-	Base *test2 = generate();
+	std::cout << std::endl;
+	std::cout << " ### TEST 1 ###" << std::endl;
+	std::cout << std::endl;
 
-	std::cout << " ### TESTING FOR THE POINTER IDENTIFICATION ### " << std::endl;
+	Base* test1 = generate();
 	identify(test1);
-	identify(test2);
-
-	std::cout << " ### TESTING FOR THE REFERENCE IDENTIFICATION ### " << std::endl;
 	identify(*test1);
+
+	std::cout << std::endl;
+	std::cout << " ### TEST 2 ###" << std::endl;
+	std::cout << std::endl;
+
+	Base* test2 = generate();
+	identify(test2);
 	identify(*test2);
 
+	std::cout << std::endl;
+	std::cout << " ### TEST 3 ###" << std::endl;
+	std::cout << std::endl;
+
+	Base* test3 = generate();
+	identify(test3);
+	identify(*test3);
+
+	std::cout << std::endl;
+	std::cout << " ### TEST FOR NULL ### " << std::endl;
+	std::cout << std::endl;
+
+	Base* unknown = nullptr;
+	identify(unknown);
+	identify(*unknown);
+
+	
 	delete test1;
 	delete test2;
+	delete test3;
 	return (0);
 }

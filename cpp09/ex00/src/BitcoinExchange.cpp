@@ -127,11 +127,9 @@ bool	Database::parseDate(std::multimap<std::string, float> matrix)
 			if (month == 2 && day > 28)
 				return (false);
 		}
-		else if (month <= 1 || month >= 12)
-		{
+		if (month <= 1 || month >= 12)
 			return (false);
-		}
-		else if (month % 2 == 0)
+		if (month % 2 == 0)
 		{
 			if (month == 2)
 				continue ;
