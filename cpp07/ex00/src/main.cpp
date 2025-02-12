@@ -10,26 +10,37 @@
 
 #include "../inc/Template.hpp"
 #include <iostream>
+#include <stdexcept>
 
-int main(void)
+int main(int argc, char** argv)
 {
-	int a = 2;
-	int b = 69;
+	if (argc != 3)
+	{
+		std::cerr << "Usage: <integer 1> <integer 2>" << std::endl;
+		return (1);
+	}
+	try {
+		int a = std::stoi(argv[1]);
+		int b = std::stoi(argv[2]);
+		std::cout << "Before the swap: " << std::endl;
+		std::cout << "a = " << a << ", b = " << b << std::endl;
+		::swap(a, b);
+		std::cout << "After the swap: " << std::endl;
+		std::cout << "a = " << a << ", b = " << b << std::endl;
+		std::cout << "min(a, b) " << ::min(a,b) << std::endl;
+		std::cout << "max(a,b) " << ::max(a,b) << std::endl;
+	} catch (std::exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
 
-	std::cout << "Before the swap: " << std::endl;
-	std::cout << "a = " << a << ", b = " << b << std::endl;
-	::swap(a, b);
-	std::cout << "After the swap: " << std::endl;
-	std::cout << "a = " << a << ", b = " << b << std::endl;
-	std::cout << "min(a, b) " << ::min(a,b) << std::endl;
-	std::cout << "max(a,b) " << ::max(a,b) << std::endl;
+	{
+		std::string c = "chaine1";
+		std::string d = "chaine2";
 
-	std::string first = "chaine1";
-	std::string second = "chaine2";
-
-	::swap(first, second);
-	std::cout << "first = " << first << ", second = " << second << std::endl;
-	std::cout << "min(first, second) " << ::min(first,second) << std::endl;
-	std::cout << "max(first, second) " << ::max(first,second) << std::endl;
+		::swap(c, d);
+		std::cout << "c = " << c << ", d = " << d << std::endl;
+		std::cout << "min(c, d) " << ::min(c, d) << std::endl;
+		std::cout << "max(c, d) " << ::max(c, d) << std::endl;
+	}
 	return (0);
 }
