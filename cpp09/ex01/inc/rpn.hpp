@@ -10,18 +10,15 @@
 
 #pragma once
 
-#include <iostream>
 #include <stack>
+#include <stdexcept>
 #include <sstream>
 
 class Rpn
 {
 	private:
-		std::stack<int64_t>	_operands;
-		int64_t				_result;
-	public:
 		// constructor
-		Rpn( std::string& equation);
+		Rpn();
 
 		// destructor
 		~Rpn();
@@ -29,14 +26,7 @@ class Rpn
 		// canonical form
 		Rpn( const Rpn& ref );
 		Rpn& operator=( const Rpn& ref );
-
+	public:
 		// public methods
-		void	outputResult();
-		bool	isDigit( std::string nbr )
-
-		// setters
-		void	setResult( int64_t result );
-		// getters
-		const int64_t	getResult() const;
-
+		static int	outputResult( std::string equation );
 };

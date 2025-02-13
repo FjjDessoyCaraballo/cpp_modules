@@ -9,6 +9,7 @@
 /* ****************************************************************************/
 
 #include "../inc/rpn.hpp"
+#include <iostream>
 
 int main(int argc, char** argv)
 {
@@ -21,8 +22,7 @@ int main(int argc, char** argv)
 	if (equation.empty())
 		return (EXIT_FAILURE);
 	try {
-		Rpn bob(equation);
-		bob.outputResult();
+		std::cout << Rpn::outputResult(equation) << std::endl;
 	} catch (std::exception& e) {
 		std::cerr << "Your pole has not been reversed!" << std::endl;
 		std::cerr << "Exception: " << e.what() << std::endl;

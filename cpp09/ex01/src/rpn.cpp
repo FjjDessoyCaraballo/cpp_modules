@@ -10,25 +10,8 @@
 
 #include "../inc/rpn.hpp"
 
-// equation will never come in empty before there are check done beforehand
-Rpn::Rpn( std::string& equation )
+Rpn::Rpn()
 {
-	std::istringstream stream(equation);
-	std::string token;
-
-	while (stream >> token)
-	{
-		if (token == "*" || token == "/" || token == "+" || token == "-")
-		{
-
-		}
-		else if ()
-		{
-
-		}
-			return ;
-	}
-
 }
 
 Rpn::~Rpn()
@@ -48,20 +31,79 @@ Rpn& Rpn::operator=( const Rpn& ref )
 	return (*this);
 }
 
-//public methods
-void	Rpn::outputResult()
+int	Rpn::outputResult( std::string equation )
 {
-	std::cout <<
-}
+	std::stack<int> stacky;
+	std::istringstream stream(equation);
+	std::string token;
 
-// setters
-void	Rpn::setResult( int64_t result )
-{
-	this->_result = result;
-}
-// getters
+	// each token that gets the output of stream will be one of the arguments from argv
+	while (stream >> token)
+	{
+		if (token == "*" || token == "/" || token == "+" || token == "-")
+		{
+			// for one operator there will be the equivalent number of operands plus one - e.g. 1 + 1
+			// if we get to the operators clause and there is less than two operands it's an error 
+			if (stacky.size() < 2)
+				throw std::runtime_error("Error: not enough operands");
 
-const int64_t		Rpn::getResult() const
-{
-	return(this->_result);
+			// extract two operators at a time to follow the RPN logic
+			int operandA = stacky.top();
+			stacky.pop();
+			int operandB = stacky.top();
+			stacky.pop();
+			int result = 0;
+
+			switch (token[0])
+			{
+				case '*':
+					result = operandA * operandB;
+					break ;
+				case '+':
+					result = operandA + operandB;
+					break ;
+				case '-':
+					result = operandA - operandB;
+					break ;
+				case '/':
+					if (operandA == 0)
+						throw std::runtime_error("Error: division by zero");
+					result = operandA / operandB;
+					break ;
+				default:
+					throw (std::runtime_error("Error: what?"));
+					break ;
+			}
+			stacky.push(result);
+		}
+		// clause for checking if the input is a number (positive and negative respectively)
+		else if (isdigit(token[0]) || (token.size() > 1 && isdigit(token[1]) && token[0] == '-'))
+		{
+			bool isNumber = true;
+			
+			// if the number is negative we will iterate to check the string for garbage
+			for (size_t i = 1; i < token.size(); i++)
+			{
+				if (!isdigit(token[i]))
+				{
+					isNumber = false;
+					break ;
+				}
+			}
+			// this clause runs if there is garbage
+			if (!isNumber)
+				throw std::runtime_error("Error: invalid digit");
+
+			// all good, we push it into the stack
+			int number = std::stoi(token);
+			stacky.push(number);
+		}
+	}
+	// check if there is anything left but the result in the stack
+	if (stacky.size() > 1)
+		throw std::runtime_error("Error: overstacked");
+
+	// for clarity we assign the top of the stack (only number left) to the result
+	int result = stacky.top();
+	return (result);
 }
