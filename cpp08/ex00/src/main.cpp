@@ -9,6 +9,12 @@
 /* ****************************************************************************/
 
 #include "../inc/easyfind.hpp"
+#include <vector>
+#include <deque>
+#include <list>
+#include <array>
+#include <forward_list>
+#include <stdexcept>
 
 int main(void)
 {
@@ -22,7 +28,7 @@ int main(void)
 	std::cout << " ### TEST TWO ### " << std::endl;
 
 	{
-		std::vector<int>vec = {0,0,0,0,0,0,0};
+		std::array<int, 7>vec = {0,0,0,0,0,0,0};
 		easyfind(vec, 8);
 	}
 	std::cout << std::endl;
@@ -30,7 +36,7 @@ int main(void)
 	std::cout << " ### TEST THREE ### " << std::endl;
 
 	{
-		std::vector<int>vec = {8,8,8,8,8,8,8,8,8};
+		std::list<int>vec = {8,8,8,8,8,8,8,8,8};
 		::easyfind(vec, 8);
 	}
 
@@ -38,7 +44,7 @@ int main(void)
 	std::cout << " ### TEST FOUR ### " << std::endl;
 
 	{
-		std::vector<int>vec = {1235, 56834564, 58, -12313, -8};
+		std::forward_list<int>vec = {1235, 56834564, 58, -12313, -8};
 		::easyfind(vec, 8);
 	}
 
@@ -47,6 +53,14 @@ int main(void)
 
 	{
 		std::vector<int>vec = {-8,-8,-8,-8,-8,-8,0,8};
+		::easyfind(vec, 8);
+	}
+
+	std::cout << std::endl;
+	std::cout << " ### TEST SIX ### " << std::endl;
+
+	{
+		std::deque<int>vec = {-8,-8,-8,-8,-8,-8,0,8};
 		::easyfind(vec, 8);
 	}
 	

@@ -11,14 +11,12 @@
 #pragma once
 
 #include <iostream>
-#include <vector>
-#include <stdexcept>
 
 template <typename T>
 int easyfind(const T& container, int num) {
 	int index = 0;
 	for (auto iter = container.begin(); iter != container.end(); ++iter, ++index) {
-		std::cout << container[index] << "[" << index << "]" << std::endl;
+		std::cout << *iter << "[" << index << "]" << std::endl;
 		if (*iter == num) {
 			std::cout << "Found element at index: " << index << std::endl;
 			return (index);
