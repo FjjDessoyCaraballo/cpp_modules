@@ -9,9 +9,8 @@
 /* ****************************************************************************/
 
 #include "../inc/Span.hpp"
-#include <random>
 
-Span::Span( uint32_t limit ): _max(limit)
+Span::Span( uint32_t limit ): _max(limit), gen(std::random_device{}())
 {
 	this->_container.reserve(limit); // making our container fixed sized
 }
@@ -83,19 +82,17 @@ uint32_t	Span::longestSpan()
 	return (maxSpan);
 }
 
+
 void	Span::addRange( uint32_t range )
 {
 	if (range == 0)
 		return ;
 	if (this->_container.size() + range > this->_max)
 		throw std::overflow_error("Range is bigger than size of container");
-	std::random_device rd;
-	std::mt19937 gen(rd());
 	std::uniform_int_distribution<uint32_t> dist(0, UINT32_MAX);
 	for (uint32_t i = 0; i < range; ++i)
 	{
-		int randomNumber = dist(gen);
-		this->addNumber(randomNumber);
+		this->addNumber(dist(gen));
 	}
 }
 

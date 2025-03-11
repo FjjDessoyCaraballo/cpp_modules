@@ -1,7 +1,7 @@
 NAME				=	span
 
 COMP				=	c++
-FLAGS				=	-Wall -Werror -Wextra -std=c++11
+FLAGS				=	-Wall -Werror -Wextra -std=c++17
 
 SRC_DIR				=	src
 OBJ_DIR				=	obj

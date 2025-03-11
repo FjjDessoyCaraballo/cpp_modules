@@ -24,9 +24,13 @@ int main(void)
 		std::cout << sp.longestSpan() << std::endl;
 	}
 	{
-		Span sp = Span(15000);
+		std::cout << std::endl;
+		std::cout << "## RANGE OF ITERATORS ##" << std::endl;
+		std::cout << std::endl;
 
-		sp.addRange(12000);
+		Span sp = Span(120);
+
+		sp.addRange(5);
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;	
 	}

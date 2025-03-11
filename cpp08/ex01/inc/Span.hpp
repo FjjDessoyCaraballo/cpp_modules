@@ -13,12 +13,14 @@
 #include <vector>
 #include <stdexcept>
 #include <stdint.h>
+#include <random>
 
 class Span
 {
 	private:
 		std::vector<int>	_container;
 		uint32_t			_max;	
+		std::mt19937 		gen;
 	public:
 		// constructor
 		Span( uint32_t limit );
