@@ -40,10 +40,13 @@ class MutantStack
 		MutantStack &operator=( const MutantStack& ref );
 
 		// public methods
-		void			push( int num );
+		void			push( T num );
 		void			pop();
 		T&				top();
 		size_t			size() const;
+		bool 			empty() const;
+		void		 	swap(MutantStack<T>& secondStack);
+		template <typename... Args> void			emplace(Args&&... args);
 
 		// iterators
 		iterator		end() const;
