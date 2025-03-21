@@ -20,9 +20,13 @@ int main()
 	// little zombie created using heap (newZombie function uses new)
 	Zombie* zptr;
 	zptr = newZombie("Bigus Dickus");
+	if (zptr == nullptr)
+		return (1);
 	zptr->announce();
 	delete zptr;
 	zptr = newZombie("Claudionor");
+	if (zptr == nullptr)
+		return (1);
 	zptr->announce();
 	// shotgun the little zombie with delete
 	// by shotguning, I mean we are effectively clearing the memory used by it
