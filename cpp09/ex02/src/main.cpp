@@ -8,14 +8,13 @@
 /*        --------/   														  */
 /* ****************************************************************************/
 
-#include <iostream>
 #include "../inc/PmergeMe.hpp"
 
 int main(int argc, char **argv)
 {
 	if (argc > 1)
 	{
-		PmergeMe terribleAlgorithm(argv);
+		PmergeMe terribleAlgorithm(argc, argv);
 	}
 	else
 	{

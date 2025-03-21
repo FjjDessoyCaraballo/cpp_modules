@@ -74,7 +74,7 @@ int main(void)
 			MutantStack<int> mstack2;
 			if (mstack2.empty())
 				std::cout << "We see this message if the stack 2 is empty after creation" << std::endl;
-			mstack2.emplace(11);
+			mstack2.emplace(11); // if one desires, they can create a class to test this properly
 			std::cout << std::endl;
 			std::cout << "Before swap" << std::endl;
 			std::cout << "stack 1: " << mstack1.top() << std::endl;

@@ -17,10 +17,12 @@
 class PmergeMe {
 	private:
 		std::vector<std::pair<uint64_t, uint64_t>>	_pairs;
+		uint64_t									_oddElement;
+		bool										_hasOddElement;
 		// need a second container after pairing;
 	public:
 		// constructor
-		PmergeMe( char** array );
+		PmergeMe( int argc, char* array[] );
 		
 		//destructor
 		~PmergeMe();
@@ -36,6 +38,6 @@ class PmergeMe {
 		const std::vector<std::pair<uint64_t, uint64_t>>	&getPairs() const;
 
 		// setters
-		void	setPairs( char** array );
+		void	setPairs( int argc, char** array );
 
 };
