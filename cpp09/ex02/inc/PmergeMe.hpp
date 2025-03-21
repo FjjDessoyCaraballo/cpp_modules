@@ -17,6 +17,7 @@
 class PmergeMe {
 	private:
 		std::vector<std::pair<uint64_t, uint64_t>>	_pairs;
+		std::vector<uint64_t>						_largerElements;
 		uint64_t									_oddElement;
 		bool										_hasOddElement;
 		// need a second container after pairing;
@@ -33,6 +34,7 @@ class PmergeMe {
 		
 		// public methods
 		void	printPairs(void) const;
+		void	fordJohnsonAlgorithm(void);
 
 		// getters
 		const std::vector<std::pair<uint64_t, uint64_t>>	&getPairs() const;

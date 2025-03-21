@@ -64,6 +64,13 @@ void	PmergeMe::setPairs( int argc, char** array )
 	}
 }
 
+void PmergeMe::fordJohnsonAlgorithm( std::vector<pair<uint64_t, uint64_t>>:iterator it )
+{
+	auto it = _pairs.begin();
+	if ()
+		fordJohnsonAlgorithm()
+}
+
 void	PmergeMe::printPairs(void) const
 {
 	for (auto it = _pairs.begin(); it != _pairs.end(); ++it)
@@ -74,4 +81,6 @@ void	PmergeMe::printPairs(void) const
 	{
 		std::cout << "[" << _oddElement << "]" << std::endl;
 	}
+	std::cout << "Size of vector: " << _pairs.size() << std::endl;
+	std::cout << "size of larger elements vector: " << _largerElements.size() << std::endl;
 }
