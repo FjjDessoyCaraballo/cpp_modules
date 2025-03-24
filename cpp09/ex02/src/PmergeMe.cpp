@@ -64,11 +64,66 @@ void	PmergeMe::setPairs( int argc, char** array )
 	}
 }
 
-void PmergeMe::fordJohnsonAlgorithm( std::vector<pair<uint64_t, uint64_t>>:iterator it )
+void PmergeMe::fordJohnsonAlgorithm()
 {
-	auto it = _pairs.begin();
-	if ()
-		fordJohnsonAlgorithm()
+	// check if there is something to sort
+	if (_pairs.size() <= 1)
+		return ;
+	
+	// add larger elements from first row of the _pairs vector in a vector with
+	// solely large elements
+	for (const auto& pair : _pairs)
+		_largerElements.push_back(pair.first);
+	
+	// sort large elements
+	sortLargerElements(0, _largerElements.size() - 1);
+
+	// 
+}
+
+void	sortLargerElements( int left, int right )
+{
+	// 0 or 1 element
+	if (left >= right)
+		return ;
+
+	// helper variables
+	std::vector<std::pair<uint64_t, uint64_t>> subPairs;
+	bool hasUnpaired = false;
+	uint64_t unpaired = 0;
+	
+
+	for (int i = left; i < right; i += 2)
+	{
+		if (i + 1 <= right)
+		{
+			if (_largerElements[i] > _largerElements[i + 1])
+				subpairs.push_back(std::make_pair(_largerElements[i], _largerElements[i + 1]));
+			else
+				subPairs.push_back(std::make_pair(_largerElements[i + 1], _largerElements[i]));
+		}
+		else
+		{
+			// handle off element
+			hasUnpaired = true;
+			unpaired = _largerElements[i];
+		}
+	}
+
+	// Extract just the larger elements from the previous pairs
+	std::vector<uint64_t> subLarger;
+	for (const auto& pair: subPairs)
+		subLarger.push_back(pair.first);
+
+	// recursion to sort the larger elements
+	if (subLarger.size() > 1)
+	{
+		for (size_t i = 0; i < subLarger.size(); i++)
+			_largerElements[left + i] = subLarger[i];
+		sortLargerElements(left, left + subLarger.size() - 1);
+	}
+
+	
 }
 
 void	PmergeMe::printPairs(void) const

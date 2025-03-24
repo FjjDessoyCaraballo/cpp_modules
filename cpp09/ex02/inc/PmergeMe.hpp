@@ -11,6 +11,7 @@
 #pragma once
 
 #include <vector>
+#include <set>
 #include <cstdint>
 #include <iostream>
 
@@ -20,6 +21,7 @@ class PmergeMe {
 		std::vector<uint64_t>						_largerElements;
 		uint64_t									_oddElement;
 		bool										_hasOddElement;
+		std::multiset<uint64_t>						_result;
 		// need a second container after pairing;
 	public:
 		// constructor
@@ -33,8 +35,9 @@ class PmergeMe {
 		PmergeMe& operator=(const PmergeMe& ref);
 		
 		// public methods
-		void	printPairs(void) const;
-		void	fordJohnsonAlgorithm(void);
+		void	printPairs() const;
+		void	fordJohnsonAlgorithm();
+		void	sortLargerElements( int left, int right );
 
 		// getters
 		const std::vector<std::pair<uint64_t, uint64_t>>	&getPairs() const;
