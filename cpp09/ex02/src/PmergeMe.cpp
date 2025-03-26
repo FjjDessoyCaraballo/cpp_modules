@@ -20,14 +20,9 @@ PmergeMe::PmergeMe( int argc, char* array[] )
 	this->printLargerPairs();
 }
 
-PmergeMe::~PmergeMe()
-{
-}
+PmergeMe::~PmergeMe() {}
 
-PmergeMe::PmergeMe( const PmergeMe& ref )
-{
-	operator=(ref);
-}
+PmergeMe::PmergeMe( const PmergeMe& ref ) { operator=(ref); }
 
 PmergeMe	&PmergeMe::operator=( const PmergeMe& ref )
 {
@@ -37,10 +32,7 @@ PmergeMe	&PmergeMe::operator=( const PmergeMe& ref )
 	return (*this);
 }
 
-const std::vector<std::pair<uint64_t, uint64_t>>	&PmergeMe::getPairs() const
-{
-	return (this->_pairs);
-}
+const std::vector<std::pair<uint64_t, uint64_t>>	&PmergeMe::getPairs() const { return (this->_pairs); }
 
 void	PmergeMe::setPairs( int argc, char** array )
 {
@@ -70,20 +62,32 @@ void PmergeMe::fordJohnsonAlgorithm()
 {
 	// check if there is something to sort
 	if (_pairs.size() <= 1)
-		return ;
+	{
 	
-	// solely large elements
+		// solely large elements
+		for (const auto& pair : _pairs)
+		{
+			_largerElements.push_back(pair.first);
+			_largerElements.push_back(pair.second);
+		}
+
+		if (_hasOddElement)
+			_largerElements.push_back(_oddElement);
+		return ;
+	}
+
+	// extracction of larger elements from each pair
 	for (const auto& pair : _pairs)
 		_largerElements.push_back(pair.first);
-	
-	// sort large elements
+
+	// recursion to sort large elements
 	sortLargerElements(0, _largerElements.size() - 1);
 
 }
 
 void	PmergeMe::sortLargerElements( int left, int right )
 {
-	// 0 or 1 element
+	// check if there's something to
 	if (left >= right)
 		return ;
 
@@ -92,7 +96,6 @@ void	PmergeMe::sortLargerElements( int left, int right )
 	bool hasUnpaired = false;
 	uint64_t unpaired = 0;
 	
-
 	for (int i = left; i < right; i += 2)
 	{
 		if (i + 1 <= right)
@@ -116,30 +119,26 @@ void	PmergeMe::sortLargerElements( int left, int right )
 		subLarger.push_back(pair.first);
 
 	// recursion to sort the larger elements
+	for (size_t i = 0; i < subLarger.size(); i++)
+		this->_largerElements[left + i] = subLarger[i];
+
 	if (subLarger.size() > 1)
-	{
-		for (size_t i = 0; i < subLarger.size(); i++)
-			this->_largerElements[left + i] = subLarger[i];
 		sortLargerElements(left, left + subLarger.size() - 1);
-	}
+
 
 	std::vector<uint64_t> sorted;
 	for (uint64_t i = left; i < left + subLarger.size(); i++)
 		sorted.push_back(_largerElements[i]);
-	
-	// Insert smaller elements from the larger collection
+
+
 	for (const auto& pair: subPairs)
 		insertElement(sorted, pair.second);
 	
-	// insert unpaired large element if there is one
 	if (hasUnpaired)
 		insertElement(sorted, unpaired);
 
-	// Copy sorted result back to _largerElements
 	for (size_t i = 0; i < sorted.size(); i++)
 		_largerElements[left + i] = sorted[i];
-
-	// Now we should have the larger elements sorted
 }
 
 // Binary insertion
