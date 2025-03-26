@@ -16,6 +16,8 @@ PmergeMe::PmergeMe( int argc, char* array[] )
 	_oddElement = 0;
 	this->setPairs(argc, array);
 	this->printPairs();
+	this->fordJohnsonAlgorithm();
+	this->printLargerPairs();
 }
 
 PmergeMe::~PmergeMe()
@@ -70,7 +72,6 @@ void PmergeMe::fordJohnsonAlgorithm()
 	if (_pairs.size() <= 1)
 		return ;
 	
-	// add larger elements from first row of the _pairs vector in a vector with
 	// solely large elements
 	for (const auto& pair : _pairs)
 		_largerElements.push_back(pair.first);
@@ -78,10 +79,9 @@ void PmergeMe::fordJohnsonAlgorithm()
 	// sort large elements
 	sortLargerElements(0, _largerElements.size() - 1);
 
-	// 
 }
 
-void	sortLargerElements( int left, int right )
+void	PmergeMe::sortLargerElements( int left, int right )
 {
 	// 0 or 1 element
 	if (left >= right)
@@ -98,7 +98,7 @@ void	sortLargerElements( int left, int right )
 		if (i + 1 <= right)
 		{
 			if (_largerElements[i] > _largerElements[i + 1])
-				subpairs.push_back(std::make_pair(_largerElements[i], _largerElements[i + 1]));
+				subPairs.push_back(std::make_pair(_largerElements[i], _largerElements[i + 1]));
 			else
 				subPairs.push_back(std::make_pair(_largerElements[i + 1], _largerElements[i]));
 		}
@@ -119,14 +119,37 @@ void	sortLargerElements( int left, int right )
 	if (subLarger.size() > 1)
 	{
 		for (size_t i = 0; i < subLarger.size(); i++)
-			_largerElements[left + i] = subLarger[i];
+			this->_largerElements[left + i] = subLarger[i];
 		sortLargerElements(left, left + subLarger.size() - 1);
 	}
 
+	std::vector<uint64_t> sorted;
+	for (uint64_t i = left; i < left + subLarger.size(); i++)
+		sorted.push_back(_largerElements[i]);
 	
+	// Insert smaller elements from the larger collection
+	for (const auto& pair: subPairs)
+		insertElement(sorted, pair.second);
+	
+	// insert unpaired large element if there is one
+	if (hasUnpaired)
+		insertElement(sorted, unpaired);
+
+	// Copy sorted result back to _largerElements
+	for (size_t i = 0; i < sorted.size(); i++)
+		_largerElements[left + i] = sorted[i];
+
+	// Now we should have the larger elements sorted
 }
 
-void	PmergeMe::printPairs(void) const
+// Binary insertion
+void PmergeMe::insertElement(std::vector<uint64_t>& sorted, uint64_t element)
+{
+	auto it = std::lower_bound(sorted.begin(), sorted.end(), element);
+	sorted.insert(it, element);
+}
+
+void	PmergeMe::printPairs()
 {
 	for (auto it = _pairs.begin(); it != _pairs.end(); ++it)
 	{
@@ -138,4 +161,12 @@ void	PmergeMe::printPairs(void) const
 	}
 	std::cout << "Size of vector: " << _pairs.size() << std::endl;
 	std::cout << "size of larger elements vector: " << _largerElements.size() << std::endl;
+}
+
+void	PmergeMe::printLargerPairs()
+{
+	for (const auto& elements : _largerElements)
+	{
+		std::cout << "[" << elements << "]" << std::endl;
+	}
 }

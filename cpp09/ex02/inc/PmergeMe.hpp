@@ -35,9 +35,11 @@ class PmergeMe {
 		PmergeMe& operator=(const PmergeMe& ref);
 		
 		// public methods
-		void	printPairs() const;
+		void	printPairs();
 		void	fordJohnsonAlgorithm();
 		void	sortLargerElements( int left, int right );
+		void 	insertElement(std::vector<uint64_t>& sorted, uint64_t element);
+		void	printLargerPairs();
 
 		// getters
 		const std::vector<std::pair<uint64_t, uint64_t>>	&getPairs() const;
