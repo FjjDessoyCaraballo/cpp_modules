@@ -28,25 +28,23 @@ class PmergeMe {
 		PmergeMe(const PmergeMe& ref);
 		PmergeMe& operator=(const PmergeMe& ref);
 		
-		// public methods
 		void	printPairs();
-		void	fordJohnsonAlgorithm();
 		void	sortLargerElements( int left, int right );
 		void 	insertElement(std::vector<uint64_t>& sorted, uint64_t element);
 		void 	insertSmallerElementsWithJacobsthal();
 		void	printLargerPairs();
-		// getters
-		const std::vector<std::pair<uint64_t, uint64_t>>	&getPairs() const;
-	
+		
 		// setters
 		void	setPairs( int argc, char** array );
-	public:
+		public:
 		// constructor
-		PmergeMe( int argc, char* array[] );
+		PmergeMe();
 		
 		//destructor
 		~PmergeMe();
 		
+		// public methods
+		void	fordJohnsonAlgorithm(int argc, char* array[], int vec_or_list);
 		void	printResult();
 
 };

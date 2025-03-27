@@ -9,6 +9,7 @@
 /* ****************************************************************************/
 
 #include "../inc/PmergeMe.hpp"
+#include <map>
 
 int main(int argc, char **argv)
 {
@@ -33,8 +34,25 @@ int main(int argc, char **argv)
 		}
 		std::cout << std::endl;
 
+		// DEBUGGING AND SANITY TEST
+
+		// std::cout << "[size] : " << original.size() << std::endl;
+		// std::multiset<uint64_t> sort;
+		// for (auto it = original.begin(); it != original.end(); it++)
+		// {
+		// 	sort.insert(*it);
+		// }
+		// std::cout << "multiset: ";
+		// for (auto it = sort.begin(); it != sort.end(); it++)
+		// {
+		// 	std::cout << *it << " ";
+		// }
+		// std::cout << std::endl;
+		// std::cout << "[size] : " << sort.size() << std::endl;
+
 		// the algorithm is applied automatically with the contruction
-		PmergeMe terribleAlgorithm(argc, argv);
+		PmergeMe terribleAlgorithm;
+		terribleAlgorithm.fordJohnsonAlgorithm(argc, argv, 1);
 		terribleAlgorithm.printResult();
 	}
 	else

@@ -11,15 +11,10 @@
 #include "../inc/PmergeMe.hpp"
 #include <chrono>
 
-PmergeMe::PmergeMe( int argc, char* array[] )
+PmergeMe::PmergeMe()
 {
 	_hasOddElement = false;
-
 	_oddElement = 0;
-	setPairs(argc, array);
-	// printPairs(); // for debugging
-	fordJohnsonAlgorithm();
-	// printLargerPairs();
 }
 
 PmergeMe::~PmergeMe() {}
@@ -33,8 +28,6 @@ PmergeMe	&PmergeMe::operator=( const PmergeMe& ref )
 	this->_pairs = ref._pairs;
 	return (*this);
 }
-
-const std::vector<std::pair<uint64_t, uint64_t>>	&PmergeMe::getPairs() const { return (this->_pairs); }
 
 void	PmergeMe::setPairs( int argc, char** array )
 {
@@ -60,35 +53,42 @@ void	PmergeMe::setPairs( int argc, char** array )
 	}
 }
 
-void PmergeMe::fordJohnsonAlgorithm()
+void PmergeMe::fordJohnsonAlgorithm(int argc, char* array[], int vec_or_list)
 {
-    // Check if there is something to sort
-    if (_pairs.size() <= 1)
-    {
-        // For small cases, just sort directly
-        for (const auto& pair : _pairs)
-        {
-            _largerElements.push_back(pair.first);
-            _largerElements.push_back(pair.second);
-        }
+	if (vec_or_list == 1)
+	{
+		setPairs(argc, array);
+		// printPairs(); // for debugging
+		// printLargerPairs(); // for debugging
 
-        if (_hasOddElement)
-            _largerElements.push_back(_oddElement);
-            
-        // Sort the small array directly
-        std::sort(_largerElements.begin(), _largerElements.end());
-        return;
-    }
+		// Check if there is something to sort
+		if (_pairs.size() <= 1)
+		{
+			// For small cases, just sort directly
+			for (const auto& pair : _pairs)
+			{
+				_largerElements.push_back(pair.first);
+				_largerElements.push_back(pair.second);
+			}
 
-    // Extract larger elements from each pair
-    for (const auto& pair : _pairs)
-        _largerElements.push_back(pair.first);
+			if (_hasOddElement)
+				_largerElements.push_back(_oddElement);
+				
+			// Sort the small array directly
+			std::sort(_largerElements.begin(), _largerElements.end());
+			return;
+		}
 
-    // Recursively sort larger elements
-    sortLargerElements(0, _largerElements.size() - 1);
+		// Extract larger elements from each pair
+		for (const auto& pair : _pairs)
+			_largerElements.push_back(pair.first);
 
-    // Now use the Jacobsthal insertion method for smaller elements
-    insertSmallerElementsWithJacobsthal();
+		// Recursively sort larger elements
+		sortLargerElements(0, _largerElements.size() - 1);
+
+		// Now use the Jacobsthal insertion method for smaller elements
+		insertSmallerElementsWithJacobsthal();
+	}
 }
 
 void	PmergeMe::sortLargerElements( int left, int right )
@@ -164,52 +164,67 @@ void PmergeMe::insertSmallerElementsWithJacobsthal()
     if (!_largerElements.empty())
         result.push_back(_largerElements[0]);
     
+    // Add the second element's smaller part immediately (optimization)
+    if (_pairs.size() > 0)
+        insertElement(result, _pairs[0].second);
+    
     // Generate Jacobsthal numbers
-    std::vector<int> jacobsthal(2, 0);
-    jacobsthal[0] = 1;
-    jacobsthal[1] = 3;
-    while (jacobsthal.back() < static_cast<int>(_pairs.size()))
+    std::vector<size_t> jacobsthal;
+    jacobsthal.push_back(1); // Start with 1 (we've already handled index 0)
+    jacobsthal.push_back(3);
+    
+    while (jacobsthal.back() < _pairs.size())
     {
-        jacobsthal.push_back(jacobsthal[jacobsthal.size() - 1] + 2 * jacobsthal[jacobsthal.size() - 2]);
+        size_t next = jacobsthal[jacobsthal.size() - 1] + 2 * jacobsthal[jacobsthal.size() - 2];
+        jacobsthal.push_back(next);
     }
     
-    // Insert in Jacobsthal order
-    for (size_t j = 0; j < jacobsthal.size() && jacobsthal[j] < static_cast<int>(_pairs.size()); j++)
+    // Keep track of which indices we've processed
+    std::vector<bool> processed(_pairs.size(), false);
+    processed[0] = true; // Mark first element as processed
+    
+    // Process elements according to Jacobsthal sequence
+    for (size_t j = 0; j < jacobsthal.size(); j++)
     {
-        int index = jacobsthal[j];
-        
-        // Insert the element at this position
-        if (index > 0 && index < static_cast<int>(_largerElements.size()))
+        size_t curr = jacobsthal[j];
+        if (curr < _pairs.size())
         {
-            // Add larger element if not already in result
-            insertElement(result, _largerElements[index]);
+            // Insert the larger element if not already in result
+            if (std::find(result.begin(), result.end(), _largerElements[curr]) == result.end())
+                insertElement(result, _largerElements[curr]);
             
-            // Add corresponding smaller element
-            insertElement(result, _pairs[index].second);
+            // Insert the smaller element
+            insertElement(result, _pairs[curr].second);
+            processed[curr] = true;
         }
         
-        // Fill in elements between current and previous Jacobsthal numbers
-        int prev = (j == 0) ? 0 : jacobsthal[j-1];
-        for (int i = index - 1; i > prev; i--)
+        // Process intermediate elements in reverse order (important for efficiency)
+        size_t prev = (j == 0) ? 0 : jacobsthal[j-1];
+        for (size_t i = curr - 1; i > prev; i--)
         {
-            if (i > 0 && i < static_cast<int>(_largerElements.size()))
+            if (i < _pairs.size() && !processed[i])
             {
-                // Add larger element if not already in result
-                insertElement(result, _largerElements[i]);
+                // Insert the larger element if not already in result
+                if (std::find(result.begin(), result.end(), _largerElements[i]) == result.end())
+                    insertElement(result, _largerElements[i]);
                 
-                // Add corresponding smaller element
+                // Insert the smaller element
                 insertElement(result, _pairs[i].second);
+                processed[i] = true;
             }
         }
     }
     
-    // Insert any remaining elements that were not covered by Jacobsthal sequence
+    // Process any remaining elements
     for (size_t i = 1; i < _pairs.size(); i++)
     {
-        // Check if this element has already been inserted
-        if (std::find(result.begin(), result.end(), _largerElements[i]) == result.end())
+        if (!processed[i])
         {
-            insertElement(result, _largerElements[i]);
+            // Insert larger element if not already in result
+            if (std::find(result.begin(), result.end(), _largerElements[i]) == result.end())
+                insertElement(result, _largerElements[i]);
+            
+            // Insert smaller element
             insertElement(result, _pairs[i].second);
         }
     }
@@ -218,7 +233,7 @@ void PmergeMe::insertSmallerElementsWithJacobsthal()
     if (_hasOddElement)
         insertElement(result, _oddElement);
     
-    // Update _largerElements with completely sorted array
+    // Update _largerElements with the fully sorted result
     _largerElements = result;
 }
 
@@ -247,10 +262,11 @@ void	PmergeMe::printLargerPairs()
 
 void PmergeMe::printResult()
 {
-	std::cout << "After: ";
-	for (const auto& elements : _largerElements)
+	std::cout << "after: ";
+	for (auto it = _largerElements.begin(); it != _largerElements.end(); ++it)
 	{
-		std::cout << elements << " ";
+		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
+	// std::cout << "[size] : " << _largerElements.size() << std::endl; // debugging
 }
