@@ -14,7 +14,28 @@ int main(int argc, char **argv)
 {
 	if (argc > 1)
 	{
+		// setting a regular vector to output the input given before sorting
+		std::vector<uint64_t> original;
+		try {
+			for (int i = 1; i < argc; i++)
+			{
+				long val = std::stol(argv[i]);
+				original.push_back(val);
+			}
+		} catch (std::exception& e) {
+			std::cerr << "Exception: " << e.what() << std::endl;
+			return (EXIT_FAILURE);
+		}
+		std::cout << "before: ";
+		for (auto it = original.begin(); it != original.end(); it++)
+		{
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+
+		// the algorithm is applied automatically with the contruction
 		PmergeMe terribleAlgorithm(argc, argv);
+		terribleAlgorithm.printResult();
 	}
 	else
 	{

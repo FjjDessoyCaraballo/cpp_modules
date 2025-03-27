@@ -9,15 +9,17 @@
 /* ****************************************************************************/
 
 #include "../inc/PmergeMe.hpp"
+#include <chrono>
 
 PmergeMe::PmergeMe( int argc, char* array[] )
 {
 	_hasOddElement = false;
+
 	_oddElement = 0;
 	setPairs(argc, array);
 	// printPairs(); // for debugging
 	fordJohnsonAlgorithm();
-	printLargerPairs();
+	// printLargerPairs();
 }
 
 PmergeMe::~PmergeMe() {}
@@ -60,52 +62,33 @@ void	PmergeMe::setPairs( int argc, char** array )
 
 void PmergeMe::fordJohnsonAlgorithm()
 {
-	// check if there is something to sort
-	if (_pairs.size() <= 1)
-	{
-	
-		// solely large elements
-		for (const auto& pair : _pairs)
-		{
-			_largerElements.push_back(pair.first);
-			_largerElements.push_back(pair.second);
-		}
-
-		if (_hasOddElement)
-			_largerElements.push_back(_oddElement);
-		return ;
-	}
-
-	// extracction of larger elements from each pair
-	for (const auto& pair : _pairs)
-		_largerElements.push_back(pair.first);
-
-	// recursion to sort large elements
-	sortLargerElements(0, _largerElements.size() - 1);
-
-    // Create result vector starting with the first element from sorted _largerElements
-    std::vector<uint64_t> result;
-    if (!_largerElements.empty())
-        result.push_back(_largerElements[0]);
-    
-    // Insert smaller elements using binary insertion
-    // For simplicity, we'll insert them in order rather than using Jacobsthal sequence
-    for (size_t i = 0; i < _pairs.size(); i++)
+    // Check if there is something to sort
+    if (_pairs.size() <= 1)
     {
-        // Skip first element as it's already in result
-        if (i > 0)
-            result.push_back(_largerElements[i]);
-        
-        // Insert corresponding smaller element
-        insertElement(result, _pairs[i].second);
+        // For small cases, just sort directly
+        for (const auto& pair : _pairs)
+        {
+            _largerElements.push_back(pair.first);
+            _largerElements.push_back(pair.second);
+        }
+
+        if (_hasOddElement)
+            _largerElements.push_back(_oddElement);
+            
+        // Sort the small array directly
+        std::sort(_largerElements.begin(), _largerElements.end());
+        return;
     }
-    
-    // Insert odd element if present
-    if (_hasOddElement)
-        insertElement(result, _oddElement);
-    
-    // Update _largerElements with fully sorted result
-    _largerElements = result;
+
+    // Extract larger elements from each pair
+    for (const auto& pair : _pairs)
+        _largerElements.push_back(pair.first);
+
+    // Recursively sort larger elements
+    sortLargerElements(0, _largerElements.size() - 1);
+
+    // Now use the Jacobsthal insertion method for smaller elements
+    insertSmallerElementsWithJacobsthal();
 }
 
 void	PmergeMe::sortLargerElements( int left, int right )
@@ -258,6 +241,16 @@ void	PmergeMe::printLargerPairs()
 	for (const auto& elements : _largerElements)
 	{
 		std::cout << "[" << elements << "] ";
+	}
+	std::cout << std::endl;
+}
+
+void PmergeMe::printResult()
+{
+	std::cout << "After: ";
+	for (const auto& elements : _largerElements)
+	{
+		std::cout << elements << " ";
 	}
 	std::cout << std::endl;
 }
