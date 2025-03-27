@@ -15,6 +15,8 @@
 #include <cstdint>
 #include <iostream>
 #include <algorithm>
+#include <chrono>
+#include <iomanip>
 
 class PmergeMe {
 	private:
@@ -25,7 +27,14 @@ class PmergeMe {
 		uint64_t											_oddElement;
 		bool												_hasOddElement;
 		uint64_t											_processingTime;
-		
+		uint64_t											_nbElements;
+
+		// variables for calculating time
+		std::chrono::high_resolution_clock::time_point		_start;
+		std::chrono::high_resolution_clock::time_point		_end;
+		std::chrono::duration<double, std::micro>			_durationVector;
+		std::chrono::duration<double, std::micro>			_durationDeque;	
+
 		// canonical form
 		PmergeMe(const PmergeMe& ref);
 		PmergeMe& operator=(const PmergeMe& ref);

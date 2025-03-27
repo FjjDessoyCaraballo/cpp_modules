@@ -9,7 +9,6 @@
 /* ****************************************************************************/
 
 #include "../inc/PmergeMe.hpp"
-#include <chrono>
 
 PmergeMe::PmergeMe()
 {
@@ -31,6 +30,8 @@ PmergeMe	&PmergeMe::operator=( const PmergeMe& ref )
 
 void	PmergeMe::setPairs( int argc, char** array )
 {
+	_nbElements = argc - 1;
+	_start = std::chrono::high_resolution_clock::now();
 	try {
 		for (int i = 1; i < argc; i += 2)
 		{
@@ -40,16 +41,9 @@ void	PmergeMe::setPairs( int argc, char** array )
 				long val2 = std::stol(array[i + 1]);
 			
 				if (val2 > val1)
-				{
 					_pairsVector.push_back(std::make_pair(val2, val1));
-					_pairsDeque.push_back(std::make_pair(val2, val1));
-
-				}
 				else
-				{
 					_pairsVector.push_back(std::make_pair(val1, val2));
-					_pairsDeque.push_back(std::make_pair(val2, val1));
-				}	
 			}
 			else {
 				_hasOddElement = true;
@@ -61,7 +55,37 @@ void	PmergeMe::setPairs( int argc, char** array )
 		return ;
 	}
 	fJAVector();
+	_end = std::chrono::high_resolution_clock::now();
+	_durationVector = std::chrono::duration<double, std::micro>(_end - _start);
+
+	_start = std::chrono::high_resolution_clock::now();
+	try {
+		for (int i = 1; i < argc; i += 2)
+		{
+			if (i + 1 < argc) 
+			{
+				long val1 = std::stol(array[i]);
+				long val2 = std::stol(array[i + 1]);
+			
+				if (val2 > val1)
+					_pairsDeque.push_back(std::make_pair(val2, val1));
+
+				else
+					_pairsDeque.push_back(std::make_pair(val2, val1));	
+			}
+			else {
+				_hasOddElement = true;
+				_oddElement = std::stol(array[i]);
+			}
+		}
+	} catch (std::exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
+		return ;
+	}
 	fJADeque();
+	_end = std::chrono::high_resolution_clock::now();
+	_durationDeque = std::chrono::duration<double, std::micro>(_end - _start);
+
 }
 
 void PmergeMe::fJAVector()
@@ -483,4 +507,6 @@ void PmergeMe::printResult()
 	std::cout << std::endl;
 	// std::cout << "[size] : " << _largeDeque.size() << std::endl; // debugging
 
+	std::cout << "Time to process a range of " << _nbElements << " elements with std::vector : " << std::fixed << std::setprecision(5) << _durationVector.count() << " us" << std::endl;
+	std::cout << "Time to process a range of " << _nbElements << " elements with std::deque : " << std::fixed << std::setprecision(5) << _durationDeque.count() << " us" << std::endl;
 }
