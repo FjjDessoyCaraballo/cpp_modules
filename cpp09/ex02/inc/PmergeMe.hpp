@@ -11,31 +11,42 @@
 #pragma once
 
 #include <vector>
-#include <set>
+#include <deque>
 #include <cstdint>
 #include <iostream>
 #include <algorithm>
 
 class PmergeMe {
 	private:
-		std::vector<std::pair<uint64_t, uint64_t>>	_pairs;
-		std::vector<uint64_t>						_largerElements;
-		uint64_t									_oddElement;
-		bool										_hasOddElement;
-		uint64_t									_processingTime;
+		std::vector<std::pair<uint64_t, uint64_t>>			_pairsVector;
+		std::deque<std::pair<uint64_t, uint64_t>>			_pairsDeque;
+		std::vector<uint64_t>								_largeVecElem;
+		std::deque<uint64_t>								_largeDeque;
+		uint64_t											_oddElement;
+		bool												_hasOddElement;
+		uint64_t											_processingTime;
 		
 		// canonical form
 		PmergeMe(const PmergeMe& ref);
 		PmergeMe& operator=(const PmergeMe& ref);
 		
-		void	printPairs();
-		void	sortLargerElements( int left, int right );
-		void 	insertElement(std::vector<uint64_t>& sorted, uint64_t element);
-		void 	insertSmallerElementsWithJacobsthal();
+		// methods for vector implementation
+		void	sortLargeVector( int left, int right );
+		void 	insertElementVector(std::vector<uint64_t>& sorted, uint64_t element);
+		void 	JacobsthalVector();
 		void	printLargerPairs();
+		void	fJAVector();
+		
+		// methods for list implementation
+		void	sortLargeDeque( int left, int right );
+		void 	insertElementDeque(std::deque<uint64_t>& sorted, uint64_t element);
+		void 	JacobsthalDeque();
+		void 	fJADeque();
+		
+		// printer
+		void	printPairs();
 		
 		// setters
-		void	setPairs( int argc, char** array );
 		public:
 		// constructor
 		PmergeMe();
@@ -44,7 +55,7 @@ class PmergeMe {
 		~PmergeMe();
 		
 		// public methods
-		void	fordJohnsonAlgorithm(int argc, char* array[], int vec_or_list);
+		void	setPairs( int argc, char** array );
 		void	printResult();
 
 };

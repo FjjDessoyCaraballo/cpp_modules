@@ -32,6 +32,7 @@ int main(int argc, char **argv)
 		{
 			std::cout << *it << " ";
 		}
+		std::cout << "(argc: " << argc -1 << ")";
 		std::cout << std::endl;
 
 		// DEBUGGING AND SANITY TEST
@@ -52,7 +53,7 @@ int main(int argc, char **argv)
 
 		// the algorithm is applied automatically with the contruction
 		PmergeMe terribleAlgorithm;
-		terribleAlgorithm.fordJohnsonAlgorithm(argc, argv, 1);
+		terribleAlgorithm.setPairs(argc, argv);
 		terribleAlgorithm.printResult();
 	}
 	else
