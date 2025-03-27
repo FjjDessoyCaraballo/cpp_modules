@@ -39,11 +39,11 @@ void	PmergeMe::setPairs( int argc, char** array )
 			{
 				long val1 = std::stol(array[i]);
 				long val2 = std::stol(array[i + 1]);
-			
+				
 				if (val2 > val1)
-					_pairsVector.push_back(std::make_pair(val2, val1));
+				_pairsVector.push_back(std::make_pair(val2, val1));
 				else
-					_pairsVector.push_back(std::make_pair(val1, val2));
+				_pairsVector.push_back(std::make_pair(val1, val2));
 			}
 			else {
 				_hasOddElement = true;
@@ -66,12 +66,12 @@ void	PmergeMe::setPairs( int argc, char** array )
 			{
 				long val1 = std::stol(array[i]);
 				long val2 = std::stol(array[i + 1]);
-			
+				
 				if (val2 > val1)
-					_pairsDeque.push_back(std::make_pair(val2, val1));
-
+				_pairsDeque.push_back(std::make_pair(val2, val1));
+				
 				else
-					_pairsDeque.push_back(std::make_pair(val2, val1));	
+				_pairsDeque.push_back(std::make_pair(val2, val1));	
 			}
 			else {
 				_hasOddElement = true;
