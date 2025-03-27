@@ -14,6 +14,7 @@
 #include <set>
 #include <cstdint>
 #include <iostream>
+#include <algorithm>
 
 class PmergeMe {
 	private:
@@ -39,6 +40,7 @@ class PmergeMe {
 		void	fordJohnsonAlgorithm();
 		void	sortLargerElements( int left, int right );
 		void 	insertElement(std::vector<uint64_t>& sorted, uint64_t element);
+		void 	insertSmallerElementsWithJacobsthal();
 		void	printLargerPairs();
 
 		// getters
