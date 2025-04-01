@@ -11,6 +11,12 @@
 #include "../inc/PmergeMe.hpp"
 #include <map>
 
+/**
+ * 1. Pair elements and compare within each pair
+ * 2. Recursively sort the larger elements from each pair
+ * 3. Insert the smaller elements using a specific sequence (Jacobsthal numbers)
+ */
+
 int main(int argc, char **argv)
 {
 	if (argc > 1)

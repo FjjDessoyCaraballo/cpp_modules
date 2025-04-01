@@ -22,7 +22,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ_DIR)
 	@echo "Removing object files"
 
 fclean: clean
