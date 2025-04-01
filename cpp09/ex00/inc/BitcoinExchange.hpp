@@ -24,7 +24,7 @@ class Database
 		std::multimap<std::string, float>				_injectionTable; // exchange rate file
 		std::multimap<std::string, float>				setMatrix( std::fstream &file, bool injection );
 		void											applyExchangeRate(void);
-		bool											parseDate(std::multimap<std::string, float> matrix);
+		bool											parseDate(std::string date);
 	public:
 		// constructor
 		Database( std::string newdb );

@@ -21,23 +21,11 @@ Database::Database( std::string newdb )
 		throw MissingDb();
 	}
 	this->_matrixDb = setMatrix(this->_fileDb, false);
-	if (parseDate(_matrixDb) == false)
-	{
-		this->_fileDb.close();
-		this->_inj.close();
-		return ;
-	}
 	this->_injectionTable = setMatrix(this->_inj, true);
-	if (parseDate(_injectionTable) == false)
-	{
-		this->_fileDb.close();
-		this->_inj.close();
-		return ;
-	}
-	if (this->_fileDb.is_open())	
-		this->_fileDb.close();
+	if (this->_fileDb.is_open())
+	this->_fileDb.close();
 	if (this->_inj.is_open())
-		this->_inj.close();
+	this->_inj.close();
 	applyExchangeRate();
 }
 
@@ -100,49 +88,44 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 	return (matrix);
 }
 
-bool	Database::parseDate(std::multimap<std::string, float> matrix)
+bool Database::parseDate(std::multimap<std::string, float> matrix)
 {
-	for (auto it = matrix.begin(); it != matrix.end(); ++it)
-	{
-		// check the first column for the dates
-		const std::string& date = it->first;
-		size_t first_hiphen = date.find('-');
-		size_t second_hiphen = date.rfind('-');
-		if (first_hiphen == std::string::npos || second_hiphen == std::string::npos)
-			return (false);
-
-		size_t year = std::stoi(date.substr(0, first_hiphen));
-		size_t day = std::stoi(date.substr(first_hiphen + 2));
-		size_t month = std::stoi(date.substr(second_hiphen + 2));
-		bool leap_year = false;
-		if (year % 4 == 0 || year % 100 == 0 | year % 400 == 0)
-			leap_year = true;
-		if (leap_year)
-		{
-			if (month == 2 && day > 29)
-				return (false);
-		}
-		else if (!leap_year)
-		{
-			if (month == 2 && day > 28)
-				return (false);
-		}
-		if (month <= 1 || month >= 12)
-			return (false);
-		if (month % 2 == 0)
-		{
-			if (month == 2)
-				continue ;
-			if (day != 30)
-				return (false);
-		}
-		else if (month % 2 != 0)
-		{
-			if (day != 31)
-				return (false);
-		}
-	}
-	return (true);
+    for (auto it = matrix.begin(); it != matrix.end(); ++it)
+    {
+        // check the first column for the dates
+        const std::string& date = it->first;
+        size_t first_hyphen = date.find('-');
+        size_t second_hyphen = date.rfind('-');
+        
+        if (first_hyphen == std::string::npos || second_hyphen == std::string::npos || first_hyphen == second_hyphen)
+            return (false);
+            
+        try {
+            size_t year = std::stoi(date.substr(0, first_hyphen));
+            size_t month = std::stoi(date.substr(first_hyphen + 1, second_hyphen - first_hyphen - 1));
+            size_t day = std::stoi(date.substr(second_hyphen + 1));
+            
+            if (month < 1 || month > 12)
+                return (false);
+            if (day < 1 || day > 31)
+                return (false);
+            if (month == 2) {
+                bool leap_year = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+                if (leap_year && day > 29)
+                    return (false);
+                if (!leap_year && day > 28)
+                    return (false);
+            }
+            else if (month == 4 || month == 6 || month == 9 || month == 11) {
+                if (day > 30)
+                    return (false);
+            }
+        }
+        catch (const std::exception& e) {
+            return (false); // Error in conversion
+        }
+    }
+    return (true);
 }
 
 void	Database::applyExchangeRate()
@@ -160,9 +143,17 @@ void	Database::applyExchangeRate()
 
 			if (injDate == dbDate)
 			{
-				std::cout << injDate << " => " << dbValue << " = " << (dbValue * injValue) << std::endl;
-				match = true;
-				break ;
+				if (parseDate(injDate) == false)
+				{
+					std::cout << "Error: bad input => " << injDate << std::endl;
+					break ;
+				}
+				else
+				{
+					std::cout << injDate << " => " << dbValue << " = " << (dbValue * injValue) << std::endl;
+					match = true;
+					break ;
+				}
 			}
 		}
 		if (match == false) // no exact match found
