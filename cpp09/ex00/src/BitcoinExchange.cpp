@@ -88,47 +88,66 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 	return (matrix);
 }
 
-bool	Database::parseDate(std::string date)
+bool Database::parseDate(std::string date)
 {
-	size_t first_hiphen = date.find('-');
-	size_t second_hiphen = date.rfind('-');
-	if (first_hiphen == std::string::npos || second_hiphen == std::string::npos)
-		return (false);
-	size_t year = std::stoi(date.substr(0, first_hiphen));
-	size_t day = std::stoi(date.substr(first_hiphen + 2));
-	size_t month = std::stoi(date.substr(second_hiphen + 2));
-	bool leap_year = false;
-	if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
-		leap_year = true;
-	if (leap_year)
+    // Check for basic format YYYY-MM-DD
+    size_t first_hiphen = date.find('-');
+    size_t second_hiphen = date.rfind('-');
+    
+    if (first_hiphen == std::string::npos || second_hiphen == std::string::npos || first_hiphen == second_hiphen)
+        return (false);
+    
+    try
 	{
-		if (month == 2 && day > 29)
+        size_t year = std::stoi(date.substr(0, first_hiphen));
+        size_t month = std::stoi(date.substr(first_hiphen + 1, second_hiphen - first_hiphen - 1));
+        size_t day = std::stoi(date.substr(second_hiphen + 1));
+    
+        if (month < 1 || month > 12)
+            return (false);
+            
+        // Check valid day range based on month
+        const size_t daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        size_t maxDays = daysInMonth[month];
+        
+        if (month == 2 && (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)))
+            maxDays = 29;
+            
+        if (day < 1 || (day > maxDays))
+            return (false);
+        
+		if (year < 2009)
 			return (false);
-	}
-	else if (!leap_year)
-	{
-		if (month == 2 && day > 28)
+
+		if (year == 2009 && month == 1 && day == 1)
 			return (false);
+
+        return (true);
+    }
+    catch (const std::exception& e) {
+        return false;
 	}
-	if (month <= 1 || month >= 12)
-		return (false);
-	if (month % 2 == 0 && month != 2)
-	{
-		if (day != 30)
-			return (false);
-	}
-	else if (month % 2 != 0)
-	{
-		if (day != 31)
-			return (false);
-	}
-	return (true);
 }
 
 void	Database::applyExchangeRate()
 {
 	for (auto it = _injectionTable.begin(); it != _injectionTable.end(); ++it)
 	{
+		if (it->second > 1000)
+		{
+			std::cout << "Error: too large a number." << std::endl;
+			continue ;
+		}
+		if (it->second < 0)
+		{
+			std::cout << "Error: not a positive number." << std::endl;
+			continue ;
+		}
+		if (parseDate(it->first) == false)
+		{
+			std::cout << "Error: bad input => " << it->first << std::endl;
+			continue ;
+		}
 		const std::string& injDate = it->first;
 		const float injValue = it->second;
 		bool match = false;
@@ -140,17 +159,9 @@ void	Database::applyExchangeRate()
 
 			if (injDate == dbDate)
 			{
-				if (parseDate(injDate) == false)
-				{
-					std::cout << "Error: bad input => " << injDate << std::endl;
-					break ;
-				}
-				else
-				{
-					std::cout << injDate << " => " << dbValue << " = " << (dbValue * injValue) << std::endl;
-					match = true;
-					break ;
-				}
+				std::cout << injDate << " => " << dbValue << " = " << (dbValue * injValue) << std::endl;
+				match = true;
+				break ;
 			}
 		}
 		if (match == false) // no exact match found
@@ -161,8 +172,7 @@ void	Database::applyExchangeRate()
 				--prev_it; // Move iterator to the largest date less than injDate
 				const std::string& prevDate = prev_it->first;
 				const float prevValue = prev_it->second;
-				std::cout << prevDate << " (" << injDate << ")" << " => " << prevValue << (prevValue * injValue) << std::endl;
-			}
+				std::cout << injDate << " (" << prevDate << ")" << " => " << prevValue << " = " << (prevValue * injValue) << std::endl;			}
 			else
 				std::cout << "No exact or earlier date found for " << injDate << "." << std::endl;
 		}
