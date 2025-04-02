@@ -26,7 +26,6 @@ class PmergeMe {
 		std::deque<uint64_t>								_largeDeque;
 		uint64_t											_oddElement;
 		bool												_hasOddElement;
-		uint64_t											_processingTime;
 		uint64_t											_nbElements;
 
 		// variables for calculating time

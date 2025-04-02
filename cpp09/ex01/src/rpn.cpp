@@ -48,9 +48,9 @@ int	Rpn::outputResult( std::string equation )
 				throw std::runtime_error("Error: not enough operands");
 
 			// extract two operators at a time to follow the RPN logic
-			int operandA = stacky.top();
-			stacky.pop();
 			int operandB = stacky.top();
+			stacky.pop();
+			int operandA = stacky.top();
 			stacky.pop();
 			int result = 0;
 

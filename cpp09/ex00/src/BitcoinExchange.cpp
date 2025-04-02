@@ -9,6 +9,7 @@
 /* ****************************************************************************/
 
 #include "../inc/BitcoinExchange.hpp"
+#include <iostream>
 
 Database::Database( std::string newdb )
 {
@@ -21,6 +22,7 @@ Database::Database( std::string newdb )
 		throw MissingDb();
 	}
 	this->_matrixDb = setMatrix(this->_fileDb, false);
+	std::cout << "The problem is in the injections" << std::endl;
 	this->_injectionTable = setMatrix(this->_inj, true);
 	if (this->_fileDb.is_open())
 	this->_fileDb.close();
@@ -29,14 +31,9 @@ Database::Database( std::string newdb )
 	applyExchangeRate();
 }
 
-Database::~Database()
-{
-}
+Database::~Database() {}
 
-Database::Database( const Database& ref )
-{
-	static_cast<void>(ref);
-}
+Database::Database( const Database& ref ) { static_cast<void>(ref); }
 
 Database &Database::operator=( const Database& ref )
 {
@@ -56,23 +53,27 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 		throw DbFormat();
     while (std::getline(file, line))
     {
-		size_t comma_pos = line.find(',');
-		if (comma_pos == std::string::npos)
+		size_t separator = 0;
+		if (injection == false)
+			separator = line.find(',');
+		else
+			separator = line.find(" | ");
+		if (separator == std::string::npos)
 		{
 			std::cerr << "Line " << line_count << std::endl; // for debugging
 			throw DbFormat();
 		}
-		std::string date = line.substr(0, comma_pos);
+		std::string date = line.substr(0, separator);
 		if (date.empty())
 			throw DbFormat();
-		std::string valueStr = line.substr(comma_pos + 1);
+		std::string valueStr = line.substr(separator + 1);
 		if (valueStr.empty())
-			throw DbFormat();		
+			throw DbFormat();
 		try 
 		{
 			float valueDb = std::stof(valueStr);
 			matrix.emplace(date, valueDb);
-		} 
+		}
 		catch (const std::invalid_argument& e)
 		{
 			std::cerr << "Invalid argument: " << e.what() << " at line " << line_count << std::endl;
