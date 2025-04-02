@@ -49,6 +49,7 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 	std::string line;
 	size_t line_count = 0;
 	
+	
 	if (injection == false && !std::getline(file, line))
 		throw DbFormat();
     while (std::getline(file, line))
@@ -66,7 +67,11 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 		std::string date = line.substr(0, separator);
 		if (date.empty())
 			throw DbFormat();
-		std::string valueStr = line.substr(separator + 1);
+		std::string valueStr;
+		if (!injection)
+			valueStr = line.substr(separator + 1);
+		else
+			valueStr = line.substr(separator + 3);
 		if (valueStr.empty())
 			throw DbFormat();
 		try 
