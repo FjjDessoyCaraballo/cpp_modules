@@ -22,7 +22,6 @@ Database::Database( std::string newdb )
 		throw MissingDb();
 	}
 	this->_matrixDb = setMatrix(this->_fileDb, false);
-	std::cout << "The problem is in the injections" << std::endl;
 	this->_injectionTable = setMatrix(this->_inj, true);
 	if (this->_fileDb.is_open())
 	this->_fileDb.close();
@@ -47,7 +46,7 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 {
 	std::multimap<std::string, float> matrix;
 	std::string line;
-	size_t line_count = 0;
+	size_t line_count = 1;
 	
 	
 	if (injection == false && !std::getline(file, line))
@@ -61,19 +60,25 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 			separator = line.find(" | ");
 		if (separator == std::string::npos)
 		{
-			std::cerr << "Line " << line_count << std::endl; // for debugging
-			throw DbFormat();
+			std::cerr <<  "Error: bad input => " << line << std::endl;
+			continue ;
 		}
 		std::string date = line.substr(0, separator);
 		if (date.empty())
-			throw DbFormat();
+		{
+			std::cerr <<  "Error: bad input => " << line << std::endl;
+			continue ;
+		}
 		std::string valueStr;
 		if (!injection)
 			valueStr = line.substr(separator + 1);
 		else
 			valueStr = line.substr(separator + 3);
 		if (valueStr.empty())
-			throw DbFormat();
+		{
+			std::cerr << "Error: must be a positive integer" << std::endl;
+			continue ;
+		}
 		try 
 		{
 			float valueDb = std::stof(valueStr);
@@ -82,12 +87,12 @@ std::multimap<std::string, float> Database::setMatrix(std::fstream &file, bool i
 		catch (const std::invalid_argument& e)
 		{
 			std::cerr << "Invalid argument: " << e.what() << " at line " << line_count << std::endl;
-			throw DbFormat();
+			continue ;
 		} 
 		catch (const std::out_of_range& e)
 		{
 			std::cerr << "Out of range: " << e.what() << " at line " << line_count << std::endl;
-			throw DbFormat();
+			continue ;
 		}
 		line_count++;
 	}

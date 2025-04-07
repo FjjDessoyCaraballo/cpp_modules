@@ -101,9 +101,12 @@ int	Rpn::outputResult( std::string equation )
 	}
 	// check if there is anything left but the result in the stack
 	if (stacky.size() > 1)
-		throw std::runtime_error("Error: overstacked");
+		throw std::runtime_error("Error: overstacked (weird stuff in the equation)");
+	if (stacky.empty())
+		throw std::runtime_error("Error: input only positive integers");
 
 	// for clarity we assign the top of the stack (only number left) to the result
-	int result = stacky.top();
+	int result = 0; 
+	result = stacky.top();
 	return (result);
 }
