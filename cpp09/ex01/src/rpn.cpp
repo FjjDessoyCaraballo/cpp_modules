@@ -37,6 +37,10 @@ int	Rpn::outputResult( std::string equation )
 	std::istringstream stream(equation);
 	std::string token;
 
+	size_t position = equation.find_first_not_of("0123456789 /*+-");
+	if (position != std::string::npos)
+		throw std::runtime_error("input only positive integers");
+
 	// each token that gets the output of stream will be one of the arguments from argv
 	while (stream >> token)
 	{
@@ -45,7 +49,7 @@ int	Rpn::outputResult( std::string equation )
 			// for one operator there will be the equivalent number of operands plus one - e.g. 1 + 1
 			// if we get to the operators clause and there is less than two operands it's an error 
 			if (stacky.size() < 2)
-				throw std::runtime_error("Error: not enough operands");
+				throw std::runtime_error("not enough operands");
 
 			// extract two operators at a time to follow the RPN logic
 			int operandB = stacky.top();
@@ -67,11 +71,11 @@ int	Rpn::outputResult( std::string equation )
 					break ;
 				case '/':
 					if (operandA == 0)
-						throw std::runtime_error("Error: division by zero");
+						throw std::runtime_error("division by zero");
 					result = operandA / operandB;
 					break ;
 				default:
-					throw (std::runtime_error("Error: what?"));
+					throw (std::runtime_error("what?"));
 					break ;
 			}
 			stacky.push(result);
@@ -92,7 +96,7 @@ int	Rpn::outputResult( std::string equation )
 			}
 			// this clause runs if there is garbage
 			if (!isNumber)
-				throw std::runtime_error("Error: invalid digit");
+				throw std::runtime_error("invalid digit");
 
 			// all good, we push it into the stack
 			int number = std::stoi(token);
@@ -101,9 +105,9 @@ int	Rpn::outputResult( std::string equation )
 	}
 	// check if there is anything left but the result in the stack
 	if (stacky.size() > 1)
-		throw std::runtime_error("Error: overstacked (weird stuff in the equation)");
-	if (stacky.empty())
-		throw std::runtime_error("Error: input only positive integers");
+		throw std::runtime_error("overstacked (weird stuff in the equation)");
+	// if (stacky.empty())
+	// 	throw std::runtime_error("");
 
 	// for clarity we assign the top of the stack (only number left) to the result
 	int result = 0; 

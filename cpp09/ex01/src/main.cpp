@@ -25,7 +25,7 @@ int main(int argc, char** argv)
 		std::cout << Rpn::outputResult(equation) << std::endl;
 	} catch (std::exception& e) {
 		std::cerr << "Your pole has not been reversed!" << std::endl;
-		std::cerr << "Exception: " << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	return (EXIT_SUCCESS);
 }
