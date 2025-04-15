@@ -70,7 +70,7 @@ int	Rpn::outputResult( std::string equation )
 					result = operandA - operandB;
 					break ;
 				case '/':
-					if (operandA == 0)
+					if (operandB == 0)
 						throw std::runtime_error("division by zero");
 					result = operandA / operandB;
 					break ;
